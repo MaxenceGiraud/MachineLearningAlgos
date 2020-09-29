@@ -9,7 +9,7 @@ class KNN:
 
     def fit(self,X,Y):
         self.X = X
-        self.Y = Y
+        self.y = Y
 
     def predict(self,X_test):
         all_dist = cdist(X_test, self.X) ## Computing all distances between points in test and training set
@@ -23,7 +23,15 @@ class KNN:
         out = np.bincount(tn1.ravel(),minlength=n*m).reshape(m,-1)  ## Choosing the most class that is the closest to the points
 
         y_hat = np.argmax(out,axis=1)
-        return y_hat     
+        return y_hat    
+
+    def score(self,X_test,y_test):
+        '''Compute Accuracy'''
+        y_hat = self.predict(X_test)
+        errors  = np.count_nonzero(y_hat-y_test)
+
+        acc = 1- (errors / len(y_test))
+        return acc
 
 
 
