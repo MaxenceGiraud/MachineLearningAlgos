@@ -197,3 +197,7 @@ dmypy.json
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+
+
+# Perso
+perso.py
