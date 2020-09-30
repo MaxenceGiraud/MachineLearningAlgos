@@ -7,9 +7,9 @@ Personal reimplementation of some ML algorithm
 ## Algoritms
 
 ### Machine Leaning
-- [x] KNN
+- [x] KNN (classifier)
 - [x] LDA/QDA
-- [ ] 
+- [x] Logistic Regression 
 ### Deep Leaning
 - [x] MLP
 - [ ] GAN 
