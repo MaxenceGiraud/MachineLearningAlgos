@@ -10,9 +10,12 @@ Personal reimplementation of some ML algorithm
 - [x] KNN (classifier)
 - [x] LDA/QDA
 - [x] Logistic Regression 
+- [x] Linear regression / Ridge regression
+- [ ] SVM
 ### Deep Leaning
 - [x] MLP
+- [ ] VAE (Partially done in class)
 - [ ] GAN 
-- [ ] CNN ??
-- [ ] RNN/LSTM ?? 
+- [ ] CNN ?? (simply a layer compatible with MLP ??)
+- [ ] RNN/LSTM ?? (simply a layer compatible with MLP ??)
 - [ ] Transformer
