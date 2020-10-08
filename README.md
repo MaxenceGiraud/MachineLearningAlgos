@@ -16,7 +16,7 @@ Personal reimplementation of some ML algorithm
 - [ ] Random Forest
 - [ ] Gradient Boosting
 - [ ] AdaBoost
-- [ ] Naive Bayes (Bernoulli, Gaussian ??, Multinomial ??)
+- [x] Naive Bayes (Bernoulli, Gaussian ??, Multinomial ??)
 - [ ] K-means
 - [ ] K-medoids
 ### Deep Leaning
@@ -30,3 +30,4 @@ Personal reimplementation of some ML algorithm
 ### Data processing/Analysis
 - [ ] PCA
 - [ ] FDA
+- [ ] ICA

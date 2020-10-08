@@ -1,14 +1,18 @@
 import numpy as np
-from copy import copy
-import math
 
 class BernoulliNaiveBayes: # TODO convert to categorical and so vectorize
-    def __init__(self):
+    def __init__(self,encoding="object"):
+        assert (encoding in ["object","categorical"], "Encoding must either be object or categorical"
+
         self.cond_prob = None
         self.prior = None
         self.features = None
         self.labels  = None
-
+        self.encoding = encoding
+    
+    def fit_cat(self,X,y):
+        # cond_prob -> 1+sum the datapoints of same labels / Nk+2
+        pass
 
     def fit(self,X,y):
         '''
@@ -34,6 +38,9 @@ class BernoulliNaiveBayes: # TODO convert to categorical and so vectorize
 
             i+=1
 
+    def predict_cat(self,X):
+        
+        pass
 
     def predict(self,X):
         
