@@ -16,7 +16,9 @@ Personal reimplementation of some ML algorithm
 - [ ] Random Forest
 - [ ] Gradient Boosting
 - [ ] AdaBoost
-- [ ] Naive Bayes
+- [ ] Naive Bayes (Bernoulli, Gaussian ??, Multinomial ??)
+- [ ] K-means
+- [ ] K-medoids
 ### Deep Leaning
 - [x] MLP (to refactor)
 - [ ] VAE (Partially done in class)
@@ -24,3 +26,7 @@ Personal reimplementation of some ML algorithm
 - [ ] CNN ?? (simply a layer compatible with MLP ??)
 - [ ] RNN/LSTM ?? (simply a layer compatible with MLP ??)
 - [ ] Transformer
+
+### Data processing/Analysis
+- [ ] PCA
+- [ ] FDA
