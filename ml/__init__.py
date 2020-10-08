@@ -1,4 +1,4 @@
-from .knn import KNN
+from .knn import KNN,KNN_Regressor
 from .lda import LDA
 from .qda import QDA
 from .linear_regression import LinearRegression
