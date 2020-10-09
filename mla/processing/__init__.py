@@ -1,1 +1,1 @@
-from .encoding import object_to_categorical,string_to_wordlist
+from .encoding import object_to_categorical,object_to_categorical_from_features,string_to_wordlist

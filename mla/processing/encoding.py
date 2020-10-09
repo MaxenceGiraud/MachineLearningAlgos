@@ -31,5 +31,5 @@ def object_to_categorical_from_features(X,features):
 
 
 def string_to_wordlist(str):
-    ''' Convert a string into list of word (or anything separated by " ")'''
-    return re.sub("[^\w]", " ", str).split()
+    ''' Convert a string into list of word '''
+    return re.findall(r'\w+', str)

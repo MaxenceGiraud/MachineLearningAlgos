@@ -1,6 +1,6 @@
 import numpy as np
 
-class BernoulliNaiveBayes: # TODO convert to categorical and so vectorize
+class BernoulliNaiveBayes:
     def __init__(self,encoding="categorical"):
         assert (encoding in ["object","categorical"]), "Encoding must either be object or categorical"
 
@@ -46,10 +46,12 @@ class BernoulliNaiveBayes: # TODO convert to categorical and so vectorize
             for i in range(len(self.labels)) :
                 Xl = X[np.array(y) == self.labels[i]]
 
-                self.cond_prob[i] = (1+np.sum(Xl,axis=0))/Nk[i]
+                self.cond_prob[i] = (1+np.sum(Xl,axis=0))/(Nk[i]+2)
     
     def predict(self,X):
         
+        #assert (self.cond_prob != None), "Model has not been trained"
+
         if self.encoding == 'object' :
             y_hat = []
             for x in X :
@@ -67,7 +69,7 @@ class BernoulliNaiveBayes: # TODO convert to categorical and so vectorize
                 y_hat.append(self.labels[np.argmax(probs)])
         
         elif self.encoding == 'categorical':
-            
+            # see sklearn.utils.extmath.safe_sparse_dot
             probs  = np.log(self.prior) + X @ np.log(self.cond_prob.T) + (1-X)@np.log(1-self.cond_prob.T) 
             y_hat = self.labels[np.argmax(probs,axis=1)]
 
@@ -82,4 +84,8 @@ class BernoulliNaiveBayes: # TODO convert to categorical and so vectorize
         
 class GaussianNaiveBayes:
     def __init__(self):
+        pass
+
+class MultinomialNaiveBayes:
+    def __init_(self):
         pass
