@@ -13,8 +13,8 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] KNN (classifier+regressor)
 - [x] LDA/QDA
 - [x] Logistic Regression (to refactor)
-- [x] Linear regression / Ridge regression (+classification todo)
-- [x] Naive Bayes (Bernoulli, Gaussian ??, Multinomial ??)
+- [x] Linear regression / Ridge regression (+classification)
+- [x] Naive Bayes (Bernoulli, Gaussian, Multinomial)
 - [ ] SVM
 - [ ] Decision Tree
 - [ ] Random Forest
