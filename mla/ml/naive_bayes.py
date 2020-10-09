@@ -107,7 +107,7 @@ class GaussianNaiveBayes:
     def predict(self,X):
 
         probs = np.zeros((X.shape[0],len(self.labels))) +np.log(self.prior) 
-        
+
         for i in range(len(self.labels)):
             probs[:,i] += - 0.5 *np.sum( np.log(2*np.pi*self.std[i]) + (X-self.mu[i])**2/self.std[i],axis=1)
         
@@ -122,5 +122,35 @@ class GaussianNaiveBayes:
 
 
 class MultinomialNaiveBayes:
-    def __init_(self):
-        pass
+    '''
+    Parameters
+    ----------
+    alpha : float, default=0.001
+        Additive (Laplace/Lidstone) smoothing parameter (0 for no smoothing).
+        '''
+    def __init_(self,alpha=0.001):
+        self.alpha = alpha
+
+    def fit(self,X,y):
+
+        self.labels,Nk = np.unique(y,return_counts=True)
+        self.prior = Nk/len(y) # Called rho_{k} in ML2
+
+        self.cond_prob = np.zeros((len(self.labels),X.shape[1]))
+
+        for i in range(len(self.labels)) :
+            Xl = X[np.array(y) == self.labels[i]]
+
+            self.cond_prob[i] = (sefl.alpha+np.sum(Xl,axis=0))/(Nk[i]+X.shape[1]+1)
+
+    def predict(self,X):
+        probs  = np.log(self.prior) + X @ np.log(self.cond_prob.T)
+
+        y_hat = self.labels[np.argmax(probs,axis=1)]
+        
+        return y_hat
+
+    def score(self,X,y):
+        y_hat  = self.predict(X)
+        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
+        return acc

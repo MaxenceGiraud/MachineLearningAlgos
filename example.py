@@ -40,7 +40,7 @@ clf.score(X_test,y_test)
 
 # Load dataset
 X = fetch_20newsgroups()
-X,y = X['data'],X['target']
+X,y = X['data'][:2000],X['target'][:2000]
 
 # Convert list of strings to boolean features
 vectorizer = CountVectorizer()
@@ -52,6 +52,13 @@ X = X.toarray()
 
 X_train,X_test,y_train,y_test = train_test_split(X,y)
 
+#%%
+mnb = mla.MultinomialNaiveBayes()
+mnb.fit(X_train,y_train)
+
+mnb.score(X_test,y_test)
+
+#%% Boolean 
 # Transform all non zeros to 1
 X[np.where(X>1)] =1
 
