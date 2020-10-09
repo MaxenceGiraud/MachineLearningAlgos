@@ -83,8 +83,43 @@ class BernoulliNaiveBayes:
 
         
 class GaussianNaiveBayes:
-    def __init__(self):
-        pass
+    def __init__(self,var_smoothing=1e-9):
+        self.prior = None
+        self.labels  = None
+        self.mu = None
+        self.std = None
+        self.var_smoothing = var_smoothing
+    
+    def fit(self,X,y):
+        self.labels,Nk = np.unique(y,return_counts=True)
+        self.prior = Nk/len(y) 
+
+        self.mu = np.zeros((len(self.labels),X.shape[1]))
+        self.std = np.zeros((len(self.labels),X.shape[1]))
+        for i in range(len(self.labels)) : 
+            Xl = X[np.array(y) == self.labels[i]]
+
+            self.mu[i] = np.sum(Xl,axis=0) / Nk[i]
+
+            #In some case may need to add some smoothing (see sklearn)
+            self.std[i] = np.std(Xl,axis=0)**2 + self.var_smoothing
+
+    def predict(self,X):
+
+        probs = np.zeros((X.shape[0],len(self.labels))) +np.log(self.prior) 
+        
+        for i in range(len(self.labels)):
+            probs[:,i] += - 0.5 *np.sum( np.log(2*np.pi*self.std[i]) + (X-self.mu[i])**2/self.std[i],axis=1)
+        
+        y_hat = self.labels[np.argmax(probs,axis=1)]
+        return y_hat
+    
+    def score(self,X,y):
+        y_hat  = self.predict(X)
+        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
+        return acc
+
+
 
 class MultinomialNaiveBayes:
     def __init_(self):
