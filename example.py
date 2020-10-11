@@ -33,7 +33,7 @@ clf.score(X_test,y_test)
 
 
 #%%
-############# Boolean features Classification task  (Bernoulli Naive Bayes) #################
+############# Boolean/Counting features Classification task  (Bernoulli/Multinomial Naive Bayes) #################
 
 
 ''' Careful, very big dataset (13000 datapoints with 130 000 features), if low memory use only a fraction of it '''

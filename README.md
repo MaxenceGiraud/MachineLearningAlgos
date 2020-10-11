@@ -12,7 +12,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 ### Machine Leaning
 - [x] KNN (classifier+regressor)
 - [x] LDA/QDA
-- [x] Logistic Regression (to refactor)
+- [x] Logistic Regression/ Perceptron
 - [x] Linear regression / Ridge regression (+classification)
 - [x] Naive Bayes (Bernoulli, Gaussian, Multinomial)
 - [ ] SVM
@@ -22,6 +22,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] AdaBoost
 - [ ] K-means
 - [ ] K-medoids
+- [ ] One vs rest/ One vs one classifier 
 ### Deep Leaning
 - [x] MLP (to refactor)
 - [ ] VAE (Partially done in class)
@@ -34,3 +35,10 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] PCA
 - [ ] FDA
 - [ ] ICA
+
+
+## References
+
+
+[1] M. BISHOP, Christopher. Pattern Recognition and Machine Learning. Springer, 2011. 
+

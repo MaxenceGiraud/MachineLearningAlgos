@@ -6,3 +6,4 @@ from .linear_classification import LinearClassification
 from .ridge_regression import Ridge
 from .ridge_classifier import RidgeClassifier
 from .naive_bayes import BernoulliNaiveBayes,GaussianNaiveBayes,MultinomialNaiveBayes
+from .perceptron import perceptron
