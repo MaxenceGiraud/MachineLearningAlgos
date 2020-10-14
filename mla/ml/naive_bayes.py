@@ -141,7 +141,7 @@ class MultinomialNaiveBayes:
         for i in range(len(self.labels)) :
             Xl = X[np.array(y) == self.labels[i]]
 
-            self.cond_prob[i] = (sefl.alpha+np.sum(Xl,axis=0))/(Nk[i]+X.shape[1]+1)
+            self.cond_prob[i] = (self.alpha+np.sum(Xl,axis=0))/(Nk[i]+X.shape[1]+1)
 
     def predict(self,X):
         probs  = np.log(self.prior) + X @ np.log(self.cond_prob.T)
