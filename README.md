@@ -14,15 +14,16 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] LDA/QDA
 - [x] Logistic Regression/ Perceptron
 - [x] Linear regression / Ridge regression (+classification)
-- [x] Naive Bayes (Bernoulli, Gaussian, Multinomial)
+- [x] Naive Bayes (Bernoulli, Gaussian and Multinomial)
+- [x] K-means / K-medoids
 - [ ] SVM
-- [ ] Decision Tree
+- [ ] Decision Tree (cfl + reg)
 - [ ] Random Forest
 - [ ] Gradient Boosting
 - [ ] AdaBoost
-- [ ] K-means
-- [ ] K-medoids
 - [ ] One vs rest/ One vs one classifier 
+- [ ] Gaussian Mixture
+- [ ] DBSCAN / OPTICS
 ### Deep Leaning
 - [x] MLP (to refactor)
 - [ ] VAE (Partially done in class)
@@ -40,5 +41,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 ## References
 
 
-[1] M. BISHOP, Christopher. Pattern Recognition and Machine Learning. Springer, 2011. 
+[1] M. BISHOP, Christopher. Pattern Recognition and Machine Learning. Springer, 2011.   
+[2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition. Springer, 2016. 
+
 
