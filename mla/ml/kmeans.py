@@ -1,8 +1,7 @@
 import numpy as np
 from scipy.spatial.distance import cdist
 
-# TODO : do k medoids : the means are actual points
-class kmeans:
+class Kmeans:
     '''K-Means clustering algorithm'''
     def __init__(self,k,max_iter=100,init='kmeans++'):
         self.k = k

@@ -7,4 +7,5 @@ from .ridge_regression import Ridge
 from .ridge_classifier import RidgeClassifier
 from .naive_bayes import BernoulliNaiveBayes,GaussianNaiveBayes,MultinomialNaiveBayes
 from .perceptron import perceptron
-from .kmeans import kmeans
+from .kmeans import Kmeans
+from .kmedoids import Kmedoids

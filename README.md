@@ -24,6 +24,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] One vs rest/ One vs one classifier 
 - [ ] Gaussian Mixture
 - [ ] DBSCAN / OPTICS
+- [ ] World to vec
 ### Deep Leaning
 - [x] MLP (to refactor)
 - [ ] VAE (Partially done in class)
