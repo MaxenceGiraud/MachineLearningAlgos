@@ -24,7 +24,11 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] One vs rest/ One vs one classifier 
 - [ ] Gaussian Mixture
 - [ ] DBSCAN / OPTICS
-- [ ] World to vec
+- [ ] MCMC
+- [ ] Gaussian process regression
+- [ ] Hidden Markov model
+- [ ] EM algo
+- [ ] Multivariate adaptive regression spline
 ### Deep Leaning
 - [x] MLP (to refactor)
 - [ ] VAE (Partially done in class)
