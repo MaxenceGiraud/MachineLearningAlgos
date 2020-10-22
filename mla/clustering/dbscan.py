@@ -2,9 +2,8 @@ import numpy as np
 from scipy.spatial.distance import cdist
 from itertools import compress  
 
-
 class DBSCAN:
-    def __init__(self,eps=0.3,min_pts=8,metric='minkowski'):
+    def __init__(self,eps=0.2,min_pts=8,metric='minkowski'):
         self.eps = eps
         self.min_pts = min_pts
         self.metric = metric
@@ -13,9 +12,7 @@ class DBSCAN:
         #self.labels = set(y) - {-1}
         # y= -1 not labeled
         
-        y_hat = np.zeros(X.shape[0])
-
-        dist_all = cdist(X,X,metric=self.metric=)
+        dist_all = cdist(X,X,metric=self.metric)
         neighbors = np.where(dist_all < self.eps,1,0) 
         n_neighbors = np.sum(neighbors,axis=0)
         
@@ -24,14 +21,32 @@ class DBSCAN:
         is_core = np.where(n_neighbors >= self.min_pts,1,0) 
         
         # Boolean to indexes
-        set_neighbors_idx =  [list(compress(range(len(bool_arr )), bool_arr )) for bool_arr in neighbors[is_core]]
+        set_neighbors_idx =  [list(compress(range(len(bool_arr )), bool_arr )) for bool_arr in neighbors]
 
-        # Group the clusters TODO : TO rework
-        clusters = np.array,union_find(set_neighbors_idx)
+        visited = np.zeros(X.shape[0])
+        clusters = []
+  
+        def add_neighbhor(point):
+            current_cluster.append(point)
+            visited[point] = 1
+            for p in set_neighbors_idx[point] :
+                if not visited[p] :
+                    add_neighbhor(p)
 
-        y_hat[is_noise] = -1
+        for i in range(X.shape[0]) : 
+            if not visited[i]:
+                visited[i] = 1
+                if is_core[i] :
+                    current_cluster = [i]
+                    for n in set_neighbors_idx[i] :
+                        add_neighbhor(n)
+
+                    clusters.append(current_cluster)
+                            
+        y_hat = -np.ones(X.shape[0])
+                       
         for i in range(len(clusters)):
-            y_hat[clusters] = i
+            y_hat[clusters[i]] = i
 
         return y_hat
     
@@ -39,18 +54,3 @@ class DBSCAN:
         y_hat  = self.predict(X)
         acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
         return acc
-        
-
-def union_find(lis):
-    lis = map(set, lis)
-    unions = []
-    for item in lis:
-        temp = []
-        for s in unions:
-            if not s.isdisjoint(item):
-                item = s.union(item)
-            else:
-                temp.append(s)
-        temp.append(item)
-        unions = temp
-    return unions

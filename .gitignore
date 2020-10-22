@@ -201,3 +201,5 @@ dmypy.json
 
 # Perso
 perso.py
+synth_test.txt
+synth_train.txt
