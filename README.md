@@ -15,19 +15,15 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] Logistic Regression/ Perceptron
 - [x] Linear regression / Ridge regression (+classification)
 - [x] Naive Bayes (Bernoulli, Gaussian and Multinomial)
-- [x] K-means / K-medoids
 - [ ] SVM
-- [ ] Decision Tree (cfl + reg)
+- [x] Decision Tree CART (cfl + reg)
 - [ ] Random Forest
 - [ ] Gradient Boosting
 - [ ] AdaBoost
 - [ ] One vs rest/ One vs one classifier 
-- [ ] Gaussian Mixture
-- [ ] DBSCAN / OPTICS
 - [ ] MCMC
 - [ ] Gaussian process regression
 - [ ] Hidden Markov model
-- [ ] EM algo
 - [ ] Multivariate adaptive regression spline
 ### Deep Leaning
 - [x] MLP (to refactor)
@@ -36,6 +32,14 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] CNN ?? (simply a layer compatible with MLP ??)
 - [ ] RNN/LSTM ?? (simply a layer compatible with MLP ??)
 - [ ] Transformer
+  
+### Clustering
+- [x] K-means
+- [x] K-medoids
+- [x] DBSCAN
+- [ ] OPTICS
+- [ ] Gaussian Mixture
+- [ ] EM algo
 
 ### Data processing/Analysis
 - [ ] PCA
@@ -47,6 +51,5 @@ Some examples on how to use the algorithms can be found in the file example.py
 
 
 [1] M. BISHOP, Christopher. Pattern Recognition and Machine Learning. Springer, 2011.   
-[2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition. Springer, 2016. 
-
-
+[2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition. Springer, 2016.   
+[3] [Scikit-learn](https://scikit-learn.org)
