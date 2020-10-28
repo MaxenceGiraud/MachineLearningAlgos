@@ -2,19 +2,23 @@ import numpy as np
 # import graphviz
 
 class Node:
-    def __init__(self,criterion,idx_feature,gini = None):
+    def __init__(self,criterion,idx_feature,gini = None,categorial = False):
         self.criterion = criterion
         self.idx_feature = idx_feature
         self.left = None
         self.right = None
         self.gini = gini
+        self.categorial = categorial
 
     @property
     def depth(self):
         return max(self.left.depth,self.right.depth) + 1 
     
     def predict(self,X):
-        left,right = np.where(X[:,self.idx_feature] < self.criterion),np.where(X[:,self.idx_feature] >= self.criterion)       
+        if self.categorial :
+            left,right = np.where(X[:,self.idx_feature] == self.criterion),np.where(X[:,self.idx_feature] != self.criterion) 
+        else :
+            left,right = np.where(X[:,self.idx_feature] < self.criterion),np.where(X[:,self.idx_feature] >= self.criterion)       
         prediction = np.zeros(X.shape[0])
         prediction[left] = self.left.predict(X[left])
         prediction[right] = self.right.predict(X[right])
@@ -76,11 +80,22 @@ def gini_index_classifier(groups,class_labels):
 # TODO : Take into account the possibility of categorial features
 
 class DecisionTreeClassifier:
-    ''' CART Decision tree classifier '''
+    ''' CART Decision tree classifier
+    
+    Parameters
+    ----------
+    max_depth :int ,
+            maximum depth of the tree         
+    min_samples_split : int,
+            minimum number of samples in order to create a split
+    categorical_features : list,
+            list of features which are categorical (index of the column)
+     '''
 
-    def __init__(self,max_depth,min_samples_split):
+    def __init__(self,max_depth,min_samples_split,categorial_features = []):
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
+        self.categorial_features  = categorial_features
 
     def get_depth(self):
         return self.tree.depth
@@ -92,7 +107,10 @@ class DecisionTreeClassifier:
         for j in range(X.shape[1]):
             # iterate on unique value of features
             for i in np.unique(X[:,j],return_index=True)[1]:
-                groups = np.where(X[:,j]<X[i,j])[0], np.where(X[:,j]>=X[i,j])[0]
+                if j in self.categorial_features :
+                    groups = np.where(X[:,j]==X[i,j])[0], np.where(X[:,j]!=X[i,j])[0]
+                else :
+                    groups = np.where(X[:,j]<X[i,j])[0], np.where(X[:,j]>=X[i,j])[0]
                 gini = gini_index_classifier([[y[groups[0]]][0],[y[groups[1]]][0]],labels)
                 if gini < best_score:
                     best_score = gini
@@ -110,7 +128,7 @@ class DecisionTreeClassifier:
 
         idx,gini,groups_idx = self.get_best_split(X,y) # Get the bet split
         
-        current_node = Node(X[idx[0],idx[1]],idx[1],gini)
+        current_node = Node(X[idx[0],idx[1]],idx[1],gini,categorial= (idx[1] in self.categorial_features))
         if gini == 0 : # TODO May extend property to epsilon > 0
             current_node.left = Leaf(decision = np.bincount(y[groups_idx[0]]).argmax())
             current_node.right = Leaf(decision = np.bincount(y[groups_idx[1]]).argmax())
