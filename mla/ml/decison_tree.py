@@ -1,4 +1,5 @@
 import numpy as np
+# import graphviz
 
 class Node:
     def __init__(self,criterion,idx_feature,gini = None):
@@ -21,6 +22,7 @@ class Node:
         return prediction
 
     def print(self):
+        # TODO display tree
         pass
    
 class Leaf(Node):
@@ -55,8 +57,6 @@ def gini_index_classifier(groups,class_labels):
     gini : float,
         gini index
     '''
-    # TODO to rework, must return values between 0 and 1
-
     counts  = [len(group) for group in groups]
     n_samples = np.sum(counts)
 
@@ -74,7 +74,6 @@ def gini_index_classifier(groups,class_labels):
     
 
 # TODO : Take into account the possibility of categorial features
-# TODO Add oob samples
 
 class DecisionTreeClassifier:
     ''' CART Decision tree classifier '''
@@ -83,16 +82,16 @@ class DecisionTreeClassifier:
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
 
-    def depth(self):
-        self.tree.depth
+    def get_depth(self):
+        return self.tree.depth
 
     def get_best_split(self,X,y):
         ''' get the best one split possible '''
         best_score = 10
         labels  = np.unique(y)
-        for i in range(X.shape[0]):
-            # TODO optimize : iterate on unique value of features
-            for j in range(X.shape[1]):
+        for j in range(X.shape[1]):
+            # iterate on unique value of features
+            for i in np.unique(X[:,j],return_index=True)[1]:
                 groups = np.where(X[:,j]<X[i,j])[0], np.where(X[:,j]>=X[i,j])[0]
                 gini = gini_index_classifier([[y[groups[0]]][0],[y[groups[1]]][0]],labels)
                 if gini < best_score:
