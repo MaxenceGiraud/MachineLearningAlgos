@@ -22,7 +22,7 @@ class Base_Randomforest:
         # Fit the trees
         if self.parallelize :
             pool = mp.Pool(mp.cpu_count())
-            [pool.apply(self.estimators[i].fit,(X,y))for i in range(self.n_tree)]
+            self.estimators = [pool.apply(self.estimators[i].fit,(X,y)) for i in range(self.n_tree)]
 
         else : 
             for i in range(self.n_tree) :
@@ -42,19 +42,21 @@ class RandomForestClassifier(Base_Randomforest):
     n_tree : int,
             number of trees in the forest
     '''
-    # TODO as of now class have to be in range(0,n), same with decision trees
     def fit(self,X,y):
         self.labels = np.unique(y)
 
         return super().fit(X,y)
         
     def predict(self,X):
-        res = []
+        
         if self.parallelize :
             pool = mp.Pool(mp.cpu_count())
+            res = [pool.apply(self.estimators[i].predict,(X,)) for i in range(self.n_tree)]
+            '''
             for i in range(self.n_tree):
-                res.append(pool.map_async(self.estimators[i].predict,X))
+                res.append(pool.apply_async(self.estimators[i].predict,X))'''
         else : 
+            res = []
             for i in range(self.n_tree):
                 res.append(self.estimators[i].predict(X))
 
@@ -85,12 +87,12 @@ class RandomForestRegressor(Base_Randomforest):
     '''
     
     def predict(self,X):
-        res = []
         if self.parallelize :
             pool = mp.Pool(mp.cpu_count())
             for i in range(self.n_tree):
-                res.append(pool.map_async(self.estimators[i].predict,X))
+                res = [pool.apply(self.estimators[i].predict,(X,)) for i in range(self.n_tree)]
         else : 
+            res = []
             for i in range(self.n_tree):
                 res.append(self.estimators[i].predict(X))
 
