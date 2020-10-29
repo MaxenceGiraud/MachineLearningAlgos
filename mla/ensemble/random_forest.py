@@ -1,4 +1,5 @@
 import numpy as np
+import multiprocessing as mp
 
 class Base_Randomforest:
     def __init__(self,basetree,basetree_params,n_tree = 20,parallelize=True):
@@ -6,7 +7,7 @@ class Base_Randomforest:
         self.basetree_params = basetree_params
         if parallelize :
             try :
-                import multiprocessineg as mp
+                import multiprocessing as mp
             except :
                 raise Exception("Need the multiprocessing package to parallelize")
         self.parallelize = parallelize
@@ -20,16 +21,17 @@ class Base_Randomforest:
         samples_idx = np.random.choice(X.shape[0],size=self.n_tree * X.shape[0],replace=True).reshape(self.n_tree,X.shape[0])
 
         # Create base tree
+        self.estimators = []
         [self.estimators.append(self.basetree(**self.basetree_params)) for _ in range(self.n_tree)]
 
         # Fit the trees
         if self.parallelize :
             pool = mp.Pool(mp.cpu_count())
-            [pool.apply(self.estimators[i].fit,())for i in range(self.n_tree)]
+            [pool.apply(self.estimators[i].fit,(X,y))for i in range(self.n_tree)]
 
         else : 
             for i in range(self.n_tree) :
-                self.estimators[i].fit(X[samples_idx[i]],y[samples_idx])
+                self.estimators[i].fit(X[samples_idx[i]],y[samples_idx[i]])
 
 
 class RandomForestClassifier(Base_Randomforest):
@@ -46,7 +48,11 @@ class RandomForestClassifier(Base_Randomforest):
             number of trees in the forest
     '''
     # TODO as of now class have to be in range(0,n), same with decision trees
-    
+    def fit(self,X,y):
+        self.labels = np.unique(y)
+
+        return super().fit(X,y)
+        
     def predict(self,X):
         res = []
         if self.parallelize :
@@ -57,7 +63,12 @@ class RandomForestClassifier(Base_Randomforest):
             for i in range(self.n_tree):
                 res.append(self.estimators[i].predict(X))
 
-        return np.apply_along_axis(np.bincount,1,res).argmax(axis=0)
+        # Take the most common value
+        res = np.array(res)
+        decision = []
+        for col in range(res.shape[1]):
+            decision.append(np.bincount(res[:,col]).argmax())
+        return decision
 
     def score(self,X,y):
         y_hat  = self.predict(X)
