@@ -1,15 +1,10 @@
-import numpy as np
 import multiprocessing as mp
+import numpy as np
 
 class Base_Randomforest:
     def __init__(self,basetree,basetree_params,n_tree = 20,parallelize=True):
         self.basetree = basetree
         self.basetree_params = basetree_params
-        if parallelize :
-            try :
-                import multiprocessing as mp
-            except :
-                raise Exception("Need the multiprocessing package to parallelize")
         self.parallelize = parallelize
         self.n_tree = n_tree
         
