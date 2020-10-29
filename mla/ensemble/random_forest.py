@@ -63,3 +63,35 @@ class RandomForestClassifier(Base_Randomforest):
         y_hat  = self.predict(X)
         acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
         return acc
+
+class RandomForestRegressor(Base_Randomforest):
+    ''' Random Forest Classfier
+    Parameters
+    ----------
+    basetree : object,
+            decision tree regressor object with fit and predict methods
+            (may be also another base estimator)
+    basetree_params : dict,
+            parameters of base tree
+    parallelize : bool, 
+    n_tree : int,
+            number of trees in the forest
+    '''
+    
+    def predict(self,X):
+        res = []
+        if self.parallelize :
+            pool = mp.Pool(mp.cpu_count())
+            for i in range(self.n_tree):
+                res.append(pool.map_async(self.estimators[i].predict,X))
+        else : 
+            for i in range(self.n_tree):
+                res.append(self.estimators[i].predict(X))
+
+        return np.mean(res,axis=0)
+
+    def score(self,X,y):
+        '''Compute MSE for the prediction  of the model with X/y'''
+        y_hat = self.predict(X)
+        mse = np.sum((y - y_hat)**2) / len(y)
+        return mse
