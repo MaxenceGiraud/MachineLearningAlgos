@@ -15,7 +15,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] Least squares linear regression/classification
 - [x] Ridge regression/classification
 - [ ] LASSO
-- [ ] Least squares polynomial Regression/classification
+- [x] Least squares polynomial Regression/classification
 - [ ] SVM
 - [x] Decision Tree CART (cfl + reg)
 - [ ] MCMC

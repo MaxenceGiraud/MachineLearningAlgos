@@ -6,20 +6,22 @@ class PolynomialRegression:
         self.degree = degree
 
     def fit(self,X,y):
+        X_poly = X
         if self.degree >= 2 :
             for d in range(2,self.degree+1):
-                Xd = X**self.degree
-                X = np.concatenate((X,Xd),axis=1)
-        X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
-        self.beta = np.linalg.inv(X.T @ X) @ X.T @ y
+                Xd = X**d
+                X_poly = np.concatenate((X_poly,Xd),axis=1)
+        X_poly = np.concatenate((np.ones((X.shape[0],1)),X_poly),axis=1) # add column of 1 for the bias
+        self.beta = np.linalg.inv(X_poly.T @ X_poly) @ X_poly.T @ y
 
     def predict(self,X):
+        X_poly = X
         if self.degree >= 2 :
             for d in range(2,self.degree+1):
-                Xd = X**self.degree
-                X = np.concatenate((X,Xd),axis=1)
-        X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
-        return (X @ self.beta)
+                Xd = X**d
+                X_poly = np.concatenate((X_poly,Xd),axis=1)
+        X_poly = np.concatenate((np.ones((X.shape[0],1)),X_poly),axis=1) # add column of 1 for the bias
+        return (X_poly @ self.beta)
 
     def score(self,X,y):
         '''Compute MSE for the prediction  of the model with X/y'''
@@ -41,19 +43,21 @@ class PolynomialClassification:
         y_new[y == self.labels[0]] = 1
         y_new[y == self.labels[1]] = -1
 
+        X_poly = X
         if self.degree >= 2 :
             for d in range(2,self.degree+1):
-                Xd = X**self.degree
-                X = np.concatenate((X,Xd),axis=1)
-        X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
+                Xd = X**d
+                X_poly = np.concatenate((X_poly,Xd),axis=1)
+        X_poly = np.concatenate((np.ones((X.shape[0],1)),X_poly),axis=1) # add column of 1 for the bias
         self.beta = np.linalg.inv(X.T @ X) @ X.T @ y_new
 
     def predict(self,X): 
+        X_poly = X
         if self.degree >= 2 :
             for d in range(2,self.degree+1):
-                Xd = X**self.degree
-                X = np.concatenate((X,Xd),axis=1)   
-        X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
+                Xd = X**d
+                X_poly = np.concatenate((X_poly,Xd),axis=1)
+        X_poly = np.concatenate((np.ones((X.shape[0],1)),X_poly),axis=1) # add column of 1 for the bias
         y_hat  = np.where((X @ self.beta) >0,self.labels[0],self.labels[1])
         return y_hat
 
