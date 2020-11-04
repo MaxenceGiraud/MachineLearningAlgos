@@ -14,7 +14,7 @@ class LinearClassification:
         y_new[y == self.labels[1]] = -1
 
         X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
-        self.beta = np.linalg.inv(X.T @ X) @ X.T @ y_new
+        self.beta = np.linalg.pinv(X.T @ X) @ X.T @ y_new
 
     def predict(self,X):    
         X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias

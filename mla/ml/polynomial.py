@@ -12,7 +12,7 @@ class PolynomialRegression:
                 Xd = X**d
                 X_poly = np.concatenate((X_poly,Xd),axis=1)
         X_poly = np.concatenate((np.ones((X.shape[0],1)),X_poly),axis=1) # add column of 1 for the bias
-        self.beta = np.linalg.inv(X_poly.T @ X_poly) @ X_poly.T @ y
+        self.beta = np.linalg.pinv(X_poly.T @ X_poly) @ X_poly.T @ y
 
     def predict(self,X):
         X_poly = X
@@ -34,7 +34,7 @@ class PolynomialClassification:
         self.beta = 0
         self.degree = degree
 
-    def fit(self,X,y):
+    def fit(self,X,yinv):
         self.labels = np.unique(y)
         assert len(self.labels) == 2, "Only 2 class can be given to this classifier"
 
@@ -49,7 +49,7 @@ class PolynomialClassification:
                 Xd = X**d
                 X_poly = np.concatenate((X_poly,Xd),axis=1)
         X_poly = np.concatenate((np.ones((X.shape[0],1)),X_poly),axis=1) # add column of 1 for the bias
-        self.beta = np.linalg.inv(X.T @ X) @ X.T @ y_new
+        self.beta = np.linalg.pinv(X.T @ X) @ X.T @ y_new
 
     def predict(self,X): 
         X_poly = X
