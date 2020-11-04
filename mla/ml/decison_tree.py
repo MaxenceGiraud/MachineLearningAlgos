@@ -100,7 +100,7 @@ class DecisionTreeClassifier:
 
     def get_best_split(self,X,y):
         ''' get the best one split possible '''
-        best_score = 10
+        best_score = np.inf
         labels  = np.unique(y)
         for j in range(X.shape[1]):
             # iterate on unique value of features
@@ -166,7 +166,9 @@ class DecisionTreeRegressor:
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
         self.categorial_features  = categorial_features
+        assert metric in ["mse","mae"], "Metric must one of the followwing : mse,mae"
         self.metric = metric # ignored for now
+        
 
     def get_depth(self):
         return self.tree.depth

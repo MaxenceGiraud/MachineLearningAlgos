@@ -11,10 +11,11 @@ Some examples on how to use the algorithms can be found in the file example.py
 
 ### Machine Leaning
 - [x] KNN (classifier+regressor)
-- [x] LDA/QDA
 - [x] Logistic Regression/ Perceptron
-- [x] Linear regression / Ridge regression (+classification)
-- [x] Naive Bayes (Bernoulli, Gaussian and Multinomial)
+- [x] Least squares linear regression/classification
+- [x] Ridge regression/classification
+- [ ] LASSO
+- [ ] Least squares polynomial Regression/classification
 - [ ] SVM
 - [x] Decision Tree CART (cfl + reg)
 - [ ] MCMC
@@ -27,6 +28,14 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Gradient Boosting
 - [ ] AdaBoost
 - [ ] One vs rest/ One vs one classifier 
+  
+### Bayesian
+- [x] Naive Bayes (Bernoulli, Gaussian and Multinomial)
+- [x] LDA/QDA
+- [ ] MCMC
+- [ ] Importance sampling
+- [ ] SMC
+- [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
 
 ### Deep Leaning
 - [x] MLP (to refactor)
@@ -41,13 +50,33 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] K-medoids
 - [x] DBSCAN
 - [ ] OPTICS
-- [ ] Gaussian Mixture
-- [ ] EM algo
+- [ ] Gaussian Mixture with EM algorithm
+- [ ] Variational Bayesian Gaussian Mixture
+- [ ] Generative topographic map
+- [ ] Vector quantization
+- [ ] Fuzzy clustering (ex : Fuzzy C-means)
 
 ### Data processing/Analysis
 - [ ] PCA
 - [ ] FDA
 - [ ] ICA
+- [ ] Elastic map/net
+- [ ] CCA
+
+### Multi-armed bandit
+Algo seen in class to add and generalize:   
+- [ ] UCB
+- [ ] kl UCB
+- [ ] ETC 
+- [ ] FTL
+- [ ] Thompson sampling
+
+### Reinforcement Learning 
+- [ ] Q-learning
+
+### Visualization
+- [ ] Draw Decision boundary(ies)
+- [ ] Confusion matrix ?
 
 
 ## References
