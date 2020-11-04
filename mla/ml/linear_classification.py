@@ -9,11 +9,12 @@ class LinearClassification:
         assert len(self.labels) == 2, "Only 2 class can be given to this classifier"
 
         # Renamed labels as 1 and -1
-        y[y == self.labels[0]] = 1
-        y[y == self.labels[1]] = -1
+        y_new = np.zeros(y.shape)
+        y_new[y == self.labels[0]] = 1
+        y_new[y == self.labels[1]] = -1
 
         X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
-        self.beta = np.linalg.inv(X.T @ X) @ X.T @ y
+        self.beta = np.linalg.inv(X.T @ X) @ X.T @ y_new
 
     def predict(self,X):    
         X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
