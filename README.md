@@ -37,14 +37,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] SMC
 - [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
 
-### Deep Leaning
-- [ ] MLP 
-- [ ] Autoencoder/VAE ? (Partially done in class), to refactor as wrapper of NeuralNetwork
-- [ ] GAN 
-- [ ] CNN 
-- [ ] RNN/LSTM 
-- [ ] Transformer 
-  
+
 ### Clustering
 - [x] K-means
 - [x] K-medoids
@@ -55,13 +48,42 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Generative topographic map
 - [ ] Vector quantization
 - [ ] Fuzzy clustering (ex : Fuzzy C-means)
+  
 
-### Data processing/Analysis
-- [ ] PCA
-- [ ] FDA
-- [ ] ICA
-- [ ] Elastic map/net
-- [ ] CCA
+### Deep Leaning
+- [ ] Neural Network Base
+
+#### Layers
+- [ ] Dense 
+- [ ] Convolution
+- [ ] Recurrent
+- [ ] LSTM
+
+#### Wrapper
+- [ ] Autoencoder/VAE ? (Partially done in class), to refactor as wrapper of NeuralNetwork
+- [ ] GAN 
+- [ ] Transformer 
+  
+#### Optimization Algorithm
+- [x] Mini batch/full batch Gradient descent
+- [x] Stochastic gradient descent
+- [ ] Adam
+- [ ] Adagrad
+
+#### Loss
+- [ ] MSE
+- [ ] RMSE
+- [ ] MAE
+- [ ] Weighted MSE/RMSE/MAE
+  
+#### Activation functions
+- [x] Linear
+- [x] Relu
+- [x] Tanh
+- [x] Sigmoid
+- [x] Leaky Relu
+- [x] Softplus
+
 
 ### Multi-armed bandit
 Algo seen in class to add and generalize:   
@@ -73,6 +95,13 @@ Algo seen in class to add and generalize:
 
 ### Reinforcement Learning 
 - [ ] Q-learning
+  
+### Data processing/Analysis
+- [ ] PCA
+- [ ] FDA
+- [ ] ICA
+- [ ] Elastic map/net
+- [ ] CCA
 
 ### Visualization
 - [ ] Draw Decision boundary(ies)
