@@ -65,3 +65,13 @@ class PolynomialClassification:
         y_hat  = self.predict(X)
         acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
         return acc
+    
+class LinearRegression(PolynomialRegression):
+    def __init__(self):
+        self.beta = 0
+        self.degree = 1
+
+class LinearClassification(PolynomialClassification):
+    def __init__(self):
+        self.beta = 0
+        self.degree = 1
