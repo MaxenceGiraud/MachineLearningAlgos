@@ -9,39 +9,40 @@ Some examples on how to use the algorithms can be found in the file example.py
 
 ## Algoritms
 
-### Machine Leaning
-- [x] KNN (classifier+regressor)
-- [x] Logistic Regression/ Perceptron
-- [x] Least squares linear regression/classification
-- [x] Ridge regression/classification
+### [Machine Leaning](./mla/ml)
+- [x] [KNN](./mla/ml/knn.py) (classifier+regressor)
+- [x] [Logistic Regression/ Perceptron](./mla/ml/perceptron.py)
+- [x] [Least squares](./mla/ml/leastsquares.py) linear regression/classification
+- [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
+- [x] [Ridge](./mla/ml/ridge.py) regression/classification
 - [ ] LASSO
-- [x] Least squares polynomial Regression/classification
 - [ ] SVM
-- [x] Decision Tree CART (cfl + reg)
+- [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [ ] MCMC
 - [ ] Gaussian process regression
 - [ ] Hidden Markov model
 - [ ] Multivariate adaptive regression spline
 
-### Ensemble methods
-- [x] Random Forest
-- [ ] Gradient Boosting
-- [ ] AdaBoost
-- [ ] One vs rest/ One vs one classifier 
-  
-### Bayesian
-- [x] Naive Bayes (Bernoulli, Gaussian and Multinomial)
-- [x] LDA/QDA
+#### [Bayesian](./mla/ml)
+- [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
+- [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
 - [ ] MCMC
 - [ ] Importance sampling
 - [ ] SMC
 - [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
+  
 
+### [Ensemble methods](./mla/ensemble/)
+- [x] [Random Forest](./mla/ensemble/random_forest.py)
+- [ ] Gradient Boosting
+- [ ] AdaBoost
+- [ ] One vs rest/ One vs one classifier 
+  
 
-### Clustering
-- [x] K-means
-- [x] K-medoids
-- [x] DBSCAN
+### [Clustering](./mla/clustering/)
+- [x] [K-means](./mla/clustering/kmeans.py)
+- [x] [K-medoids](./mla/clustering/kmedoids.py)
+- [x] [DBSCAN](./mla/clustering/dbscan.py)
 - [ ] OPTICS
 - [ ] Gaussian Mixture with EM algorithm
 - [ ] Variational Bayesian Gaussian Mixture
@@ -50,11 +51,11 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Fuzzy clustering (ex : Fuzzy C-means)
   
 
-### Deep Leaning
-- [ ] Neural Network Base
+### [Deep Leaning](./mla/dl/)
+- [ ] [Neural Network Base](./mla/dl/neuralnetwork.py)
 
-#### Layers
-- [ ] Dense 
+#### [Layers](./mla/dl/layers/)
+- [ ] [Dense](./mla/dl/layers/dense.py)
 - [ ] Convolution (1d,2d,3d)
 - [ ] Recurrent
 - [ ] LSTM
@@ -67,20 +68,20 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] GAN 
 - [ ] Transformer 
   
-#### Optimization Algorithm
+#### [Optimization Algorithm](./mla/dl/optimizer/)
 - [x] Mini batch/full batch Gradient descent
 - [x] Stochastic gradient descent
 - [ ] Adam
 - [ ] Adagrad
 
-#### Loss
+#### [Loss](./mla/dl/layers/loss.py)
 - [x] MSE
 - [x] RMSE
 - [x] MAE
 - [ ] Neg log likelihood  
 - [ ] Add possibility of weighted loss
   
-#### Activation functions
+#### [Activation functions](./mla/dl/activation/activation.py)
 - [x] Linear
 - [x] Relu
 - [x] Tanh
