@@ -38,12 +38,12 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
 
 ### Deep Leaning
-- [x] MLP (to refactor)
-- [ ] VAE ? (Partially done in class)
-- [ ] GAN ?
-- [ ] CNN ?? (simply a layer compatible with MLP ??)
-- [ ] RNN/LSTM ?? (simply a layer compatible with MLP ??)
-- [ ] Transformer ?
+- [ ] MLP 
+- [ ] Autoencoder/VAE ? (Partially done in class), to refactor as wrapper of NeuralNetwork
+- [ ] GAN 
+- [ ] CNN 
+- [ ] RNN/LSTM 
+- [ ] Transformer 
   
 ### Clustering
 - [x] K-means
