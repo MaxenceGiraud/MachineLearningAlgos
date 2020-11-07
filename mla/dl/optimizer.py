@@ -1,36 +1,42 @@
 import numpy as np
 
-def gradient_descent(X, y, theta, gradient, batch_size=32, learning_rate=1, eps=1e-6, iter_max=100):
+class BaseOptimizer:
+    def __init__(self,learning_rate=0.1,batch_size = 32,n_iter=100,eps=1e-6):
+        self.lr = learning_rate
+        self.batch_size = batch_size
+        self.n_iter_max = n_iter
+        self.eps = eps
+    
+    def minimize(self,nn):
+        pass
 
-    # add column of 1 for the bias/intercept
-    X = np.concatenate((np.ones((X.shape[0], 1)), X), axis=1)
-    g = 1
-    nb_iter = 0
-    while np.linalg.norm(g) > eps and nb_iter < iter_max:
-        # Random permutation
-        permut = np.random.permutation(X.shape[0])
-        X = X[permut]
-        y = y[permut]
+class GradientDescent(BaseOptimizer):
+    def minimize(self,nn,X,y):
+        # add column of 1 for the bias/intercept
+        g = 1
+        nb_iter = 0
+        while np.linalg.norm(g) > self.eps and nb_iter < self.n_iter_max:
+            # Random permutation
+            permut = np.random.permutation(X.shape[0])
+            X = X[permut]
+            y = y[permut]
 
-        for i in range(len(y) // batch_size):
-            range_start, range_end = i*batch_size, (i+1)*batch_size
+            for i in range(len(y) // self.batch_size):
+                range_start, range_end = i*self.batch_size, (i+1)*self.batch_size
 
-            # Compute gradient
-            g = gradient(X[range_start:range_end])
+                nn.forward(X[range_start,range_end]) # forward pass
+                g = nn.backprop(X[range_start,range_end]) # backprop
+                nn.update(self.lr)  # Update weights
+            # last mini batch
+            nn.forward(X[i*self.batch_size:]) # forward pass
+            g = nn.backprop(X[i*self.batch_size:]) # backprop
+            nn.update(self.lr)  # Update weights
 
-            # Update weights
-            theta -= learning_rate*g
-        # last mini batch
-        g = gradient(X[i*batch_size])
-        theta -= learning_rate*g
+            nb_iter += 1
 
-        nb_iter += 1
-    return theta
-
-
-def adam():
+class Adam(BaseOptimizer):
     pass
 
 
-def adagrad():
+class Adagrad(BaseOptimizer):
     pass
