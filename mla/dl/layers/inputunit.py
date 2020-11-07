@@ -8,6 +8,3 @@ class InputUnit:
 
     def forward(self,X):
         return X
-    
-    def backprop(self,X):
-        return X
