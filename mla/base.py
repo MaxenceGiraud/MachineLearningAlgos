@@ -1,9 +1,10 @@
 import numpy as np
 
-class BaseRegressor:
-
+class BaseAny:
     def predict(self,X):
         raise NotImplementedError("This method is not supposed to be used")
+
+class BaseRegressor(BaseAny):
 
     def score(self,X,y):
         '''Compute MSE for the prediction  of the model with X/y'''
@@ -11,10 +12,7 @@ class BaseRegressor:
         mse = np.sum((y - y_hat)**2) / len(y)
         return mse
 
-class BaseClassifier:
-
-    def predict(self,X):
-        raise NotImplementedError("This method is not supposed to be used")
+class BaseClassifier(BaseAny):
 
     def score(self,X,y):
         ''' Compute Accuracy of classifier'''

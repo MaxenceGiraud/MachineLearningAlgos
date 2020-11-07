@@ -1,5 +1,5 @@
 import numpy as np
-from .base import BaseClassifier
+from ..base import BaseClassifier
 
 class LDA(BaseClassifier):
     'LDA Classifier'''

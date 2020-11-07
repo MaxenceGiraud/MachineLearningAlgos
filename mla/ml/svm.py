@@ -1,5 +1,5 @@
 import numpy as np
-from .base import BaseRegressor,BaseClassifier
+from ..base import BaseRegressor,BaseClassifier
 
 class SVM(BaseClassifier):
     def __init__(self):

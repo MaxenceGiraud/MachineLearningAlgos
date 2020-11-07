@@ -1,5 +1,6 @@
 import multiprocessing as mp
 import numpy as np
+from ..base import BaseClassifier,BaseRegressor
 
 class Base_Randomforest:
     def __init__(self,basetree,basetree_params,n_tree = 20,parallelize=True):
@@ -28,8 +29,18 @@ class Base_Randomforest:
             for i in range(self.n_tree) :
                 self.estimators[i].fit(X[samples_idx[i]],y[samples_idx[i]])
 
+    def predict_all_trees(self,X):
+        if self.parallelize :
+            pool = mp.Pool(mp.cpu_count())
+            for i in range(self.n_tree):
+                res = [pool.apply(self.estimators[i].predict,(X,)) for i in range(self.n_tree)]
+        else : 
+            res = []
+            for i in range(self.n_tree):
+                res.append(self.estimators[i].predict(X))
 
-class RandomForestClassifier(Base_Randomforest):
+
+class RandomForestClassifier(Base_Randomforest,BaseClassifier):
     ''' Random Forest Classfier
     Parameters
     ----------
@@ -48,17 +59,7 @@ class RandomForestClassifier(Base_Randomforest):
         return super().fit(X,y)
         
     def predict(self,X):
-        
-        if self.parallelize :
-            pool = mp.Pool(mp.cpu_count())
-            res = [pool.apply(self.estimators[i].predict,(X,)) for i in range(self.n_tree)]
-            '''
-            for i in range(self.n_tree):
-                res.append(pool.apply_async(self.estimators[i].predict,X))'''
-        else : 
-            res = []
-            for i in range(self.n_tree):
-                res.append(self.estimators[i].predict(X))
+        res = super.predict_all_trees(X)
 
         # Take the most common value
         res = np.array(res)
@@ -67,12 +68,7 @@ class RandomForestClassifier(Base_Randomforest):
             decision.append(np.bincount(res[:,col]).argmax())
         return decision
 
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc
-
-class RandomForestRegressor(Base_Randomforest):
+class RandomForestRegressor(Base_Randomforest,BaseRegressor):
     ''' Random Forest Classfier
     Parameters
     ----------
@@ -87,19 +83,6 @@ class RandomForestRegressor(Base_Randomforest):
     '''
     
     def predict(self,X):
-        if self.parallelize :
-            pool = mp.Pool(mp.cpu_count())
-            for i in range(self.n_tree):
-                res = [pool.apply(self.estimators[i].predict,(X,)) for i in range(self.n_tree)]
-        else : 
-            res = []
-            for i in range(self.n_tree):
-                res.append(self.estimators[i].predict(X))
+        res = super.predict_all_trees(X)
 
         return np.mean(res,axis=0)
-
-    def score(self,X,y):
-        '''Compute MSE for the prediction  of the model with X/y'''
-        y_hat = self.predict(X)
-        mse = np.sum((y - y_hat)**2) / len(y)
-        return mse

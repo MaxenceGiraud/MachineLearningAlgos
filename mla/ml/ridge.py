@@ -1,5 +1,5 @@
 import numpy as np
-from .base import BaseClassifier,BaseRegressor
+from ..base import BaseClassifier,BaseRegressor
 
 class RidgeRegressor(BaseRegressor):
     def __init__(self,lambd=1):
