@@ -1,1 +1,2 @@
 from .random_forest import RandomForestClassifier
+from .multiclass import OneVsRestClassifier
