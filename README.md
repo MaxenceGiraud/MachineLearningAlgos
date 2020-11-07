@@ -55,9 +55,12 @@ Some examples on how to use the algorithms can be found in the file example.py
 
 #### Layers
 - [ ] Dense 
-- [ ] Convolution
+- [ ] Convolution (1d,2d,3d)
 - [ ] Recurrent
 - [ ] LSTM
+- [ ] Pooling
+- [ ] Dropout
+- [ ] Normalization
 
 #### Wrapper
 - [ ] Autoencoder/VAE ? (Partially done in class), to refactor as wrapper of NeuralNetwork
@@ -71,10 +74,11 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Adagrad
 
 #### Loss
-- [ ] MSE
-- [ ] RMSE
-- [ ] MAE
-- [ ] Weighted MSE/RMSE/MAE
+- [x] MSE
+- [x] RMSE
+- [x] MAE
+- [ ] Neg log likelihood  
+- [ ] Add possibility of weighted loss
   
 #### Activation functions
 - [x] Linear
@@ -83,7 +87,8 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] Sigmoid
 - [x] Leaky Relu
 - [x] Softplus
-
+- [ ] Softmax
+- [ ] Softmin
 
 ### Multi-armed bandit
 Algo seen in class to add and generalize:   

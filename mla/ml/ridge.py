@@ -1,6 +1,21 @@
 import numpy as np
+from .base import BaseClassifier,BaseRegressor
 
-class RidgeClassifier: # TODO adapt to n class
+class RidgeRegressor(BaseRegressor):
+    def __init__(self,lambd=1):
+        self.lambd  = lambd
+        self.beta = 0
+
+    def fit(self,X,y):
+        X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
+        self.beta = np.linalg.inv(self.lambd*np.identity(X.shape[1]) + X.T @ X) @ X.T @ y
+
+    def predict(self,X):
+        X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
+        return (X @ self.beta)
+
+
+class RidgeClassifier(BaseClassifier): 
     def __init__(self,lambd=1):
         self.lambd  = lambd
         self.beta = 0
@@ -20,8 +35,3 @@ class RidgeClassifier: # TODO adapt to n class
         X = np.concatenate((np.ones((X.shape[0],1)),X),axis=1) # add column of 1 for the bias
         y_hat  = np.where((X @ self.beta) >0,self.labels[0],self.labels[1])
         return y_hat
-
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc

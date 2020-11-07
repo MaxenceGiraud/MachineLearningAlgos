@@ -1,4 +1,5 @@
 import numpy as np
+from .base import BaseClassifier,BaseRegressor
 # import graphviz
 
 class Node:
@@ -77,7 +78,7 @@ def gini_index(groups,class_labels):
 
     
 
-class DecisionTreeClassifier:
+class DecisionTreeClassifier(BaseClassifier):
     ''' CART Decision tree classifier
     
     Parameters
@@ -143,12 +144,7 @@ class DecisionTreeClassifier:
     def predict(self,X):
         return self.tree.predict(X)
 
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc
-
-class DecisionTreeRegressor:
+class DecisionTreeRegressor(BaseRegressor):
     ''' CART Decision tree regressor
    Parameters
     ----------
@@ -219,9 +215,3 @@ class DecisionTreeRegressor:
         
     def predict(self,X):
         return self.tree.predict(X)
-
-    def score(self,X,y):
-        '''Compute MSE for the prediction  of the model with X/y'''
-        y_hat = self.predict(X)
-        mse = np.sum((y - y_hat)**2) / len(y)
-        return mse

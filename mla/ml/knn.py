@@ -1,8 +1,9 @@
 import numpy as np
 from scipy.spatial.distance import cdist
+from .base import BaseClassifier,BaseRegressor
 
 
-class KNN:
+class KNN(BaseClassifier):
     '''KNN Classifier'''
     def __init__(self,k,metric='minkowski'):
         self.k = k
@@ -26,15 +27,7 @@ class KNN:
         y_hat = np.argmax(out,axis=1)
         return y_hat    
 
-    def score(self,X_test,y_test):
-        '''Compute Accuracy'''
-        y_hat = self.predict(X_test)
-        errors  = np.count_nonzero(y_hat-y_test)
-
-        acc = 1- (errors / len(y_test))
-        return acc
-
-class KNN_Regressor:
+class KNN_Regressor(BaseRegressor):
     '''KNN Regressor with uniform weight'''
     def __init__(self,k,metric='minkowski',weight='uniform'):
         assert weight in ['uniform','distance'], "weight must either be uniform or distance"
@@ -59,10 +52,4 @@ class KNN_Regressor:
             dist_nn = (dist_nn.T / np.sum(dist_nn,axis=1)).T # Normalize the distances
             y_hat = np.sum(self.y[nearest_neighbors] * dist_nn,axis=1)
 
-        return y_hat    
-
-    def score(self,X,y):
-        '''Compute MSE for the prediction  of the model with X/y'''
-        y_hat = self.predict(X)
-        mse = np.sum((y - y_hat)**2) / len(y)
-        return mse
+        return y_hat

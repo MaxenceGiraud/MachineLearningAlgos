@@ -1,6 +1,8 @@
 import numpy as np
+from .base import BaseClassifier
 
-class BernoulliNaiveBayes:
+
+class BernoulliNaiveBayes(BaseClassifier):
     def __init__(self,encoding="categorical"):
         assert (encoding in ["object","categorical"]), "Encoding must either be object or categorical"
 
@@ -75,14 +77,8 @@ class BernoulliNaiveBayes:
 
         return y_hat
 
-    
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc
-
         
-class GaussianNaiveBayes:
+class GaussianNaiveBayes(BaseClassifier):
     def __init__(self,var_smoothing=1e-9):
         self.prior = None
         self.labels  = None
@@ -113,15 +109,9 @@ class GaussianNaiveBayes:
         
         y_hat = self.labels[np.argmax(probs,axis=1)]
         return y_hat
-    
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc
 
 
-
-class MultinomialNaiveBayes:
+class MultinomialNaiveBayes(BaseClassifier):
     '''
     Parameters
     ----------
@@ -149,8 +139,3 @@ class MultinomialNaiveBayes:
         y_hat = self.labels[np.argmax(probs,axis=1)]
         
         return y_hat
-
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc

@@ -1,4 +1,5 @@
 import numpy as np
+from .base import BaseClassifier
 
 def str_to_function(arg):
     switcher = { 
@@ -16,7 +17,7 @@ def tanh(x):
     return (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))
 
 
-class perceptron:
+class Perceptron(BaseClassifier):
     def __init__(self,learning_rate = 0.1,theta0 = None,batch_size=32 ,activation="sigmoid",epsilon=1e-4,iter_max=200):
         if isinstance(activation,str) :
             self.activation,self.threshold = str_to_function(activation)
@@ -91,8 +92,3 @@ class perceptron:
     def predict(self,X):
         probs = self.predict_probs(X)
         return np.where(probs>self.threshold,self.labels[0],self.labels[1])
-
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc
