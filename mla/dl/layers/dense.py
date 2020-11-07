@@ -1,14 +1,20 @@
 import numpy as np
-from activation import Linear
+from ..activation.activation import Linear
 
 class Dense:
     def __init__(self,units,activation=Linear()):
         self.units = units
         self.activation = activation
+
+        self.output_unit = None
     
-    def plug(self,InputUnit):
-        self.input_shape = InputUnit.output_shape
+    def plug(self,intputlayer):
+        self.input_shape = intputlayer.output_shape
         self.output_shape = self.input_shape
+
+        self.input_unit = intputlayer
+        intputlayer.output_unit = self
+
         # Weights
         self.w = np.random.randn(self.input_shape)
         self.b = np.random.randn() # bias
