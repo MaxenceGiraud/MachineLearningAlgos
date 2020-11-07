@@ -3,7 +3,7 @@
 import mla
 import numpy as np
 
-from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups
+from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups,load_iris
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 #%%
@@ -21,7 +21,7 @@ regressor.score(X_test,y_test)
 
 
 #%%
-############# Classification task #################
+############# Binary Classification task #############
 
 clf = mla.KNN(3) # Choose whatever classifier you want (need to have fit and score methods)
 
@@ -31,7 +31,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 clf.fit(X_train,y_train)
 clf.score(X_test,y_test)
 
+#%% 
+#############  Multilabel classification task ##########
+clf  = mla.OneVsRestClassifier() # Choose whatever regressor you want (need to have fit and score methods)
 
+data = load_boston()
+X = data['data']
+y = data['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+clf.fit(X_train,y_train)
+clf.score(X_test,y_test)
 #%%
 ############# Boolean/Counting features Classification task  (Bernoulli/Multinomial Naive Bayes) #################
 
