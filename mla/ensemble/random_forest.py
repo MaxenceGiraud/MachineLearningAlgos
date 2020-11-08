@@ -1,9 +1,10 @@
 import multiprocessing as mp
 import numpy as np
 from ..base import BaseClassifier,BaseRegressor
+from ..ml.decison_tree import DecisionTreeClassifier,DecisionTreeRegressor
 
 class Base_Randomforest:
-    def __init__(self,basetree,basetree_params,n_tree = 20,parallelize=True):
+    def __init__(self,basetree,basetree_params={},n_tree = 20,parallelize=True):
         self.basetree = basetree
         self.basetree_params = basetree_params
         self.parallelize = parallelize
@@ -39,6 +40,7 @@ class Base_Randomforest:
             for i in range(self.n_tree):
                 res.append(self.estimators[i].predict(X))
 
+        return res
 
 class RandomForestClassifier(Base_Randomforest,BaseClassifier):
     ''' Random Forest Classfier
@@ -53,13 +55,16 @@ class RandomForestClassifier(Base_Randomforest,BaseClassifier):
     n_tree : int,
             number of trees in the forest
     '''
+    def __init__(self,basetree=DecisionTreeClassifier,basetree_params={},n_tree = 20,parallelize=True):
+        super().__init__(basetree,basetree_params,n_tree,parallelize)
+
     def fit(self,X,y):
         self.labels = np.unique(y)
 
-        return super().fit(X,y)
+        return self.fit(X,y)
         
     def predict(self,X):
-        res = super.predict_all_trees(X)
+        res = super().predict_all_trees(X)
 
         # Take the most common value
         res = np.array(res)
@@ -81,8 +86,10 @@ class RandomForestRegressor(Base_Randomforest,BaseRegressor):
     n_tree : int,
             number of trees in the forest
     '''
+    def __init__(self,basetree=DecisionTreeRegressor,basetree_params={},n_tree = 20,parallelize=True):
+        super().__init__(basetree,basetree_params,n_tree,parallelize)
     
     def predict(self,X):
-        res = super.predict_all_trees(X)
+        res = self.predict_all_trees(X)
 
         return np.mean(res,axis=0)

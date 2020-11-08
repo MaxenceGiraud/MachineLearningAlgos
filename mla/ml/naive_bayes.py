@@ -72,7 +72,7 @@ class BernoulliNaiveBayes(BaseClassifier):
         
         elif self.encoding == 'categorical':
             # see sklearn.utils.extmath.safe_sparse_dot
-            probs  = np.log(self.prior) + X @ np.log(self.cond_prob.T) + (1-X)@np.log(1-self.cond_prob.T) 
+            probs  = np.log(self.prior) + X @ np.log(self.cond_prob.T)# + (1-X)@np.log(1-self.cond_prob.T) 
             y_hat = self.labels[np.argmax(probs,axis=1)]
 
         return y_hat
@@ -118,7 +118,7 @@ class MultinomialNaiveBayes(BaseClassifier):
     alpha : float, default=0.001
         Additive (Laplace/Lidstone) smoothing parameter (0 for no smoothing).
         '''
-    def __init_(self,alpha=0.001):
+    def __init__(self,alpha=0.001):
         self.alpha = alpha
 
     def fit(self,X,y):
@@ -135,7 +135,6 @@ class MultinomialNaiveBayes(BaseClassifier):
 
     def predict(self,X):
         probs  = np.log(self.prior) + X @ np.log(self.cond_prob.T)
-
         y_hat = self.labels[np.argmax(probs,axis=1)]
         
         return y_hat
