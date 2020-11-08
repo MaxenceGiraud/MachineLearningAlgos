@@ -14,11 +14,10 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] [Logistic Regression/ Perceptron](./mla/ml/perceptron.py)
 - [x] [Least squares](./mla/ml/leastsquares.py) linear regression/classification
 - [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
-- [x] [Ridge](./mla/ml/ridge.py) regression/classification
-- [ ] LASSO
-- [ ] SVM
+- [x] [Ridge](./mla/ml/leastsquares-_regularised.py) 
+- [ ] [LASSO](./mla/ml/leastsquares-_regularised.py) (using Least Angle Regression)
+- [ ] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
-- [ ] MCMC
 - [ ] Gaussian process regression
 - [ ] Hidden Markov model
 - [ ] Multivariate adaptive regression spline
@@ -26,17 +25,18 @@ Some examples on how to use the algorithms can be found in the file example.py
 #### [Bayesian](./mla/ml)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
+- [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
 - [ ] MCMC
 - [ ] Importance sampling
 - [ ] SMC
-- [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
   
 
 ### [Ensemble methods](./mla/ensemble/)
 - [x] [Random Forest](./mla/ensemble/random_forest.py)
 - [ ] Gradient Boosting
 - [ ] AdaBoost
-- [ ] One vs rest/ One vs one classifier 
+- [x] [One vs rest classifier](./mla/ensemble/multiclass.py)
+- [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
   
 
 ### [Clustering](./mla/clustering/)
@@ -52,7 +52,7 @@ Some examples on how to use the algorithms can be found in the file example.py
   
 
 ### [Deep Leaning](./mla/dl/)
-- [ ] [Neural Network Base](./mla/dl/neuralnetwork.py)
+- [ ] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
 
 #### [Layers](./mla/dl/layers/)
 - [ ] [Dense](./mla/dl/layers/dense.py)
