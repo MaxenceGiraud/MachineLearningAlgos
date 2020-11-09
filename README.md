@@ -7,15 +7,15 @@ Personal reimplementation of some ML algorithm for learning purposes
 ## How to
 Some examples on how to use the algorithms can be found in the file example.py
 
-## Algoritms
+## Algorithms
 
 ### [Machine Leaning](./mla/ml)
 - [x] [KNN](./mla/ml/knn.py) (classifier+regressor)
 - [x] [Logistic Regression/ Perceptron](./mla/ml/perceptron.py)
 - [x] [Least squares](./mla/ml/leastsquares.py) linear regression/classification
 - [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
-- [x] [Ridge](./mla/ml/leastsquares-_regularised.py) 
-- [ ] [LASSO](./mla/ml/leastsquares-_regularised.py) (using Least Angle Regression)
+- [x] [Ridge](./mla/ml/leastsquares_regularised.py) 
+- [ ] [LASSO](./mla/ml/leastsquares_regularised.py) (using Least Angle Regression)
 - [ ] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [ ] Gaussian process regression
@@ -59,7 +59,9 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Convolution (1d,2d,3d)
 - [ ] Recurrent
 - [ ] LSTM
+  
 - [ ] Pooling
+- [x] Flatten
 - [ ] Dropout
 - [ ] Normalization
 
@@ -76,7 +78,6 @@ Some examples on how to use the algorithms can be found in the file example.py
 
 #### [Loss](./mla/dl/layers/loss.py)
 - [x] MSE
-- [x] RMSE
 - [x] MAE
 - [ ] Neg log likelihood  
 - [ ] Add possibility of weighted loss
