@@ -1,3 +1,4 @@
 from .dense import Dense
-from .inputunit import InputUnit
+from .inputlayer import InputLayer
 from .loss import *
+from .flatten import Flatten

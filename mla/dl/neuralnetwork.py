@@ -1,12 +1,12 @@
 import numpy as np
 from .optimizer.optimizer import GradientDescent
-from .layers.inputunit import InputUnit
+from .layers.inputlayer import InputLayer
 from .layers.loss import Loss
 
 class NeuralNetwork:
     def __init__(self,input_shape,loss=Loss):
         assert isinstance(loss,Loss), "loss must be an instance of Loss"
-        self.layers = [InputUnit(input_shape)]
+        self.layers = [InputLayer(input_shape)]
         self.loss = loss
     
     @property
