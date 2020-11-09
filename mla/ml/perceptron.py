@@ -91,4 +91,4 @@ class Perceptron(BaseClassifier):
     
     def predict(self,X):
         probs = self.predict_probs(X)
-        return np.where(probs>self.threshold,self.labels[0],self.labels[1])
+        return np.where(probs>self.threshold,self.labels[1],self.labels[0])
