@@ -76,3 +76,22 @@ bnb = mla.BernoulliNaiveBayes()
 bnb.fit(X_train,y_train)
 bnb.score(X_test,y_test)
 #%%
+########################### Deep learning ################
+
+## Binary Classification 
+
+np.random.seed(42)
+X, y = make_classification(n_samples=10, n_features=4, n_classes=2, n_clusters_per_class=1)
+#%%
+
+nn = mla.NeuralNetwork(X.shape[1:],loss=mla.BinaryCrossEntropy())
+nn.add(mla.Dense(6,activation=mla.dl.activation.Sigmoid()))
+nn.add(mla.Dense(4,activation=mla.dl.activation.Sigmoid()))
+nn.add(mla.Dense(3,activation=mla.dl.activation.Sigmoid()))
+nn.add(mla.Dense(1,activation=mla.dl.activation.Sigmoid()))
+
+#%%
+
+nn.fit(X,y,mla.GradientDescent())
+
+#%% ##

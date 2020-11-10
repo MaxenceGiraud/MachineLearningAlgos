@@ -1,11 +1,11 @@
 import numpy as np
-from .optimizer.optimizer import GradientDescent
+from .optimizer.gradientdescent import GradientDescent
 from .layers.inputlayer import InputLayer
-from .layers.loss import Loss
+from .layers.loss import Loss,MSE,MAE
 
 class NeuralNetwork:
-    def __init__(self,input_shape,loss=Loss):
-        assert isinstance(loss,Loss), "loss must be an instance of Loss"
+    def __init__(self,input_shape,loss=MAE()):
+        #assert isinstance(loss,Loss), "loss must be an instance of Loss"
         self.layers = [InputLayer(input_shape)]
         self.loss = loss
     
@@ -18,13 +18,16 @@ class NeuralNetwork:
         self.layers.append(layer)
         self.loss.plug(self.output_layer)
 
-    def forward(self,X):
-        self.loss.forward(X)
+    def forward(self,X,y):
+        return self.loss.forward(X,y)
 
-    def backprop(self,X,y):
-        delta = self.loss.backprop(X,y)
+    def backprop(self,y):
+        delta = self.loss.backprop(y)
+        delta_loss = np.copy(delta)
         for i in range(len(self.layers)-1,0,-1):
-            delta = self.layers[i].backprop(X,delta)
+            delta = self.layers[i].backprop(delta)
+        
+        return delta_loss
 
     
     def update(self,lr):
@@ -40,8 +43,3 @@ class NeuralNetwork:
     def score(self,X,y):
         y_hat = self.predict(X)
         return self.loss.loss_function(y,y_hat)
-
-        
-
-
-
