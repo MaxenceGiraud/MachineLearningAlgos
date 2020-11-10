@@ -20,12 +20,12 @@ class Loss:
     
     def forward(self,X,y):
         self.zin = self.input_unit.forward(X)
-        self.loss = self.loss_function(self.zin,y)
+        self.loss = self.loss_function(self.zin.flatten(),y)
         return self.loss
 
     def backprop(self,y):
-        self.loss_d = self.deriv(self.loss,y)
-        return self.loss
+        self.loss_d = self.deriv(self.zin.flatten(),y)
+        return self.loss_d.reshape((-1,1))
 
     def loss_function(self,y_pred,y_true):
         raise NotImplementedError("Function not supposed to call, class is only a base")
@@ -35,14 +35,21 @@ class Loss:
 
 class MSE(Loss):
     def loss_function(self,y_pred,y_true):
-        return np.sum(np.square(y_true-y_pred)) / y_true.size
+        return np.mean((y_pred.flatten()- y_true)**2)
     
     def deriv(self,y_pred,y_true):
-        return 2*np.sum(y_pred - y_true) / y_true.size
+        return 2*(y_pred - y_true) 
 
 class MAE(Loss):
-    def loss_function(self,y_true,y_pred):
-        return np.sum(np.abs(y_pred-y_true)) / y_true.size
+    def loss_function(self,y_pred,y_true):
+        return np.mean(np.abs(y_pred-y_true))
 
     def deriv(self,y_pred,y_true):
-        return np.sum(np.sign(y_pred-y_true)) / y_true.size
+        return np.sign(y_pred-y_true)
+
+class BinaryCrossEntropy(Loss):
+    def loss_function(self,y_pred,y_true):
+        return np.mean(-y_true * np.log(y_pred) - (1 - y_true) * np.log(1 - y_pred))
+    
+    def deriv(self,y_pred,y_true):
+        return y_pred - y_true
