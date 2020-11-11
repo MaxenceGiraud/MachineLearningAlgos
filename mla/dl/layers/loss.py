@@ -20,11 +20,11 @@ class Loss:
     
     def forward(self,X,y):
         self.zin = self.input_unit.forward(X)
-        self.loss = self.loss_function(self.zin.flatten(),y)
+        self.loss = self.loss_function(self.zin,y.reshape(self.zin.shape))
         return self.loss
 
     def backprop(self,y):
-        self.loss_d = self.deriv(self.zin.flatten(),y)
+        self.loss_d = self.deriv(self.zin,y.reshape(self.zin.shape))
         return self.loss_d.reshape((-1,1))
 
     def loss_function(self,y_pred,y_true):

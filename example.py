@@ -94,4 +94,22 @@ nn.add(mla.Dense(1,activation=mla.dl.activation.Sigmoid()))
 
 nn.fit(X,y,mla.GradientDescent())
 
-#%% ##
+#%% ## Regression
+
+data = load_boston()
+X = data['data']
+y = data['target']
+X = (X - X.min(axis=0))/X.max(axis=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+#%%
+
+nn = mla.NeuralNetwork(X.shape[1:],loss=mla.MAE())
+nn.add(mla.Dense(6,activation=mla.dl.activation.Relu()))
+nn.add(mla.Dense(4,activation=mla.dl.activation.Relu()))
+nn.add(mla.Dense(3,activation=mla.dl.activation.Relu()))
+nn.add(mla.Dense(1,activation=mla.dl.activation.Relu()))
+
+#%%
+
+nn.fit(X,y,mla.GradientDescent(learning_rate=1e-4))
+#%%

@@ -26,8 +26,8 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
 - [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
-- [ ] MCMC
-- [ ] Importance sampling
+- [ ] MCMC (Murphy chap24)
+- [ ] Importance sampling (Murphy chap23)
 - [ ] SMC
   
 
@@ -52,33 +52,34 @@ Some examples on how to use the algorithms can be found in the file example.py
   
 
 ### [Deep Leaning](./mla/dl/)
-- [ ] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
+- [x] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
 
 #### [Layers](./mla/dl/layers/)
-- [ ] [Dense](./mla/dl/layers/dense.py)
+- [x] [Dense](./mla/dl/layers/dense.py)
 - [ ] Convolution (1d,2d,3d)
 - [ ] Recurrent
 - [ ] LSTM
-  
 - [ ] Pooling
 - [x] Flatten
 - [ ] Dropout
 - [ ] Normalization
 
 #### Wrapper
-- [ ] Autoencoder/VAE ? (Partially done in class), to refactor as wrapper of NeuralNetwork
+- [ ] Autoencoder
+- [ ] VAE
 - [ ] GAN 
 - [ ] Transformer 
   
 #### [Optimization Algorithm](./mla/dl/optimizer/)
-- [x] Mini batch/full batch Gradient descent
 - [x] Stochastic gradient descent
+- [x] Mini batch batch Gradient descent
 - [ ] Adam
 - [ ] Adagrad
 
 #### [Loss](./mla/dl/layers/loss.py)
 - [x] MSE
 - [x] MAE
+- [x] Binary Cross Entropy
 - [ ] Neg log likelihood  
 - [ ] Add possibility of weighted loss
   
@@ -120,5 +121,6 @@ Algo seen in class to add and generalize:
 
 [1] M. BISHOP, Christopher. Pattern Recognition and Machine Learning. Springer, 2011.   
 [2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition. Springer, 2016.   
-[3] [Scikit-learn](https://scikit-learn.org)   
-[4] Courses from Master Data Science held at the University of Lille, France
+[3] P. MURPHY, Kevin. Machine Learning: A Probabilistic Perspective. The MIT Press, 2012. 
+[4] [Scikit-learn](https://scikit-learn.org)   
+[5] Courses from Master Data Science held at the University of Lille, France

@@ -26,7 +26,7 @@ class Linear:
         return X
     
     def deriv(self,X):
-        return np.ones(X.size)
+        return np.ones(X.shape)
 
 class Softplus:
     def f(self,X):
@@ -43,3 +43,13 @@ class LeakyRelu:
     
     def deriv(self,X):
         return np.where(X>=0,1,self.alpha)
+
+class Softmax:
+    def f(self,X):
+        exps = np.exp(X- np.max(X))
+        return exps / np.sum(exps,axis=0)
+    
+    def deriv(self,X):
+        # TODO
+        return 
+        

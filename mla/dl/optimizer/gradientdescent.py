@@ -26,7 +26,6 @@ class GradientDescent(BaseOptimizer):
             nn.update(self.lr)  # Update weights
 
             #g= np.mean(g,axis=0)
-            print(g)
             print("loss :",np.mean(loss)/np.ceil(batch_iter))
             nb_iter += 1
 
