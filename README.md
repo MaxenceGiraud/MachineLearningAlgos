@@ -4,6 +4,11 @@ Personal reimplementation of some ML algorithm for learning purposes
 ## Author
 [Maxence Giraud](https://github.com/MaxenceGiraud/)
 
+## Requirements 
+* [NumPy](https://numpy.org/) 
+* [Matplotlib](https://matplotlib.org/) (for plots only)
+* [Gym](https://gym.openai.com/) (RL environment)
+
 ## How to
 Some examples on how to use the algorithms can be found in the file example.py
 
@@ -93,13 +98,16 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Softmax
 - [ ] Softmin
 
-### Multi-armed bandit
-Algo seen in class to add and generalize:   
-- [ ] UCB
-- [ ] kl UCB
-- [ ] ETC 
-- [ ] FTL
-- [ ] Thompson sampling
+### [Multi-armed bandit](./mla/mab/)
+Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.html) for the bandit environment. 
+
+- [x] UCB
+- [x] kl UCB
+- [x] ETC 
+- [x] FTL
+- [x] Thompson sampling
+- [ ] Lin UCB
+- [ ] Lin Thompsom Sampling
 
 ### Reinforcement Learning 
 - [ ] Q-learning
@@ -121,6 +129,6 @@ Algo seen in class to add and generalize:
 
 [1] M. BISHOP, Christopher. Pattern Recognition and Machine Learning. Springer, 2011.   
 [2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition. Springer, 2016.   
-[3] P. MURPHY, Kevin. Machine Learning: A Probabilistic Perspective. The MIT Press, 2012. 
+[3] P. MURPHY, Kevin. Machine Learning: A Probabilistic Perspective. The MIT Press, 2012.   
 [4] [Scikit-learn](https://scikit-learn.org)   
 [5] Courses from Master Data Science held at the University of Lille, France
