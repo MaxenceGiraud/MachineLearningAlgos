@@ -27,8 +27,9 @@ class GradientDescent(BaseOptimizer):
 
             #g= np.mean(g,axis=0)
             print("loss :",np.mean(loss)/np.ceil(batch_iter))
+            print("g :",np.mean(g)/np.ceil(batch_iter))
             nb_iter += 1
 
 class StochasticGradientDescent(GradientDescent):
     def __init__(self,learning_rate=0.1,n_iter=100,eps=1e-6):
-        super.__init__(learning_rate=learning_rate,batch_size=1,n_iter=n_iter,eps=eps)
+        super().__init__(learning_rate=learning_rate,batch_size=1,n_iter=n_iter,eps=eps)

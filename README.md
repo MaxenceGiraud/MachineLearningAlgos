@@ -49,7 +49,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] [K-medoids](./mla/clustering/kmedoids.py)
 - [x] [DBSCAN](./mla/clustering/dbscan.py)
 - [ ] OPTICS
-- [ ] Gaussian Mixture with EM algorithm
+- [ ] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
 - [ ] Vector quantization
@@ -70,10 +70,9 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Normalization
 
 #### Wrapper
-- [ ] Autoencoder
+- [x] Autoencoder
 - [ ] VAE
-- [ ] GAN 
-- [ ] Transformer 
+- [ ] GAN  
   
 #### [Optimization Algorithm](./mla/dl/optimizer/)
 - [x] Stochastic gradient descent

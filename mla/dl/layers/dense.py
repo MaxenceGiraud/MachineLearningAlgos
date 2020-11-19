@@ -34,7 +34,7 @@ class Dense:
     def backprop(self,delta):
         self.delta = delta @ self.w.T * self.activation.deriv(self.zin)
         self.dw =  delta.T @ self.zin 
-        self.db = 0
+        self.db = np.sum(delta,axis=0)
         return self.delta
 
     def update(self,lr):

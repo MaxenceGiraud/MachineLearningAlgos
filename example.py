@@ -1,6 +1,7 @@
 '''This file contains examples of use for some algo'''
 #%%
 import mla
+from mla import dl
 import numpy as np
 
 from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups,load_iris
@@ -81,18 +82,18 @@ bnb.score(X_test,y_test)
 ## Binary Classification 
 
 np.random.seed(42)
-X, y = make_classification(n_samples=10, n_features=4, n_classes=2, n_clusters_per_class=1)
+X, y = make_classification(n_samples=200, n_features=, n_classes=2, n_clusters_per_class=1)
 #%%
 
-nn = mla.NeuralNetwork(X.shape[1:],loss=mla.BinaryCrossEntropy())
-nn.add(mla.Dense(6,activation=mla.dl.activation.Sigmoid()))
-nn.add(mla.Dense(4,activation=mla.dl.activation.Sigmoid()))
-nn.add(mla.Dense(3,activation=mla.dl.activation.Sigmoid()))
-nn.add(mla.Dense(1,activation=mla.dl.activation.Sigmoid()))
+nn = dl.NeuralNetwork(X.shape[1:],loss=dl.BinaryCrossEntropy())
+nn.add(dl.Dense(6,activation=mla.dl.activation.Sigmoid()))
+nn.add(dl.Dense(4,activation=mla.dl.activation.Sigmoid()))
+nn.add(dl.Dense(3,activation=mla.dl.activation.Sigmoid()))
+nn.add(dl.Dense(1,activation=mla.dl.activation.Sigmoid()))
 
 #%%
 
-nn.fit(X,y,mla.GradientDescent())
+nn.fit(X,y,dl.GradientDescent())
 
 #%% ## Regression
 
@@ -103,13 +104,13 @@ X = (X - X.min(axis=0))/X.max(axis=0)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 #%%
 
-nn = mla.NeuralNetwork(X.shape[1:],loss=mla.MAE())
-nn.add(mla.Dense(6,activation=mla.dl.activation.Relu()))
-nn.add(mla.Dense(4,activation=mla.dl.activation.Relu()))
-nn.add(mla.Dense(3,activation=mla.dl.activation.Relu()))
-nn.add(mla.Dense(1,activation=mla.dl.activation.Relu()))
+nn = dl.NeuralNetwork(X.shape[1:],loss=dl.MSE())
+nn.add(dl.Dense(6,activation=mla.dl.activation.Relu()))
+nn.add(dl.Dense(4,activation=mla.dl.activation.Relu()))
+nn.add(dl.Dense(3,activation=mla.dl.activation.Relu()))
+nn.add(dl.Dense(1,activation=mla.dl.activation.Relu()))
 
 #%%
 
-nn.fit(X,y,mla.GradientDescent(learning_rate=1e-4))
+nn.fit(X,y,dl.GradientDescent(learning_rate=1e-5,n_iter=50))
 #%%
