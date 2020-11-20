@@ -3,6 +3,18 @@ from scipy.spatial.distance import cdist
 from itertools import compress  
 
 class DBSCAN:
+    ''' DBSCAN clustering algorithm 
+    Ref : Ester, M., H. P. Kriegel, J. Sander, and X. Xu, “A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise”. In: Proceedings of the 2nd International Conference on Knowledge Discovery and Data Mining, Portland, OR, AAAI Press, pp. 226-231. 1996
+
+    Parameter
+    ---------
+    eps : float,
+        Radius of the neighborhood of one point 
+    min_pts : int,
+        Minimum number of points in the neighborhood of a point to be considered a core
+    metric : string,
+        Metric type for the computation of distance between the points
+    '''
     def __init__(self,eps=0.2,min_pts=8,metric='minkowski'):
         self.eps = eps
         self.min_pts = min_pts

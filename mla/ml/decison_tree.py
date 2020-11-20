@@ -3,6 +3,7 @@ from ..base import BaseClassifier,BaseRegressor
 # import graphviz
 
 class Node:
+    ''' Node of a Decision tree'''
     def __init__(self,criterion,idx_feature,gini = None,categorial = False):
         self.criterion = criterion
         self.idx_feature = idx_feature

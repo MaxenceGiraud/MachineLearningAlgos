@@ -2,8 +2,19 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 class Kmeans:
-    '''K-Means clustering algorithm'''
-    def __init__(self,k,max_iter=100,init='kmeans++'):
+    '''K-Means clustering algorithm
+    
+    Parameters
+    ----------
+    k : int,
+        Number of centers
+    max_iter : int,
+        maximum number of iterations of the algo
+    init : string,
+        Method of initialization of the cluster centers, can be either random or kmeans++
+    
+    '''
+    def __init__(self,k=3,max_iter=100,init='kmeans++'):
         self.k = k
         self.max_iter = max_iter
         self.cluster_means = False

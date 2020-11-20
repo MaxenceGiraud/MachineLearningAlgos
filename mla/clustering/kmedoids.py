@@ -2,8 +2,16 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 class Kmedoids:
-    '''K-Medoids clustering algorithm'''
-    def __init__(self,k,max_iter=100):
+    '''K-Medoids clustering algorithm
+    Parameters
+    ----------
+    k : int,
+        Number of centers
+    max_iter : int,
+        maximum number of iterations of the algo
+      
+    '''
+    def __init__(self,k=3,max_iter=100):
         self.k = k
         self.max_iter = max_iter
         self.centroids = False

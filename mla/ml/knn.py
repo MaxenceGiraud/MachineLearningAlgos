@@ -4,7 +4,14 @@ from ..base import BaseClassifier,BaseRegressor
 
 
 class KNN(BaseClassifier):
-    '''KNN Classifier'''
+    '''K Nearest Neighbhor Classifier
+    Parameters
+    ----------
+    k : int,
+        Number of neighbors to consider
+    metric : string,
+         metric used to compute distance between samples
+    '''
     def __init__(self,k,metric='minkowski'):
         self.k = k
         self.metric = metric
@@ -28,7 +35,14 @@ class KNN(BaseClassifier):
         return y_hat    
 
 class KNN_Regressor(BaseRegressor):
-    '''KNN Regressor with uniform weight'''
+    '''KNN Regressor with uniform weight
+    Parameters
+    ----------
+    k : int,
+        Number of neighbors to consider
+    metric : string,
+         metric used to compute distance between samples
+    '''
     def __init__(self,k,metric='minkowski',weight='uniform'):
         assert weight in ['uniform','distance'], "weight must either be uniform or distance"
         self.k = k

@@ -4,6 +4,7 @@ from .layers.inputlayer import InputLayer
 from .layers.loss import Loss,MSE,MAE
 
 class NeuralNetwork:
+    '''Neural Network  '''
     def __init__(self,input_shape,loss=MAE()):
         #assert isinstance(loss,Loss), "loss must be an instance of Loss"
         self.layers = [InputLayer(input_shape)]

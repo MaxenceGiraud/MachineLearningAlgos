@@ -10,7 +10,8 @@ Personal reimplementation of some ML algorithm for learning purposes
 * [Gym](https://gym.openai.com/) (RL environment)
 
 ## How to
-Some examples on how to use the algorithms can be found in the file example.py
+Some examples on how to use the algorithms can be found in the file [example.py](./example.py)
+
 
 ## Algorithms
 
@@ -21,6 +22,7 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
 - [x] [Ridge](./mla/ml/leastsquares_regularised.py) 
 - [ ] [LASSO](./mla/ml/leastsquares_regularised.py) (using Least Angle Regression)
+- [ ] Elastic net solver ?? (solver for LS, Ridge, LASSO)
 - [ ] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [ ] Gaussian process regression
@@ -64,19 +66,21 @@ Some examples on how to use the algorithms can be found in the file example.py
 - [ ] Convolution (1d,2d,3d)
 - [ ] Recurrent
 - [ ] LSTM
+- [ ] GRU
 - [ ] Pooling
 - [x] Flatten
 - [ ] Dropout
 - [ ] Normalization
 
 #### Wrapper
-- [x] Autoencoder
+- [x] [Autoencoder](./mla/dl/autoencoder.py)
 - [ ] VAE
 - [ ] GAN  
   
 #### [Optimization Algorithm](./mla/dl/optimizer/)
 - [x] Stochastic gradient descent
 - [x] Mini batch batch Gradient descent
+- [ ] $\epsilon$-$\delta$ private SGD
 - [ ] Adam
 - [ ] Adagrad
 
@@ -115,7 +119,7 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] PCA
 - [ ] FDA
 - [ ] ICA
-- [ ] Elastic map/net
+- [ ] Elastic map
 - [ ] CCA
 
 ### Visualization
@@ -130,4 +134,4 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 [2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition. Springer, 2016.   
 [3] P. MURPHY, Kevin. Machine Learning: A Probabilistic Perspective. The MIT Press, 2012.   
 [4] [Scikit-learn](https://scikit-learn.org)   
-[5] Courses from Master Data Science held at the University of Lille, France
+[5] Courses from [Master Data Science](https://sciences-technologies.univ-lille.fr/mathematiques/formation/master-mention-sciences-des-donnees/) held at the University of Lille, France

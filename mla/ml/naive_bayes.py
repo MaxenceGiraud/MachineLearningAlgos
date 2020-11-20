@@ -3,6 +3,13 @@ from ..base import BaseClassifier
 
 
 class BernoulliNaiveBayes(BaseClassifier):
+    ''' Bernouilly naive Bayes classifier 
+    Parameters
+    ----------
+    encoding  : string,
+        Type of input data to consider: categorial (Boolean Matrix) or object (ex : list of words)
+    '''
+
     def __init__(self,encoding="categorical"):
         assert (encoding in ["object","categorical"]), "Encoding must either be object or categorical"
 
@@ -79,6 +86,12 @@ class BernoulliNaiveBayes(BaseClassifier):
 
         
 class GaussianNaiveBayes(BaseClassifier):
+    ''' Gaussian naive Bayes classifier
+    Parameters
+    ----------
+    var_smoothing : float, default=0.001
+      Smoothing parameter (0 for no smoothing).
+    '''
     def __init__(self,var_smoothing=1e-9):
         self.prior = None
         self.labels  = None
@@ -112,7 +125,7 @@ class GaussianNaiveBayes(BaseClassifier):
 
 
 class MultinomialNaiveBayes(BaseClassifier):
-    '''
+    '''  Multinomial naive Bayes classifier 
     Parameters
     ----------
     alpha : float, default=0.001

@@ -2,6 +2,7 @@ import numpy as np
 from .baseoptimiser import BaseOptimizer
 
 class GradientDescent(BaseOptimizer):
+    ''' Mini Batch Gradient Descent algorithm'''
     def minimize(self,nn,X,y):
         # add column of 1 for the bias/intercept
         g = 1
@@ -31,5 +32,6 @@ class GradientDescent(BaseOptimizer):
             nb_iter += 1
 
 class StochasticGradientDescent(GradientDescent):
+    ''' Stochastic Gradient Descent algorithm'''
     def __init__(self,learning_rate=0.1,n_iter=100,eps=1e-6):
         super().__init__(learning_rate=learning_rate,batch_size=1,n_iter=n_iter,eps=eps)

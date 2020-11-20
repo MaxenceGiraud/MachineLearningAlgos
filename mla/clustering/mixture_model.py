@@ -4,6 +4,18 @@ import numpy as np
 from scipy.stats import multivariate_normal
 
 class GaussianMixtureModel:
+    ''' Gaussian Mixture Model clustering algorithm
+    Ref :
+
+    Parameters
+    ----------
+    n_clusters : int,
+        Number of cluster/gaussians to consider
+    iter_max : int,
+        maximum number of iterations of the algo
+    eps : float,
+        stopping criterion
+    '''
     def __init__(self,n_cluster=3,iter_max=100,eps=1e-3):
         self.n_cluster = n_cluster
         self.iter_max = iter_max
@@ -62,6 +74,10 @@ class GaussianMixtureModel:
             print("Neg log likelihood =",nll)
             iter +=1
 
-    def predict(X):
+    def predict(self,X):
         return
+
+    def display(self):
+        # TODO display Gaussians 
+        pass
 #%%

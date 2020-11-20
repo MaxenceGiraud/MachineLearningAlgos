@@ -57,6 +57,13 @@ class BaseLasso(BaseRegularizedLeastSquares):
     def fit(self,X,y):
         X = self.X_to_poly(X)
 
+        self.beta = np.zeros(X.shape[1])
+        # Forward stepwise regression 
+        
+
+        # Least angle regression
+
+
         
 class LassoRegressor(BaseLasso):
     '''Lasso linear regressor, fitted using Least angle regression
@@ -69,10 +76,17 @@ class LassoRegressor(BaseLasso):
              degrees of features to consider,ex for 2 features x1,x2 with degree =2,
              the input features are going to be x1,x2,x1^2,x2^2
     '''
-    pass
+    def fit(self,X,y):
+        X = self.X_to_poly(X)
+        self.beta  = np.zeros(X.shape[1])
+        
+        fitting = []
+        for _ in range(X.shape[1]):
+            pass
+
 
 class LassoClassifier(BaseLasso):
-    '''Lasso linear Classifier, fitted using Least angle regression
+    '''Lasso linear Classifier, fitted using    
     
     Parameters
     ----------
@@ -91,3 +105,8 @@ class LassoClassifier(BaseLasso):
         y[y == self.labels[1]] = -1
         
         super().fit(X,y)
+    
+    def predict(self,X): 
+        pred = super().predict(X)
+        y_hat  = np.where(pred >0,self.labels[0],self.labels[1])
+        return y_hat    

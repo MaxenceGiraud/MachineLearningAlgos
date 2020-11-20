@@ -2,7 +2,7 @@ import numpy as np
 from ..base import BaseClassifier
 
 class LDA(BaseClassifier):
-    'LDA Classifier'''
+    '''LDA Classifier'''
     def __init__(self):
         self.sigma = 0
         self.pi = 0

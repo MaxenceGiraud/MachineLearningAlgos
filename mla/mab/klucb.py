@@ -1,12 +1,13 @@
 from .randmax import randmax
 import numpy as np
+from .bandit_env.bandit_tools import klucbBern
 
 class klUCB:
     """klUCB (Bernoulli divergence by default)"""
     def __init__(self, nbArms,div=klucbBern):
         self.nbArms = nbArms
         self.clear()
-        self.div = "Bernouilli"
+        self.div = div.__name__
         self.f_klucb = div
 
     def clear(self):
