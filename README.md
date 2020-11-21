@@ -80,7 +80,7 @@ Some examples on how to use the algorithms can be found in the file [example.py]
 #### [Optimization Algorithm](./mla/dl/optimizer/)
 - [x] Stochastic gradient descent
 - [x] Mini batch batch Gradient descent
-- [ ] $\epsilon$-$\delta$ private SGD
+- [ ] <img src="https://render.githubusercontent.com/render/math?math=\epsilon">-<img src="https://render.githubusercontent.com/render/math?math=\delta"> private SGD
 - [ ] Adam
 - [ ] Adagrad
 
@@ -130,8 +130,8 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 ## References
 
 
-[1] M. BISHOP, Christopher. Pattern Recognition and Machine Learning. Springer, 2011.   
-[2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition. Springer, 2016.   
-[3] P. MURPHY, Kevin. Machine Learning: A Probabilistic Perspective. The MIT Press, 2012.   
+[1] M. BISHOP, Christopher. [Pattern Recognition and Machine Learning.](https://www.springer.com/gp/book/9780387310732) Springer, 2011.    
+[2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . [The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition.](https://web.stanford.edu/~hastie/ElemStatLearn/) Springer, 2016.   
+[3] P. MURPHY, Kevin. [Machine Learning: A Probabilistic Perspective.](https://www.cs.ubc.ca/~murphyk/MLbook/pml-toc-1may12.pdf) The MIT Press, 2012.   
 [4] [Scikit-learn](https://scikit-learn.org)   
 [5] Courses from [Master Data Science](https://sciences-technologies.univ-lille.fr/mathematiques/formation/master-mention-sciences-des-donnees/) held at the University of Lille, France
