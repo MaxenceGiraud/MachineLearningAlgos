@@ -54,8 +54,7 @@ Some examples on how to use the algorithms can be found in the file [example.py]
 - [ ] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
-- [ ] Vector quantization
-- [ ] Fuzzy clustering (ex : Fuzzy C-means)
+- [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
   
 
 ### [Deep Leaning](./mla/dl/)
@@ -67,6 +66,7 @@ Some examples on how to use the algorithms can be found in the file [example.py]
 - [ ] Recurrent
 - [ ] LSTM
 - [ ] GRU
+- [ ] Transformer Block
 - [ ] Pooling
 - [x] Flatten
 - [ ] Dropout
