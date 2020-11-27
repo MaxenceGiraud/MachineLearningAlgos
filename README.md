@@ -9,11 +9,15 @@ Personal reimplementation of some ML algorithm for learning purposes
 * [Matplotlib](https://matplotlib.org/) (for plots only)
 * [Gym](https://gym.openai.com/) (RL environment)
 
+Some readme have written LaTeX, you can view them locally with some capable reader (e.g. VSCode) or using extensions (e.g. [here](https://addons.mozilla.org/en-US/firefox/addon/latexmathifygithub/) for Firefox).
+
 ## How to
 Some examples on how to use the algorithms can be found in the file [example.py](./example.py)
 
 
 ## Algorithms
+
+Some explainations of the algorithms can be found in the wiki, for more thorough reviews check the references.
 
 ### [Machine Leaning](./mla/ml)
 - [x] [KNN](./mla/ml/knn.py) (classifier+regressor)

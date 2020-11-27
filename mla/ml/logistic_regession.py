@@ -17,7 +17,7 @@ def tanh(x):
     return (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))
 
 
-class Perceptron(BaseClassifier):
+class LogisticRegression(BaseClassifier):
     def __init__(self,learning_rate = 0.1,theta0 = None,batch_size=32 ,activation="sigmoid",epsilon=1e-4,iter_max=200):
         if isinstance(activation,str) :
             self.activation,self.threshold = str_to_function(activation)

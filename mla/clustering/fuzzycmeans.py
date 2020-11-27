@@ -3,7 +3,6 @@ from scipy.spatial.distance import cdist
 
 class FuzzyCmeans:
     '''Fuzzy C-means clustering algorithm
-    # see http://www.cleartheconcepts.com/fuzzy-c-means/  
     Parameters
     ----------
     n_cluster : int,
