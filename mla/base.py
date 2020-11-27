@@ -1,6 +1,9 @@
 import numpy as np
 
 class BaseAny:
+    def fit(self,X,y):
+        raise NotImplementedError
+    
     def predict(self,X):
         raise NotImplementedError("This method is not supposed to be used")
 

@@ -46,10 +46,18 @@ class LeakyRelu:
 
 class Softmax:
     def f(self,X):
-        exps = np.exp(X- np.max(X))
-        return exps / np.sum(exps,axis=0)
+        exps = np.exp(X- X.max(axis=1))
+        return exps / np.sum(exps,axis=1)
     
     def deriv(self,X):
-        # TODO
-        return 
-        
+        return self.f(X) *( 1-self.f(X))
+
+class LogActivation:
+    def __init__(self,activation):
+        self.activation = activation
+
+    def f(self,X):
+        return np.log(self.activation.f(X))
+    
+    def deriv(self,X):
+        return self.activation.deriv(X) / self.activation.f(X)

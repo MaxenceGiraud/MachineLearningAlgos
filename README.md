@@ -29,17 +29,11 @@ Some explainations of the algorithms can be found in the wiki, for more thorough
 - [ ] Elastic net solver ?? (solver for LS, Ridge, LASSO)
 - [ ] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
-- [ ] Gaussian process regression
+- [ ] Gaussian process
 - [ ] Hidden Markov model
 - [ ] Multivariate adaptive regression spline
-
-#### [Bayesian](./mla/ml)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
-- [ ] Variational Bayes - Laplace approx (Murphy 8.4.1-2)
-- [ ] MCMC (Murphy chap24)
-- [ ] Importance sampling (Murphy chap23)
-- [ ] SMC
   
 
 ### [Ensemble methods](./mla/ensemble/)
@@ -102,8 +96,7 @@ Some explainations of the algorithms can be found in the wiki, for more thorough
 - [x] Sigmoid
 - [x] Leaky Relu
 - [x] Softplus
-- [ ] Softmax
-- [ ] Softmin
+- [x] Softmax
 
 ### [Multi-armed bandit](./mla/mab/)
 Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.html) for the bandit environment. 
@@ -113,8 +106,8 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [x] ETC 
 - [x] FTL
 - [x] Thompson sampling
-- [ ] Lin UCB
-- [ ] Lin Thompsom Sampling
+- [ ] Linear UCB
+- [ ] Linear Thompsom Sampling
 
 ### Reinforcement Learning 
 - [ ] Q-learning
