@@ -17,7 +17,7 @@ Some examples on how to use the algorithms can be found in the file [example.py]
 
 ## Algorithms
 
-Some explainations of the algorithms can be found in the wiki, for more thorough reviews check the references.
+Some explainations of the algorithms can be found in the readme of their folders, for more thorough reviews check the references.
 
 ### [Machine Leaning](./mla/ml)
 - [x] [KNN](./mla/ml/knn.py) (classifier+regressor)
