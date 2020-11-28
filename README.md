@@ -78,7 +78,7 @@ Some explainations of the algorithms can be found in the wiki, for more thorough
 #### [Optimization Algorithm](./mla/dl/optimizer/)
 - [x] Stochastic gradient descent
 - [x] Mini batch batch Gradient descent
-- [ ] <img src="https://render.githubusercontent.com/render/math?math=\epsilon">-<img src="https://render.githubusercontent.com/render/math?math=\delta"> private SGD
+- [x] <img src="https://render.githubusercontent.com/render/math?math=\epsilon">-<img src="https://render.githubusercontent.com/render/math?math=\delta"> private SGD
 - [ ] Adam
 - [ ] Adagrad
 

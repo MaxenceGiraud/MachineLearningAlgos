@@ -37,6 +37,6 @@ class Dense:
         self.db = np.sum(delta,axis=0)
         return self.delta
 
-    def update(self,lr):
-        self.w -= self.dw.T * lr  
-        self.b -= self.db * lr  
+    def update(self,lr,noise_std=0):
+        self.w -= (self.dw.T+np.random.normal(0,noise_std,size=self.dw.size)) * lr  
+        self.b -= (self.db+np.random.normal(0,noise_std)) * lr  

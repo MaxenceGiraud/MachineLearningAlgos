@@ -8,7 +8,7 @@ class GradientDescent(BaseOptimizer):
         g = 1
         nb_iter = 0
         batch_iter = len(y) / self.batch_size # number of mini batch
-        while np.linalg.norm(g) > self.eps and nb_iter < self.n_iter_max:
+        while np.linalg.norm(g) > self.stopping_criterion and nb_iter < self.n_iter_max:
             print(nb_iter)
             # Random permutation
             permut = np.random.permutation(X.shape[0])
@@ -33,5 +33,5 @@ class GradientDescent(BaseOptimizer):
 
 class StochasticGradientDescent(GradientDescent):
     ''' Stochastic Gradient Descent algorithm'''
-    def __init__(self,learning_rate=0.1,n_iter=100,eps=1e-6):
-        super().__init__(learning_rate=learning_rate,batch_size=1,n_iter=n_iter,eps=eps)
+    def __init__(self,learning_rate=0.1,n_iter=100,stopping_criterion=1e-6):
+        super().__init__(learning_rate=learning_rate,batch_size=1,n_iter=n_iter,stopping_criterion=stopping_criterion)

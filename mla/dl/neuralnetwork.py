@@ -6,7 +6,6 @@ from .layers.loss import Loss,MSE,MAE
 class NeuralNetwork:
     '''Neural Network  '''
     def __init__(self,input_shape,loss=MAE()):
-        #assert isinstance(loss,Loss), "loss must be an instance of Loss"
         self.layers = [InputLayer(input_shape)]
         self.loss = loss
     
@@ -31,9 +30,9 @@ class NeuralNetwork:
         return delta_loss
 
     
-    def update(self,lr):
+    def update(self,lr,noise_std=0):
         for layer in self.layers[1:]:
-            layer.update(lr)
+            layer.update(lr,noise_std)
 
     def fit(self,X,y,optimizer=GradientDescent()):
         optimizer.minimize(self,X,y)

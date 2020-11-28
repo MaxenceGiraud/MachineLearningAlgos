@@ -16,3 +16,7 @@ class Flatten:
 
     def backprop(self,X,delta):
         return delta.reshape(self.input_shape)
+    
+    def update(self,*args,**kwargs):
+        pass
+    
