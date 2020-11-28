@@ -5,3 +5,4 @@ from .thompson_sampling import ThompsonSampling
 from .ucb import UCB
 from .uniform_exploration import UniformExploration
 from .bandit_env import *
+from .bandit_env import arms

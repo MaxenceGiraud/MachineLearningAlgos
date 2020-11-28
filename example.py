@@ -1,7 +1,7 @@
 '''This file contains examples of use for some algo'''
 #%%
 import mla
-from mla import dl
+from mla import dl,mab
 import numpy as np
 
 from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups,load_iris
@@ -114,3 +114,16 @@ nn.add(dl.Dense(1,activation=mla.dl.activation.Relu()))
 
 nn.fit(X,y,dl.GradientDescent(learning_rate=1e-5,n_iter=50))
 #%%
+
+################# Multi Armed Bandit ##########################
+arms = [mab.arms.Bernoulli(0.8),mab.arms.Exponential(2),mab.arms.Gaussian(2.4),mab.arms.Gaussian(1.5)]
+bandit = mab.MAB(arms)
+
+T = 100
+ucb = mab.UCB(bandit.nbArms)
+ts = mab.ThompsonSampling(bandit.nbArms)
+etc = mab.ETC(bandit.nbArms,T)
+
+## Compare the different algorithms
+mab.bandit_env.RunExpes([ucb,ts,etc],bandit,N_exp=10,timeHorizon=T)
+# %%

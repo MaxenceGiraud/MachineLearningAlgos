@@ -1,4 +1,4 @@
-from randmax import randmax
+from .randmax import randmax
 import numpy as np
 
 class ETC:
