@@ -15,7 +15,7 @@ class DBSCAN:
     metric : string,
         Metric type for the computation of distance between the points
     '''
-    def __init__(self,eps=0.2,min_pts=8,metric='minkowski'):
+    def __init__(self,eps=2,min_pts=8,metric='minkowski'):
         self.eps = eps
         self.min_pts = min_pts
         self.metric = metric

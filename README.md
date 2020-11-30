@@ -48,7 +48,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [K-means](./mla/clustering/kmeans.py)
 - [x] [K-medoids](./mla/clustering/kmedoids.py)
 - [x] [DBSCAN](./mla/clustering/dbscan.py)
-- [ ] OPTICS
+- [x] [OPTICS](./mla/clustering/optics.py)
 - [ ] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
