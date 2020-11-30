@@ -87,7 +87,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] MAE
 - [x] Binary Cross Entropy
 - [ ] Neg log likelihood  
-- [ ] Add possibility of weighted loss
+- [x] Add possibility of weighted loss
   
 #### [Activation functions](./mla/dl/activation/activation.py)
 - [x] Linear
@@ -118,11 +118,6 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] ICA
 - [ ] Elastic map
 - [ ] CCA
-
-### Visualization
-- [ ] Draw Decision boundary(ies)
-- [ ] Confusion matrix ?
-
 
 ## References
 

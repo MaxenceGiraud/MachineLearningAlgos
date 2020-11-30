@@ -1,9 +1,10 @@
 import numpy as np
 
 class Loss:
-    def __init__(self):
+    def __init__(self,weights=1):
         self.input_unit = None
         self.output_unit = None
+        self.weights = weights
 
         self.loss = 0
         self.loss_d = 0
@@ -35,21 +36,21 @@ class Loss:
 
 class MSE(Loss):
     def loss_function(self,y_pred,y_true):
-        return np.mean((y_pred.flatten()- y_true)**2)
+        return np.mean(self.weights*(y_pred.flatten()- y_true)**2)
     
     def deriv(self,y_pred,y_true):
-        return 2*(y_pred - y_true) 
+        return 2*(y_pred - y_true) *self.weights
 
 class MAE(Loss):
     def loss_function(self,y_pred,y_true):
-        return np.mean(np.abs(y_pred-y_true))
+        return np.mean(np.abs(y_pred-y_true)*self.weights)
 
     def deriv(self,y_pred,y_true):
-        return np.sign(y_pred-y_true)
+        return np.sign((y_pred-y_true)*self.weights)
 
 class BinaryCrossEntropy(Loss):
     def loss_function(self,y_pred,y_true):
-        return np.mean(-y_true * np.log(y_pred) - (1 - y_true) * np.log(1 - y_pred))
+        return np.mean((-y_true * np.log(y_pred) - (1 - y_true) * np.log(1 - y_pred))*self.weights)
     
     def deriv(self,y_pred,y_true):
-        return y_pred - y_true
+        return (y_pred - y_true) * self.weights
