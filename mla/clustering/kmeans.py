@@ -20,7 +20,7 @@ class Kmeans:
         self.cluster_means = False
         self.init = init
 
-    def fit(self,X):
+    def fit_predict(self,X):
         ## Initialize the K means
         if self.init == 'random' :
             means  = X[np.random.randint(0,X.shape[0],size=self.k)] # Choose K random points in X as init

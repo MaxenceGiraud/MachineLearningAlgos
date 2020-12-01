@@ -16,7 +16,7 @@ class Kmedoids:
         self.max_iter = max_iter
         self.centroids = False
 
-    def fit(self,X):
+    def fit_predict(self,X):
         ## Init
         centroids = [X[np.random.randint(0,X.shape[0])]]
         for i in range(self.k-1):

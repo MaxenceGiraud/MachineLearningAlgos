@@ -38,7 +38,7 @@ class OPTICS:
         self.min_pts = min_pts
         self.metric = metric
 
-    def predict(self,X):
+    def fit_predict(self,X):
     
         ## INIT
         dist_all = cdist(X,X,metric=self.metric) # dist between all points

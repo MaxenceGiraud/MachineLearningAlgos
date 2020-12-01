@@ -1,5 +1,6 @@
 import numpy as np
 from ..base import BaseClassifier,BaseRegressor
+from copy import deepcopy
 # import graphviz
 
 class Node:
@@ -11,25 +12,37 @@ class Node:
         self.right = None
         self.gini = gini
         self.categorial = categorial
+        self.pruned = False
 
     @property
     def depth(self):
         return max(self.left.depth,self.right.depth) + 1 
     
-    def predict(self,X):
+    def split_data(self,X):
         if self.categorial :
             left,right = np.where(X[:,self.idx_feature] == self.criterion),np.where(X[:,self.idx_feature] != self.criterion) 
         else :
-            left,right = np.where(X[:,self.idx_feature] < self.criterion),np.where(X[:,self.idx_feature] >= self.criterion)       
+            left,right = np.where(X[:,self.idx_feature] < self.criterion),np.where(X[:,self.idx_feature] >= self.criterion) 
+
+        return left,right 
+    
+    def predict(self,X):
+        left,right = self.split_data(X)
         prediction = np.zeros(X.shape[0])
         prediction[left] = self.left.predict(X[left])
         prediction[right] = self.right.predict(X[right])
 
         return prediction
 
-    def print(self):
-        # TODO display tree
-        pass
+    def init_pruned(self):
+        self.pruned = False
+        self.left.init_pruned()
+        self.right.init_pruned()
+    
+
+    def print(self,pos=[0]):
+        self.left.print(pos.append(0))
+        self.right.print(pos.append(1))
    
 class Leaf(Node):
     ''' A leaf is a node at the bottom of the tree, it takes the decision'''
@@ -43,10 +56,17 @@ class Leaf(Node):
     @property
     def depth(self):
         return 0
+    
+    def init_pruned(self):
+        pass
+    
+    def split_data(self,X):
+        pass
 
     def predict(self,X):
         return np.ones(X.shape[0])*self.decision
 
+    
 def gini_index(groups,class_labels):
     ''' Compute Gini index for a given split for classification 
     
@@ -77,9 +97,101 @@ def gini_index(groups,class_labels):
         gini += (1-score) * (counts[i]/n_samples)
     return gini
 
+class BaseDecisionTree:
+    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],pruning_eps=0.05):
+        self.max_depth = max_depth
+        self.min_samples_split = min_samples_split
+        self.categorial_features  = categorial_features
+        self.pruning_eps = pruning_eps
+        self.tree = None
     
+    @property
+    def depth(self):
+        return self.tree.depth
+    
+    def fit(self,X,y):
+        self.tree = self.build_node(X,y,0)  
+    
+    def _create_leaf(self,y):
+        raise Exception
 
-class DecisionTreeClassifier(BaseClassifier):
+    def get_best_split(self,X,y):
+        raise Exception
+    
+    def _create_pruned_tree(self,node,X,y):
+        if isinstance(node.left,Leaf) and isinstance(node.right,Leaf) :
+            if not node.pruned:
+                node.pruned = True
+                return True
+        elif not isinstance(node,Leaf): 
+            left,right = node.split_data(X)
+            temp_left = self._create_pruned_tree(node.left,X[left],y[left])
+            temp_right = self._create_pruned_tree(node.right,X[right],y[right])
+            if temp_left == 'done' :
+                return 'done'
+            elif temp_left == True :
+                node.left = self._create_leaf(y)
+                return 'done'
+
+            if temp_right == 'done' :
+                return 'done'
+            elif temp_right == True :
+                node.right = self._create_leaf(y)
+                return 'done'
+            
+        return False
+    
+    def get_pruned_trees(self,X,y):
+        # Get all possible pruned trees  
+        tree_list = [self.tree]
+        self.tree.init_pruned()  # Init pruned values of nodes
+        while True:
+            new_tree = deepcopy(tree_list[-1])
+            if self._create_pruned_tree(new_tree,X,y) != False:
+                tree_list.append(new_tree)
+            else : 
+                break
+        return tree_list
+
+    def _bottom_up_pruning(self,X,y):
+        raise NotImplementedError
+
+
+    def _top_down_pruning(self,X,y):
+        raise NotImplementedError
+    
+    def prune(self,X,y,method='bottom_up'):
+        if method == 'bottom_up':
+            self._bottom_up_pruning(X,y)
+        
+        elif method == 'top_down':
+            self._top_down_pruning(X,y)  
+
+    
+    def build_node(self,X,y,depth):
+        # Create a leaf (end of the tree)
+        if self.max_depth <= depth or self.min_samples_split >= X.shape[0]:
+            current_node = self._create_leaf(y)
+            return current_node
+
+        idx,score,groups_idx = self.get_best_split(X,y) # Get the best split
+        
+        current_node = Node(X[idx[0],idx[1]],idx[1],score,categorial= (idx[1] in self.categorial_features))
+        if score == 0 : # TODO May extend property to epsilon > 0
+            current_node.left =  self._create_leaf(y[groups_idx[0]])
+            current_node.right = self._create_leaf(y[groups_idx[1]])
+        else :
+            # Build the children nodes
+            current_node.left = self.build_node(X[groups_idx[0]],y[groups_idx[0]],depth+1)
+            current_node.right = self.build_node(X[groups_idx[1]],y[groups_idx[1]],depth+1)
+
+        return current_node
+        
+    def predict(self,X):
+        return self.tree.predict(X)
+
+
+class DecisionTreeClassifier(BaseDecisionTree,BaseClassifier):
     ''' CART Decision tree classifier
     
     Parameters
@@ -91,14 +203,6 @@ class DecisionTreeClassifier(BaseClassifier):
     categorical_features : list,
             list of features which are categorical (index of the column)
      '''
-
-    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = []):
-        self.max_depth = max_depth
-        self.min_samples_split = min_samples_split
-        self.categorial_features  = categorial_features
-
-    def get_depth(self):
-        return self.tree.depth
 
     def get_best_split(self,X,y):
         ''' get the best one split possible '''
@@ -118,34 +222,23 @@ class DecisionTreeClassifier(BaseClassifier):
                     best_groups = groups
 
         return best_idx,best_score,best_groups
+    
+    def _create_leaf(self,y):
+        return Leaf(decision = np.bincount(y).argmax())
+    
+    def _bottom_up_pruning(self,X,y,tree_list):
+        score = self.score(X,y)
+        for new_tree in tree_list:
+            tmp_decision_tree = deepcopy(self)
+            tmp_decision_tree.tree = new_tree
+            if tmp_decision_tree.score(X,y) >= (score - self.pruning_eps) :
+                self.tree = new_tree # Pruning is successful
+                self._bottom_up_pruning(X,y,[]) # Try pruning some more based on the new tree  
+                break 
 
-    def build_node(self,X,y,depth):
-        
-        # Create a leaf (end of the tree)
-        if self.max_depth <= depth or self.min_samples_split >= X.shape[0]:
-            current_node = Leaf(decision = np.bincount(y).argmax())
-            return current_node
 
-        idx,gini,groups_idx = self.get_best_split(X,y) # Get the best split
-        
-        current_node = Node(X[idx[0],idx[1]],idx[1],gini,categorial= (idx[1] in self.categorial_features))
-        if gini == 0 : # TODO May extend property to epsilon > 0
-            current_node.left = Leaf(decision = np.bincount(y[groups_idx[0]]).argmax())
-            current_node.right = Leaf(decision = np.bincount(y[groups_idx[1]]).argmax())
-        else :
-            # Build the children nodes
-            current_node.left = self.build_node(X[groups_idx[0]],y[groups_idx[0]],depth+1)
-            current_node.right = self.build_node(X[groups_idx[1]],y[groups_idx[1]],depth+1)
 
-        return current_node
-
-    def fit(self,X,y):
-        self.tree = self.build_node(X,y,0)     
-        
-    def predict(self,X):
-        return self.tree.predict(X)
-
-class DecisionTreeRegressor(BaseRegressor):
+class DecisionTreeRegressor(BaseDecisionTree,BaseRegressor):
     ''' CART Decision tree regressor
    Parameters
     ----------
@@ -159,16 +252,11 @@ class DecisionTreeRegressor(BaseRegressor):
             metric used to choose the best split
      '''
 
-    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],metric = "mse"):
-        self.max_depth = max_depth
-        self.min_samples_split = min_samples_split
-        self.categorial_features  = categorial_features
+    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],pruning_eps=2,metric = "mse"):
+        super().__init__(max_depth,min_samples_split,categorial_features,pruning_eps)
         assert metric in ["mse","mae"], "Metric must one of the followwing : mse,mae"
         self.metric = metric # ignored for now
-        
 
-    def get_depth(self):
-        return self.tree.depth
 
     def get_best_split(self,X,y):
         ''' get the best one split possible '''
@@ -190,29 +278,18 @@ class DecisionTreeRegressor(BaseRegressor):
                     best_groups = groups
 
         return best_idx,best_score,best_groups
-
-    def build_node(self,X,y,depth):
-        
-        # Create a leaf (end of the tree)
-        if self.max_depth <= depth or self.min_samples_split >= X.shape[0]:
-            current_node = Leaf(decision = np.mean(y))
-            return current_node
-
-        idx,score,groups_idx = self.get_best_split(X,y) # Get the best split
-        
-        current_node = Node(X[idx[0],idx[1]],idx[1],score,categorial= (idx[1] in self.categorial_features))
-        if score == 0 : # TODO May extend property to epsilon > 0
-            current_node.left = Leaf(decision = np.mean(y[groups_idx[0]]))
-            current_node.right = Leaf(decision = np.mean(y[groups_idx[1]]))
-        else :
-            # Build the children nodes
-            current_node.left = self.build_node(X[groups_idx[0]],y[groups_idx[0]],depth+1)
-            current_node.right = self.build_node(X[groups_idx[1]],y[groups_idx[1]],depth+1)
-
-        return current_node
-
-    def fit(self,X,y):
-        self.tree = self.build_node(X,y,0)     
-        
-    def predict(self,X):
-        return self.tree.predict(X)
+    
+    def _create_leaf(self,y):
+        return Leaf(decision = np.mean(y))
+    
+    def _bottom_up_pruning(self,X,y):
+        tree_list = self.get_pruned_trees(X,y)
+        score = self.score(X,y)
+        print('new list')
+        for new_tree in tree_list:
+            tmp_decision_tree = deepcopy(self)
+            tmp_decision_tree.tree = new_tree
+            if tmp_decision_tree.score(X,y) <= (score):#+ self.pruning_eps) :
+                self.tree = new_tree 
+                self._bottom_up_pruning(X,y) # Try pruning some more based on the new tree  
+                break 

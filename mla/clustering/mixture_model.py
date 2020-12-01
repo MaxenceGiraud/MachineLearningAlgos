@@ -52,7 +52,7 @@ class GaussianMixtureModel:
         
         self.pi = self.N / X.shape[0]
 
-    def fit(self,X):
+    def fit_predict(self,X):
        
         self._init_params(X)
 

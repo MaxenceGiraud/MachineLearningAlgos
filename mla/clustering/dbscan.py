@@ -20,7 +20,7 @@ class DBSCAN:
         self.min_pts = min_pts
         self.metric = metric
 
-    def predict(self,X):
+    def fit_predict(self,X):
         #self.labels = set(y) - {-1}
         # y= -1 not labeled
         

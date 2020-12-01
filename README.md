@@ -44,7 +44,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
   
 
-### [Clustering](./mla/clustering/)
+### [Clustering / Unsupervized Learning](./mla/clustering/)
 - [x] [K-means](./mla/clustering/kmeans.py)
 - [x] [K-medoids](./mla/clustering/kmedoids.py)
 - [x] [DBSCAN](./mla/clustering/dbscan.py)
