@@ -98,10 +98,11 @@ def gini_index(groups,class_labels):
     return gini
 
 class BaseDecisionTree:
-    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],pruning_eps=0.05):
+    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],eps=0.02,pruning_eps=0.05):
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
         self.categorial_features  = categorial_features
+        self.eps = eps
         self.pruning_eps = pruning_eps
         self.tree = None
     
@@ -177,10 +178,11 @@ class BaseDecisionTree:
         idx,score,groups_idx = self.get_best_split(X,y) # Get the best split
         
         current_node = Node(X[idx[0],idx[1]],idx[1],score,categorial= (idx[1] in self.categorial_features))
-        if score == 0 : # TODO May extend property to epsilon > 0
+        if score < self.eps : #
             current_node.left =  self._create_leaf(y[groups_idx[0]])
             current_node.right = self._create_leaf(y[groups_idx[1]])
         else :
+            print(score)
             # Build the children nodes
             current_node.left = self.build_node(X[groups_idx[0]],y[groups_idx[0]],depth+1)
             current_node.right = self.build_node(X[groups_idx[1]],y[groups_idx[1]],depth+1)
@@ -252,8 +254,8 @@ class DecisionTreeRegressor(BaseDecisionTree,BaseRegressor):
             metric used to choose the best split
      '''
 
-    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],pruning_eps=2,metric = "mse"):
-        super().__init__(max_depth,min_samples_split,categorial_features,pruning_eps)
+    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],eps=0,pruning_eps=2,metric = "mse"):
+        super().__init__(max_depth=max_depth,min_samples_split=min_samples_split,categorial_features=categorial_features,eps=eps,pruning_eps=pruning_eps)
         assert metric in ["mse","mae"], "Metric must one of the followwing : mse,mae"
         self.metric = metric # ignored for now
 
