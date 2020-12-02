@@ -12,8 +12,6 @@ def get_color(arg):
         'InputLayer': 'black', 
         'Dense' : 'blue',
         'Convolution' : 'red',
-        'Recurrent' : 'green',
-        'Transformer' : 'yellow',
     } 
     if arg not in switcher :
         raise Exception("Layer type not yep supported for display")
@@ -76,8 +74,8 @@ class NeuralNetwork:
         # Input layers
         layer_type = layers[0].__class__.__name__
         color = get_color(layer_type)
-        ax.scatter(0,0,s=350,c=color,label=layer_type)
-        nu = 1
+        nu = layers[0].units
+        ax.scatter(np.zeros(nu),np.linspace(int(-nu/2),int(nu/2),nu),s=350,c=color,label=layer_type)
         for i in range(1,len(layers)) : 
             layer_type = layers[i].__class__.__name__
             color = get_color(layer_type)
