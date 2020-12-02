@@ -28,7 +28,7 @@ def get_colorshape(arg):
 def legend_without_duplicate_labels(ax):
     handles, labels = ax.get_legend_handles_labels()
     unique = [(h, l) for i, (h, l) in enumerate(zip(handles, labels)) if l not in labels[:i]]
-    ax.legend(*zip(*unique),bbox_to_anchor=(1,0.75))
+    ax.legend(*zip(*unique),bbox_to_anchor=(0,0.75))
 
 class NeuralNetwork:
     '''Neural Network  '''
@@ -56,10 +56,12 @@ class NeuralNetwork:
         
         return delta_loss
 
-    
+    def get_layers_to_update(self):
+        return self.layers[1:]
+
     def update(self,lr,noise_std=0):
         for layer in self.layers[1:]:
-            layer.update(lr,noise_std)
+            layer.update(lr,noise_std=noise_std)
 
     def fit(self,X,y,optimizer=GradientDescent()):
         optimizer.minimize(self,X,y)

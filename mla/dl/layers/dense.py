@@ -41,7 +41,17 @@ class Dense(BaseLayer):
         self.dw =  delta.T @ self.zin 
         self.db = np.sum(delta,axis=0)
         return self.delta
+    
+    def get_gradients(self):
+        return self.dw.T,self.db
+    
+    def update_weights(self,weights_diff):
+        ''' Update weights given the update'''
+        uw,ub = weights_diff
+        self.w += uw
+        self.b += ub 
 
     def update(self,lr,noise_std=0):
-        self.w -= (self.dw.T+np.random.normal(0,noise_std,size=self.dw.size)) * lr  
-        self.b -= (self.db+np.random.normal(0,noise_std)) * lr  
+        ''' Update weights givent a learning rate'''
+        self.w -= lr * self.dw.T
+        self.b -= lr * self.db

@@ -13,3 +13,18 @@ class BaseLayer:
         intputlayer.output_unit = self
 
         self.zin = 0
+    
+    def forward(self,X,*args,**kwargs):
+        return X
+    
+    def backprop(self,*args,**kwargs):
+        pass
+
+    def get_gradients(self,*args,**kwargs):
+        return
+    
+    def update_weights(self,*args,**kwargs):
+        return
+
+    def update(self,*args,**kwargs):
+        pass

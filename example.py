@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 #%%
 ############# Regression task #################
 
-regressor  = mla.LinearRegression() # Choose whatever regressor you want (need to have fit and score methods)
+regressor  = mla.DecisionTreeRegressor(max_depth=2) # Choose whatever regressor you want (need to have fit and score methods)
 
 data = load_boston()
 X = data['data']
@@ -24,9 +24,10 @@ regressor.score(X_test,y_test)
 #%%
 ############# Binary Classification task #############
 
-clf = mla.KNN(3) # Choose whatever classifier you want (need to have fit and score methods)
+clf = mla.DecisionTreeClassifier()# Choose whatever classifier you want (need to have fit and score methods)
 
 X,y = make_classification(n_samples=300)
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 clf.fit(X_train,y_train)
@@ -39,6 +40,7 @@ clf  = mla.OneVsRestClassifier() # Choose whatever regressor you want (need to h
 data = load_boston()
 X = data['data']
 y = data['target']
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 clf.fit(X_train,y_train)
@@ -82,7 +84,7 @@ bnb.score(X_test,y_test)
 ## Binary Classification 
 
 np.random.seed(42)
-X, y = make_classification(n_samples=200, n_features=, n_classes=2, n_clusters_per_class=1)
+X, y = make_classification(n_samples=200, n_features=5, n_classes=2, n_clusters_per_class=1)
 #%%
 
 nn = dl.NeuralNetwork(X.shape[1:],loss=dl.BinaryCrossEntropy())
@@ -93,7 +95,13 @@ nn.add(dl.Dense(1,activation=mla.dl.activation.Sigmoid()))
 
 #%%
 
-nn.fit(X,y,dl.GradientDescent())
+nn.fit(X,y,dl.Adam())
+
+print('score =',1 - np.count_nonzero(y-np.where(nn.predict(X)>0.5,1,0).flatten())/y.size)
+#%%
+nn.summary()
+#%%
+nn.display()
 
 #%% ## Regression
 
@@ -112,7 +120,8 @@ nn.add(dl.Dense(1,activation=mla.dl.activation.Relu()))
 
 #%%
 
-nn.fit(X,y,dl.GradientDescent(learning_rate=1e-5,n_iter=50))
+nn.fit(X,y,dl.Adam(learning_rate=2e-7,n_iter=200))
+
 #%%
 
 ################# Multi Armed Bandit ##########################

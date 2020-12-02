@@ -106,12 +106,9 @@ class AutoEncoder(NeuralNetwork):
             delta = self.encoder[i].backprop(delta)
 
         return delta_loss
-
-    def update(self,lr):
-        for layer in self.encoder[1:]:
-            layer.update(lr)
-        for layer in self.decoder:
-            layer.update(lr)
+    
+    def get_list_layers_todisplay(self):
+        return np.concatenate((self.encoder[1:],self.decoder))
     
     def score(self,X):
         X_hat = self.predict(X)

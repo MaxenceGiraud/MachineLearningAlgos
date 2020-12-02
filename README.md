@@ -61,12 +61,14 @@ Some explainations of the algorithms can be found in the readme of their folders
 #### [Layers](./mla/dl/layers/)
 - [x] [Dense](./mla/dl/layers/dense.py)
 - [ ] Convolution (1d,2d,3d)
+- [ ] Deconvolution
 - [ ] Recurrent
 - [ ] LSTM
 - [ ] GRU
 - [ ] Transformer Block
 - [ ] Pooling
 - [x] Flatten
+- [x] Reshape
 - [ ] Dropout
 - [ ] Normalization
 
@@ -79,7 +81,8 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] Stochastic gradient descent
 - [x] Mini batch batch Gradient descent
 - [x] <img src="https://render.githubusercontent.com/render/math?math=\epsilon">-<img src="https://render.githubusercontent.com/render/math?math=\delta"> private SGD
-- [ ] Adam
+- [x] Adam
+- [ ] Nadam (Nesterov Adama)
 - [ ] Adagrad
 
 #### [Loss](./mla/dl/layers/loss.py)
