@@ -6,12 +6,18 @@ from .layers.inputlayer import InputLayer
 from .layers.loss import Loss,MSE,MAE
 from .layers.dense import Dense
 
-def get_color(arg):
+def get_colorshape(arg):
     ''' Given a layer class, outputs a color for each layer type'''
     switcher = { 
-        'InputLayer': 'black', 
-        'Dense' : 'blue',
-        'Convolution' : 'red',
+        'InputLayer': ('black','o'), 
+        'Dense' : ('blue','o'),
+        'Conv1D' : ('lightcoral','s'),
+        'Conv2D' : ('red','s'),
+        'Conv3D' : ('maroon','s'),
+        'Recurrent' : ('limegreen','$\circlearrowleft$'),
+        'LSTM' : ('forestgreen','$\circlearrowleft$'),
+        'GRU' : ('darkgreen','$\circlearrowleft$'),
+        'Transformer' : ('mediumseagreen','$\circlearrowleft$'),
     } 
     if arg not in switcher :
         raise Exception("Layer type not yep supported for display")
@@ -20,7 +26,7 @@ def get_color(arg):
 def legend_without_duplicate_labels(ax):
     handles, labels = ax.get_legend_handles_labels()
     unique = [(h, l) for i, (h, l) in enumerate(zip(handles, labels)) if l not in labels[:i]]
-    ax.legend(*zip(*unique))
+    ax.legend(*zip(*unique),bbox_to_anchor=(0,0.75))
 
 class NeuralNetwork:
     '''Neural Network  '''
@@ -68,24 +74,20 @@ class NeuralNetwork:
 
     def display(self):
         layers = self.get_list_layers_todisplay()
-
         fig, ax = plt.subplots()
-
-        # Input layers
-        layer_type = layers[0].__class__.__name__
-        color = get_color(layer_type)
-        nu = layers[0].units
-        ax.scatter(np.zeros(nu),np.linspace(int(-nu/2),int(nu/2),nu),s=350,c=color,label=layer_type)
-        for i in range(1,len(layers)) : 
+        nu = 0
+        for i in range(len(layers)) : 
             layer_type = layers[i].__class__.__name__
-            color = get_color(layer_type)
+            color,mark = get_colorshape(layer_type)
             old_nu = nu
             nu = layers[i].units
-            ax.scatter(np.ones(nu)*i,np.linspace(int(-nu/2),int(nu/2),nu),s=350,zorder=1,c=color,label=layer_type)
-            # plot connexion
-            for j in np.linspace(int(-old_nu/2),int(old_nu/2),old_nu):
-                for k in np.linspace(int(-nu/2),int(nu/2),nu):
-                    ax.plot([i-1,i],[j,k],c='gray',zorder=-1)
+            ax.scatter(np.ones(nu)*i,np.linspace(int(-nu/2),int(nu/2),nu),s=350,zorder=1,c=color,marker=mark,label=layer_type)
+
+            # plot lines/ connection
+            if i!=0 :
+                for j in np.linspace(int(-old_nu/2),int(old_nu/2),old_nu):
+                    for k in np.linspace(int(-nu/2),int(nu/2),nu):
+                        ax.plot([i-1,i],[j,k],c='gray',zorder=-1)
                 
         legend_without_duplicate_labels(ax)
         plt.axis('off')
