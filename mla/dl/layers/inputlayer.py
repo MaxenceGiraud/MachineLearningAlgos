@@ -1,4 +1,6 @@
-class InputLayer:
+from .base_layer import BaseLayer
+
+class InputLayer(BaseLayer):
     def __init__(self,input_shape):
         self.units = 1
         self.input_shape  = input_shape
@@ -7,9 +9,5 @@ class InputLayer:
         self.intput_unit = None
         self.output_unit = None
 
-    @property
-    def nparams(self):
-        return 0
-        
     def forward(self,X):
         return X

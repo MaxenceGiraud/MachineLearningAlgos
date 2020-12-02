@@ -1,6 +1,7 @@
 import numpy as np
+from .base_layer import BaseLayer
 
-class Loss:
+class Loss(BaseLayer):
     def __init__(self,weights=1):
         self.input_unit = None
         self.output_unit = None
@@ -8,10 +9,6 @@ class Loss:
 
         self.loss = 0
         self.loss_d = 0
-    
-    @property
-    def nparams(self):
-        return 0
 
     def plug(self,intputlayer):
         assert len(intputlayer.output_shape) == 1, "Input of Loss layer must be a vector"

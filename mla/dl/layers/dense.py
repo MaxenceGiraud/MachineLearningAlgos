@@ -1,7 +1,8 @@
 import numpy as np
 from ..activation.activation import Linear
+from .base_layer import BaseLayer
 
-class Dense:
+class Dense(BaseLayer):
     def __init__(self,units,activation=Linear()):
         self.units = units
         self.activation = activation
