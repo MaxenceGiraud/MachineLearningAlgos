@@ -1,6 +1,7 @@
 import numpy as np
 from ..base import BaseClassifier,BaseRegressor
 from copy import deepcopy
+import matplotlib.pyplot as plt
 # import graphviz
 
 class Node:
@@ -18,6 +19,10 @@ class Node:
     def depth(self):
         return max(self.left.depth,self.right.depth) + 1 
     
+    @property
+    def width(self):
+        raise NotImplemented
+
     def split_data(self,X):
         if self.categorial :
             left,right = np.where(X[:,self.idx_feature] == self.criterion),np.where(X[:,self.idx_feature] != self.criterion) 
@@ -39,10 +44,60 @@ class Node:
         self.left.init_pruned()
         self.right.init_pruned()
     
+    def _define_postition(self,position = (0,0)):
+        self.pos = position
+        d = self.depth 
+        self.left._define_postition((self.pos[0]-2**d,self.pos[1]-1))
+        self.right._define_postition((self.pos[0]+2**d,self.pos[1]-1))
 
-    def print(self,pos=[0]):
-        self.left.print(pos.append(0))
-        self.right.print(pos.append(1))
+    def _get_tree_data(self):
+        d = {}
+        d['type'] = 'node'
+        d['pos'] = self.pos
+        d['feature'] = self.idx_feature
+        d['criterion'] = self.criterion
+        d['categorical'] = self.categorial
+
+        arr = [d]
+        l = self.left._get_tree_data()
+        r = self.right._get_tree_data()
+        l[0]['parent_pos'] = self.pos
+        r[0]['parent_pos'] = self.pos
+        arr.extend(l)
+        arr.extend(r)
+
+        return arr
+
+    def display(self,pos=[0]):
+        self._define_postition()
+        tree = self._get_tree_data()
+
+        for n in tree :
+            pos = np.array(n['pos'])
+            if n['type'] == 'node' :
+                if n['categorical'] :
+                    sign = '='
+                else : 
+                    sign = '<'
+                
+                if isinstance(n['criterion'],float):
+                    n['criterion'] = int(n['criterion']*100)/100
+                s= 'Feat '+str(n['feature'])+sign+str(n['criterion'])
+            elif n['type'] == 'leaf' :
+                if isinstance(n['decision'],float):
+                    n['decision'] = int(n['decision']*100)/100
+                s = str(n['decision'])
+                
+            else : 
+                raise Exception("Node type cannot be displayed")
+            plt.text(*pos,s,bbox=dict(facecolor='white'),horizontalalignment='center', verticalalignment='center',)
+            if 'parent_pos' in n : ## If not top of the tree
+                line = np.array([n['pos'],n['parent_pos']])
+                plt.plot(line[:,0],line[:,1])
+        plt.axis('off')
+        plt.tight_layout()
+        plt.show()
+        
    
 class Leaf(Node):
     ''' A leaf is a node at the bottom of the tree, it takes the decision'''
@@ -65,6 +120,20 @@ class Leaf(Node):
 
     def predict(self,X):
         return np.ones(X.shape[0])*self.decision
+    
+    def _define_postition(self,position):
+        self.pos = position
+    
+    def _get_tree_data(self):
+        d = {}
+        d['type'] = 'leaf'
+        d['pos'] = self.pos
+        d['feature'] = self.idx_feature
+        d['criterion'] = self.criterion
+        d['decision'] = self.decision
+
+        return [d]
+
 
     
 def gini_index(groups,class_labels):
@@ -109,6 +178,12 @@ class BaseDecisionTree:
     @property
     def depth(self):
         return self.tree.depth
+    
+    def display(self):
+        if self.tree == None :
+            raise Exception('The tree is not created')
+        else :
+            self.tree.display()
     
     def fit(self,X,y):
         self.tree = self.build_node(X,y,0)  
@@ -182,7 +257,6 @@ class BaseDecisionTree:
             current_node.left =  self._create_leaf(y[groups_idx[0]])
             current_node.right = self._create_leaf(y[groups_idx[1]])
         else :
-            print(score)
             # Build the children nodes
             current_node.left = self.build_node(X[groups_idx[0]],y[groups_idx[0]],depth+1)
             current_node.right = self.build_node(X[groups_idx[1]],y[groups_idx[1]],depth+1)
@@ -287,7 +361,6 @@ class DecisionTreeRegressor(BaseDecisionTree,BaseRegressor):
     def _bottom_up_pruning(self,X,y):
         tree_list = self.get_pruned_trees(X,y)
         score = self.score(X,y)
-        print('new list')
         for new_tree in tree_list:
             tmp_decision_tree = deepcopy(self)
             tmp_decision_tree.tree = new_tree
