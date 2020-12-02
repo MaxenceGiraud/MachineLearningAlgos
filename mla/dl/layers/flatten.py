@@ -3,6 +3,10 @@ import numpy as np
 class Flatten:
     def __init__(self):
         pass
+
+    @property
+    def nparams(self):
+        return 0
     
     def plug(self,intputlayer):
         self.input_shape = intputlayer.output_shape[0]

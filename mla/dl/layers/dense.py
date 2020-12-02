@@ -10,6 +10,10 @@ class Dense:
         self.zout = 0
         self.output_unit = None
     
+    @property
+    def nparams(self):
+        return self.w.size + self.b.size
+    
     def plug(self,intputlayer):
         assert len(intputlayer.output_shape) == 1, "Input of Dense layer must be a vector"
         self.input_shape = intputlayer.output_shape[0]

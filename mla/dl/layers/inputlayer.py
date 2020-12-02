@@ -7,5 +7,9 @@ class InputLayer:
         self.intput_unit = None
         self.output_unit = None
 
+    @property
+    def nparams(self):
+        return 0
+        
     def forward(self,X):
         return X

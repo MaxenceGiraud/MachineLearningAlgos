@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from itertools import combinations 
+import pandas as pd
 from .optimizer.gradientdescent import GradientDescent
 from .layers.inputlayer import InputLayer
 from .layers.loss import Loss,MSE,MAE
@@ -92,3 +92,18 @@ class NeuralNetwork:
         legend_without_duplicate_labels(ax)
         plt.axis('off')
         plt.show()
+    
+    def summary(self):
+        cols = ['Layer Type','Output Shape','Trainable Parameters']
+        layers  = self.get_list_layers_todisplay()
+        summary = []
+        params_total = 0
+        for l in layers : 
+            summary.append([l.__class__.__name__,l.output_shape,l.nparams])
+            params_total += l.nparams
+
+        
+        summary = pd.DataFrame(summary,columns=cols)
+        print(summary.to_markdown(index=False))
+
+        print("\nTotal trainable parameters :", params_total)
