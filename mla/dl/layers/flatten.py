@@ -6,14 +6,14 @@ class Flatten(BaseLayer):
         pass
 
     def plug(self,intputlayer):
-        self.input_shape = intputlayer.output_shape[0]
+        self.input_shape = intputlayer.output_shape
         self.output_shape = [np.prod(self.input_shape)]
 
         self.input_unit = intputlayer
         intputlayer.output_unit = self
 
     def forward(self,X):
-        return X.reshape((-1,))
+        return X.reshape((X.shape[0],-1))
 
     def backprop(self,X,delta):
         return delta.reshape(self.input_shape)

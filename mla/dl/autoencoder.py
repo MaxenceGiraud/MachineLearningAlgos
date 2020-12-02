@@ -3,7 +3,18 @@ from .neuralnetwork import NeuralNetwork
 from .layers.loss import MAE
 from .layers.inputlayer import InputLayer
 from .layers.dense import Dense
+from .layers.flatten import Flatten
+from .layers.reshape import Reshape
 from copy import deepcopy,copy
+
+def reverse_layer(layer,input_shape=None) :
+    ''' Given a layer provide a reversed layer  (e.g. Convolution -> Deconvolution'''
+    if isinstance(layer,Dense):
+        return deepcopy(layer)
+    elif isinstance(layer,Flatten) or  isinstance(layer,Reshape):
+        return Reshape(input_shape)
+    else :
+        raise NotImplementedError('This layer type is not supported in AutoEncoder as of now')
 
 class Encoded:
     '''Layer at the middle of an Autoencoder'''
@@ -59,7 +70,8 @@ class AutoEncoder(NeuralNetwork):
         return self.decoder[0]
         
     def add(self,layer,encoding_layer=False):
-        layer_decoder = deepcopy(layer)
+        
+        layer_decoder = reverse_layer(layer,self.encoder[-1].output_shape)
 
         # Connect encoder
         layer.plug(self.encoder[-1])

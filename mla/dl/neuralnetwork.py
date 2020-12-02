@@ -7,7 +7,7 @@ from .layers.loss import Loss,MSE,MAE
 from .layers.dense import Dense
 
 def get_colorshape(arg):
-    ''' Given a layer class, outputs a color for each layer type'''
+    ''' Given a layer class, outputs a color and a shape for each layer type'''
     switcher = { 
         'InputLayer': ('black','o'), 
         'Dense' : ('blue','o'),
@@ -18,6 +18,8 @@ def get_colorshape(arg):
         'LSTM' : ('forestgreen','$\circlearrowleft$'),
         'GRU' : ('darkgreen','$\circlearrowleft$'),
         'Transformer' : ('mediumseagreen','$\circlearrowleft$'),
+        'Flatten' : ('dimgrey','$\|$'),
+        'Reshape' : ('dimgrey','$\|$'),
     } 
     if arg not in switcher :
         raise Exception("Layer type not yep supported for display")
@@ -26,7 +28,7 @@ def get_colorshape(arg):
 def legend_without_duplicate_labels(ax):
     handles, labels = ax.get_legend_handles_labels()
     unique = [(h, l) for i, (h, l) in enumerate(zip(handles, labels)) if l not in labels[:i]]
-    ax.legend(*zip(*unique),bbox_to_anchor=(0,0.75))
+    ax.legend(*zip(*unique),bbox_to_anchor=(1,0.75))
 
 class NeuralNetwork:
     '''Neural Network  '''
@@ -79,18 +81,24 @@ class NeuralNetwork:
         for i in range(len(layers)) : 
             layer_type = layers[i].__class__.__name__
             color,mark = get_colorshape(layer_type)
+            if layer_type in ['Flatten','Reshape'] : # Layer not to display (e.g. flatten)
+                ax.scatter(i,0,marker=mark,c=color,s=10000)
+                continue
             old_nu = nu
             nu = layers[i].units
+
             ax.scatter(np.ones(nu)*i,np.linspace(int(-nu/2),int(nu/2),nu),s=350,zorder=1,c=color,marker=mark,label=layer_type)
 
             # plot lines/ connection
             if i!=0 :
                 for j in np.linspace(int(-old_nu/2),int(old_nu/2),old_nu):
                     for k in np.linspace(int(-nu/2),int(nu/2),nu):
-                        ax.plot([i-1,i],[j,k],c='gray',zorder=-1)
+                        ax.plot([last_displayed,i],[j,k],c='gray',zorder=-1)
+            last_displayed = i
                 
         legend_without_duplicate_labels(ax)
         plt.axis('off')
+        plt.tight_layout()
         plt.show()
     
     def summary(self):
