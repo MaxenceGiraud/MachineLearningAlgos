@@ -33,13 +33,36 @@ class PriorityQueue:
 
 
 class OPTICS:
+    ''' OPTICS clusering algorithm
+    Ref : Ankerst, Mihael, Markus M. Breunig, Hans-Peter Kriegel, and Jörg Sander. “OPTICS: ordering points to identify the clustering structure.” ACM SIGMOD Record 28, no. 2 (1999): 49-60.
+
+    Parameters
+    ----------
+    max_eps : int,
+        Maximum distance to consider a point in the neighborhood of another
+    min_pts : int,
+        Minimum number of points in the neighborhood of a point to be considered a core
+    metrics : string,
+        Metrics used to compute the distance between points
+    '''
     def __init__(self,max_eps=30,min_pts=8,metric='minkowski'):
         self.max_eps = max_eps
         self.min_pts = min_pts
         self.metric = metric
 
     def fit_predict(self,X):
-    
+        ''' Perform the OPTICS algorithm on X
+        Parameters 
+        ----------
+        X : array of size n,d
+            Data matrix with n datapoints and d dimensions.
+        Yields
+        ------
+        ordered_list : array of size n,
+            Ordering of the points (indexes of the points)
+        reachability : array of size n,
+            Smallest reachability distance of each datapoint (in the same order as the ordered_list)
+        '''
         ## INIT
         dist_all = cdist(X,X,metric=self.metric) # dist between all points
         neighbors = np.where(dist_all < self.max_eps,1,0)  # neightbors matrix
@@ -51,7 +74,6 @@ class OPTICS:
 
         self.reachability = -np.ones(X.shape[0]) # -1 corresponds to undefined
         self.ordered_list = []
-        self.clusters = []
 
         def core_dist(p_idx):
             if n_neighbors[p_idx] < self.min_pts :
@@ -88,9 +110,3 @@ class OPTICS:
                                 
 
         return self.ordered_list,self.reachability
-
-    
-    def score(self,X,y):
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc
