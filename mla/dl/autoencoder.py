@@ -2,7 +2,7 @@ import numpy as np
 from .neuralnetwork import NeuralNetwork
 from .layers.loss import MAE
 from .layers.inputlayer import InputLayer
-from copy import deepcopy
+from copy import deepcopy,copy
 
 class Encoded:
     '''Layer at the middle of an Autoencoder'''
@@ -103,3 +103,8 @@ class AutoEncoder(NeuralNetwork):
         self.encoded_layer.set_mode("linear")
 
         return decoded
+    
+    def get_list_layers_todisplay(self):
+        display_list = copy(self.encoder)
+        display_list.extend(self.decoder)
+        return display_list
