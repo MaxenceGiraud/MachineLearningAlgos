@@ -7,51 +7,26 @@ class Adam(BaseOptimizer):
         self.beta2 = beta2
         super().__init__(learning_rate=learning_rate,batch_size=batch_size,n_iter=n_iter,stopping_criterion=stopping_criterion)
 
-    def init_moments(self,nn):
-        for l in nn.get_layers_to_update():
-            l.m = 0
-            l.v = 0
+    def init_layers(self,nn):
+        for layer in nn.get_layers_to_update():
+            layer.m = []
+            layer.v = []
+            for g in layer.get_gradients():
+                layer.m.append(np.zeros(g.shape))
+                layer.v.append(np.zeros(g.shape))
     
     def update(self,nn,t,*args,**kwargs):
         ''' Update weights of the nn
         t : int,
             N iteration
         '''
-        for layer in nn.get_layers_to_update(nn):
+        for layer in nn.get_layers_to_update():
             grads = layer.get_gradients()
             weights_updates = []
-            for g in grads :
-                layer.m = self.beta1 * layer.m + (1-self.beta1)*g
-                layer.v  = self.beta2 * layer.v + (1-self.beta2)*g**2
-                m_hat = layer.m / (1 - self.beta1**t)
-                v_hat = layer.v / (1 - self.beta2**t)
+            for i in range(len(grads)) :
+                layer.m[i] = self.beta1 * layer.m[i] + (1-self.beta1)*grads[i]
+                layer.v[i]  = self.beta2 * layer.v[i] + (1-self.beta2)*grads[i]**2
+                m_hat = layer.m[i] / (1 - self.beta1**(t+1))
+                v_hat = layer.v[i] / (1 - self.beta2**(t+1))
                 weights_updates.append(-self.lr * m_hat / (np.sqrt(v_hat) + 1e-6))
             layer.update_weights(weights_updates)
-        
-    def minimize(self,nn,X,y):
-        # add column of 1 for the bias/intercept
-        g = 1
-        nb_iter = 0
-        batch_iter = len(y) / self.batch_size # number of mini batch
-        while np.linalg.norm(g) > self.stopping_criterion and nb_iter < self.n_iter_max:
-            print(nb_iter)
-            # Random permutation
-            permut = np.random.permutation(X.shape[0])
-            X = X[permut]
-            y = y[permut]
-            loss = 0
-            for i in range(int(batch_iter)):
-                range_start, range_end = i*self.batch_size, (i+1)*self.batch_size
-
-                loss += nn.forward(X[range_start:range_end],y[range_start:range_end]) # forward pass
-                g += nn.backprop(y[range_start:range_end]) # backprop
-                nn.update(self.lr)  # Update weights
-            # last mini batch
-            nn.forward(X[int(batch_iter)*self.batch_size:],y[int(batch_iter)*self.batch_size:]) # forward pass
-            nn.backprop(y[int(batch_iter)*self.batch_size:]) # backprop
-            nn.update(self.lr)  # Update weights
-
-            #g= np.mean(g,axis=0)
-            print("loss :",np.mean(loss)/np.ceil(batch_iter))
-            print("g :",np.mean(g)/np.ceil(batch_iter))
-            nb_iter += 1

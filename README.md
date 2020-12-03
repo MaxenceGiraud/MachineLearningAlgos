@@ -83,7 +83,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] <img src="https://render.githubusercontent.com/render/math?math=\epsilon">-<img src="https://render.githubusercontent.com/render/math?math=\delta"> private SGD
 - [x] Adam
 - [ ] Nadam (Nesterov Adama)
-- [ ] Adagrad
+- [x] Adagrad
 
 #### [Loss](./mla/dl/layers/loss.py)
 - [x] MSE

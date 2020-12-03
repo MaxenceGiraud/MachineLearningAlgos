@@ -11,8 +11,12 @@ class BaseOptimizer:
     def update(self,nn,t,*args,**kwargs):
         pass
 
+    def init_layers(self,nn):
+        pass
+
     def minimize(self,nn,X,y):
         # add column of 1 for the bias/intercept
+        self.init_layers(nn)
         g = 1
         nb_iter = 0
         batch_iter = len(y) / self.batch_size # number of mini batch
