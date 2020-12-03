@@ -30,8 +30,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [ ] Gaussian process
-- [ ] Hidden Markov model
-- [ ] Multivariate adaptive regression spline
+- [ ] MARS (Multivariate adaptive regression spline)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
   
@@ -69,8 +68,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Pooling
 - [x] Flatten
 - [x] Reshape
-- [ ] Dropout
-- [ ] Normalization
+- [x] Dropout
 
 #### Wrapper
 - [x] [Autoencoder](./mla/dl/autoencoder.py)
@@ -109,10 +107,9 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [x] ETC 
 - [x] FTL
 - [x] Thompson sampling
-- [ ] Linear UCB
-- [ ] Linear Thompsom Sampling
 
 ### Reinforcement Learning 
+- [ ] Value iteration
 - [ ] Q-learning
   
 ### Data processing/Analysis

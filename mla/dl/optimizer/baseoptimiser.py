@@ -1,4 +1,5 @@
 import numpy as np
+from ..layers.dropout import Dropout
 
 
 class BaseOptimizer:
@@ -12,7 +13,14 @@ class BaseOptimizer:
         pass
 
     def init_layers(self,nn):
-        pass
+        for layer in nn.get_layers_to_update():
+            if isinstance(layer,Dropout):
+                layer.training = True
+    
+    def clear_layer_training(self,nn):
+        for layer in nn.get_layers_to_update():
+            if isinstance(layer,Dropout):
+                layer.training = False
 
     def minimize(self,nn,X,y):
         # add column of 1 for the bias/intercept
@@ -42,3 +50,5 @@ class BaseOptimizer:
             print("loss =",np.mean(loss)/np.ceil(batch_iter))
             print("g =",np.mean(g)/np.ceil(batch_iter))
             nb_iter += 1
+            
+        self.clear_layer_training(nn)

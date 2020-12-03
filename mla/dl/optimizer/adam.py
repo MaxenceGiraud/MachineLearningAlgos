@@ -14,6 +14,7 @@ class Adam(BaseOptimizer):
             for g in layer.get_gradients():
                 layer.m.append(np.zeros(g.shape))
                 layer.v.append(np.zeros(g.shape))
+        super().init_layers(nn)
     
     def update(self,nn,t,*args,**kwargs):
         ''' Update weights of the nn
