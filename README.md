@@ -37,6 +37,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 
 ### [Ensemble methods](./mla/ensemble/)
 - [x] [Random Forest](./mla/ensemble/random_forest.py)
+- [x] [Bagging](./mla/ensemble/bagging.py)
 - [ ] Gradient Boosting
 - [ ] AdaBoost
 - [x] [One vs rest classifier](./mla/ensemble/multiclass.py)

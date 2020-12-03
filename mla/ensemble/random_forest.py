@@ -1,21 +1,24 @@
 import multiprocessing as mp
+from functools import partial 
 import numpy as np
 from ..base import BaseClassifier,BaseRegressor
 from ..ml.decison_tree import DecisionTreeClassifier,DecisionTreeRegressor
 
 class Base_Randomforest:
-    def __init__(self,basetree,basetree_params={},n_tree = 20,parallelize=True):
+    def __init__(self,basetree,basetree_params={},n_tree = 20,samples_ratio=0.6,parallelize=False):
         self.basetree = basetree
         self.basetree_params = basetree_params
         self.parallelize = parallelize
         self.n_tree = n_tree
+        self.samples_ratio = samples_ratio
         
         self.estimators = []
 
     def fit(self,X,y):
         
         # Draw bootstrap samples
-        samples_idx = np.random.choice(X.shape[0],size=self.n_tree * X.shape[0],replace=True).reshape(self.n_tree,X.shape[0])
+        n_sample = int(X.shape[0] * self.samples_ratio)
+        samples_idx = np.random.choice(X.shape[0],size=self.n_tree*n_sample ,replace=True).reshape(self.n_tree,n_sample)
 
         # Create base tree
         self.estimators = []
@@ -23,8 +26,10 @@ class Base_Randomforest:
 
         # Fit the trees
         if self.parallelize :
+            fit_func = [partial(self.estimators[i].fit,X[samples_idx[i]],y[samples_idx[i]]) for i in range(self.n_tree)]
+
             pool = mp.Pool(mp.cpu_count())
-            self.estimators = [pool.apply(self.estimators[i].fit,(X,y)) for i in range(self.n_tree)]
+            [pool.apply(fit_func[i]) for i in range(self.n_tree)]
 
         else : 
             for i in range(self.n_tree) :
@@ -87,7 +92,7 @@ class RandomForestRegressor(Base_Randomforest,BaseRegressor):
             number of trees in the forest
     '''
     def __init__(self,basetree=DecisionTreeRegressor,basetree_params={},n_tree = 20,parallelize=True):
-        super().__init__(basetree,basetree_params,n_tree,parallelize)
+        super().__init__(basetree=basetree,basetree_params=basetree_params,n_tree=n_tree,parallelize=parallelize)
     
     def predict(self,X):
         res = self.predict_all_trees(X)
