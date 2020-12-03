@@ -76,7 +76,7 @@ class NeuralNetwork:
     def get_list_layers_todisplay(self):
         return self.layers
 
-    def display(self):
+    def display(self,print_connections=True):
         layers = self.get_list_layers_todisplay()
         fig, ax = plt.subplots()
         nu = 0
@@ -92,7 +92,7 @@ class NeuralNetwork:
             ax.scatter(np.ones(nu)*i,np.linspace(int(-nu/2),int(nu/2),nu),s=350,zorder=1,c=color,marker=mark,label=layer_type)
 
             # plot lines/ connection
-            if i!=0 :
+            if i!=0 and print_connections :
                 for j in np.linspace(int(-old_nu/2),int(old_nu/2),old_nu):
                     for k in np.linspace(int(-nu/2),int(nu/2),nu):
                         ax.plot([last_displayed,i],[j,k],c='gray',zorder=-1)

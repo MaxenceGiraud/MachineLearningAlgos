@@ -21,7 +21,7 @@ class BaseOptimizer:
         nb_iter = 0
         batch_iter = len(y) / self.batch_size # number of mini batch
         while np.linalg.norm(g) > self.stopping_criterion and nb_iter < self.n_iter_max:
-            print(nb_iter)
+            
             # Random permutation
             permut = np.random.permutation(X.shape[0])
             X = X[permut]
@@ -38,7 +38,7 @@ class BaseOptimizer:
             nn.backprop(y[int(batch_iter)*self.batch_size:]) # backprop
             self.update(nn,t=nb_iter,X=X)  # Update weights
 
-            #g= np.mean(g,axis=0)
-            print("loss :",np.mean(loss)/np.ceil(batch_iter))
-            print("g :",np.mean(g)/np.ceil(batch_iter))
+            print('-----\n Iter ',nb_iter)
+            print("loss =",np.mean(loss)/np.ceil(batch_iter))
+            print("g =",np.mean(g)/np.ceil(batch_iter))
             nb_iter += 1

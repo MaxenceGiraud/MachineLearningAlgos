@@ -22,12 +22,12 @@ class Loss(BaseLayer):
     
     def forward(self,X,y):
         self.zin = self.input_unit.forward(X)
-        self.loss = self.loss_function(self.zin,y.reshape(self.zin.shape))
+        self.loss = self.loss_function(self.zin,y)
         return self.loss
 
     def backprop(self,y):
         self.loss_d = self.deriv(self.zin,y.reshape(self.zin.shape))
-        return self.loss_d.reshape((-1,1))
+        return self.loss_d
 
     def loss_function(self,y_pred,y_true):
         raise NotImplementedError("Function not supposed to call, class is only a base")
@@ -37,7 +37,7 @@ class Loss(BaseLayer):
 
 class MSE(Loss):
     def loss_function(self,y_pred,y_true):
-        return np.mean(self.weights*(y_pred.flatten()- y_true)**2)
+        return np.mean(self.weights*(y_pred- y_true)**2)
     
     def deriv(self,y_pred,y_true):
         return 2*(y_pred - y_true) *self.weights

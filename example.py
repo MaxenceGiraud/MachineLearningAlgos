@@ -1,10 +1,10 @@
 '''This file contains examples of use for some algo'''
 #%%
 import mla
-from mla import dl,mab
+from mla import dl,mab,ensemble
 import numpy as np
 
-from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups,load_iris
+from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups,load_iris,fetch_openml
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 #%%
@@ -24,7 +24,7 @@ regressor.score(X_test,y_test)
 #%%
 ############# Binary Classification task #############
 
-clf = mla.DecisionTreeClassifier()# Choose whatever classifier you want (need to have fit and score methods)
+clf = mla.KNN(3)# Choose whatever classifier you want (need to have fit and score methods)
 
 X,y = make_classification(n_samples=300)
 
@@ -35,11 +35,9 @@ clf.score(X_test,y_test)
 
 #%% 
 #############  Multilabel classification task ##########
-clf  = mla.OneVsRestClassifier() # Choose whatever regressor you want (need to have fit and score methods)
+clf  = ensemble.OneVsOneClassifier(mla.PolynomialClassification) # Choose whatever regressor you want (need to have fit and score methods)
 
-data = load_boston()
-X = data['data']
-y = data['target']
+X,y = make_classification(n_classes=4,n_samples=600,n_features=10,n_informative=5)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
@@ -47,7 +45,6 @@ clf.fit(X_train,y_train)
 clf.score(X_test,y_test)
 #%%
 ############# Boolean/Counting features Classification task  (Bernoulli/Multinomial Naive Bayes) #################
-
 
 ''' Careful, very big dataset (13000 datapoints with 130 000 features), if low memory use only a fraction of it '''
 
@@ -83,21 +80,23 @@ bnb.score(X_test,y_test)
 
 ## Binary Classification 
 
-np.random.seed(42)
+# np.random.seed(42)
 X, y = make_classification(n_samples=200, n_features=5, n_classes=2, n_clusters_per_class=1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
 #%%
 
 nn = dl.NeuralNetwork(X.shape[1:],loss=dl.BinaryCrossEntropy())
-nn.add(dl.Dense(6,activation=mla.dl.activation.Sigmoid()))
+nn.add(dl.Dense(10,activation=mla.dl.activation.Sigmoid()))
 nn.add(dl.Dense(4,activation=mla.dl.activation.Sigmoid()))
 nn.add(dl.Dense(3,activation=mla.dl.activation.Sigmoid()))
 nn.add(dl.Dense(1,activation=mla.dl.activation.Sigmoid()))
 
 #%%
 
-nn.fit(X,y,dl.Adam())
+nn.fit(X_train,y_train,dl.Adam())
 
-print('score =',1 - np.count_nonzero(y-np.where(nn.predict(X)>0.5,1,0).flatten())/y.size)
+print('\n ------------------------ \naccuracy = ',1 - np.count_nonzero(y_test-np.where(nn.predict(X_test)>0.5,1,0).flatten())/y_test.size)
 #%%
 nn.summary()
 #%%
@@ -112,18 +111,31 @@ X = (X - X.min(axis=0))/X.max(axis=0)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 #%%
 
-nn = dl.NeuralNetwork(X.shape[1:],loss=dl.MSE())
-nn.add(dl.Dense(6,activation=mla.dl.activation.Relu()))
+nn = dl.NeuralNetwork(X.shape[1:],loss=dl.MAE())
+nn.add(dl.Dense(10,activation=mla.dl.activation.Relu()))
 nn.add(dl.Dense(4,activation=mla.dl.activation.Relu()))
-nn.add(dl.Dense(3,activation=mla.dl.activation.Relu()))
-nn.add(dl.Dense(1,activation=mla.dl.activation.Relu()))
+nn.add(dl.Dense(1))
 
 #%%
 
-nn.fit(X,y,dl.Adam(learning_rate=2e-7,n_iter=200))
+nn.fit(X,y,dl.Adam(learning_rate=0.1,n_iter=200))
+
+#%% ######### Autoencoder ############################
+## Warning : Big dataset
+X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)  
+#%%
+ae = dl.AutoEncoder(X.shape[1:],loss=dl.MAE())
+ae.add(dl.Dense(350))
+
+# ae.add(dl.Dense(50))
+ae.add(dl.Dense(150))
+ae.add(dl.Dense(100))
+ae.add(dl.Dense(20),encoding_layer=True)
+#%%
+ae.fit(X_train,X_train,dl.Adam(learning_rate=0.01,n_iter=200))
 
 #%%
-
 ################# Multi Armed Bandit ##########################
 arms = [mab.arms.Bernoulli(0.8),mab.arms.Exponential(2),mab.arms.Gaussian(2.4),mab.arms.Gaussian(1.5)]
 bandit = mab.MAB(arms)

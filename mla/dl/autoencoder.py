@@ -81,33 +81,33 @@ class AutoEncoder(NeuralNetwork):
         if not encoding_layer :
             # Connect decoder
             layer_decoder.plug(self.encoded_layer)
-            for i in range(len(self.decoder)-2,0,-1):
+            for i in range(len(self.decoder)-2,-1,-1):
                 self.decoder[i].plug(self.decoder[i+1])
 
             self.decoder.append(layer_decoder)
         else :
             self.decoder[-1].plug(self.encoded_layer)
-            for i in range(len(self.decoder)-2,0,-1):
+            for i in range(len(self.decoder)-2,-1,-1):
                 self.decoder[i].plug(self.decoder[i+1])
 
         self.loss.plug(self.output_layer)
 
     
-    def forward(self,X):
-        self.loss.forward(X,X)
+    def forward(self,X,*args,**kwargs):
+        return self.loss.forward(X,X)
     
-    def backprop(self,X):
-        delta = self.loss.backprop(X)
+    def backprop(self,y):
+        delta = self.loss.backprop(y)
         delta_loss = np.copy(delta)
 
-        for i in range(0,len(self.decoder)):
+        for i in range(len(self.decoder)):
             delta = self.decoder[i].backprop(delta)
         for i in range(len(self.encoder)-1,0,-1):
             delta = self.encoder[i].backprop(delta)
 
         return delta_loss
-    
-    def get_list_layers_todisplay(self):
+
+    def get_layers_to_update(self):
         return np.concatenate((self.encoder[1:],self.decoder))
     
     def score(self,X):
