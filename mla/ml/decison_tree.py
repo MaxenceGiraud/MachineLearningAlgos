@@ -22,6 +22,11 @@ class Node:
     @property
     def width(self):
         raise NotImplemented
+    
+    @property
+    def size(self):
+        '''return number of leaves in the tree '''
+        return self.left.size + self.right.size + 1
 
     def split_data(self,X):
         if self.categorial :
@@ -111,6 +116,11 @@ class Leaf(Node):
     @property
     def depth(self):
         return 0
+    
+    @property
+    def size(self):
+        return 0
+
     
     def init_pruned(self):
         pass
@@ -227,7 +237,7 @@ class BaseDecisionTree:
                 tree_list.append(new_tree)
             else : 
                 break
-        return tree_list
+        return tree_list[1:]
 
     def _bottom_up_pruning(self,X,y):
         raise NotImplementedError
@@ -359,7 +369,7 @@ class DecisionTreeRegressor(BaseDecisionTree,BaseRegressor):
         for new_tree in tree_list:
             tmp_decision_tree = deepcopy(self)
             tmp_decision_tree.tree = new_tree
-            if tmp_decision_tree.score(X,y) <= (score):#+ self.pruning_eps) :
+            if tmp_decision_tree.score(X,y) <= (score +self.pruning_eps) :
                 self.tree = new_tree 
                 self._bottom_up_pruning(X,y) # Try pruning some more based on the new tree  
                 break 
