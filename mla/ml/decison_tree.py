@@ -167,7 +167,7 @@ def gini_index(groups,class_labels):
     return gini
 
 class BaseDecisionTree:
-    def __init__(self,max_depth=10,min_samples_split=2,categorial_features = [],eps=0.02,pruning_eps=0.05):
+    def __init__(self,max_depth=6,min_samples_split=2,categorial_features = [],eps=0.02,pruning_eps=0.05):
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
         self.categorial_features  = categorial_features
@@ -245,23 +245,18 @@ class BaseDecisionTree:
 
     
     def build_node(self,X,y,depth):
-        # Create a leaf (end of the tree)
-        if self.max_depth <= depth or self.min_samples_split >= X.shape[0]:
-            current_node = self._create_leaf(y)
-            return current_node
-
         idx,score,groups_idx = self.get_best_split(X,y) # Get the best split
         
         current_node = Node(X[idx[0],idx[1]],idx[1],score,categorial= (idx[1] in self.categorial_features))
-        if score < self.eps : #
-            current_node.left =  self._create_leaf(y[groups_idx[0]])
-            current_node.right = self._create_leaf(y[groups_idx[1]])
+        # Create a leaf (end of the tree)
+        if self.max_depth <= depth+1 or self.min_samples_split >= X.shape[0] or score < self.eps:
+            current_node = self._create_leaf(y)
         else :
             # Build the children nodes
             current_node.left = self.build_node(X[groups_idx[0]],y[groups_idx[0]],depth+1)
             current_node.right = self.build_node(X[groups_idx[1]],y[groups_idx[1]],depth+1)
 
-        return current_node
+        return current_node  
         
     def predict(self,X):
         return self.tree.predict(X)
