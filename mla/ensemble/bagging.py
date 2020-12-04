@@ -72,7 +72,7 @@ class BagginClassifier(BaseBagging,BaseClassifier):
     def fit(self,X,y):
         self.labels = np.unique(y)
 
-        return self.fit(X,y)
+        return super().fit(X,y)
         
     def predict(self,X):
         res = super().predict_all_trees(X)
@@ -81,7 +81,8 @@ class BagginClassifier(BaseBagging,BaseClassifier):
         res = np.array(res)
         decision = []
         for col in range(res.shape[1]):
-            decision.append(np.bincount(res[:,col]).argmax())
+            values,counts = np.unique(res[:,col],return_counts=True)
+            decision.append(values[counts.argmax()])
         return decision
 
 class BaggingRegressor(BaseBagging,BaseRegressor):
