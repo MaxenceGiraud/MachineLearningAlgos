@@ -38,8 +38,8 @@ Some explainations of the algorithms can be found in the readme of their folders
 ### [Ensemble methods](./mla/ensemble/)
 - [x] [Random Forest](./mla/ensemble/random_forest.py)
 - [x] [Bagging](./mla/ensemble/bagging.py)
+- [x] AdaBoost
 - [ ] Gradient Boosting
-- [ ] AdaBoost
 - [x] [One vs rest classifier](./mla/ensemble/multiclass.py)
 - [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
   
@@ -52,8 +52,11 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
+- [ ] Spectral Clustering
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
   
+### Other ML methods
+- [ ] Isolation Forest (detection of outliers)  
 
 ### [Deep Leaning](./mla/dl/)
 - [x] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
@@ -119,6 +122,9 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] ICA
 - [ ] Elastic map
 - [ ] CCA
+- [ ] Multi-dimensional Scaling
+- [ ] Isomap Embedding
+- [ ] Spectral Embedding
 
 ## References
 

@@ -26,11 +26,11 @@ class BaseBagging:
             
 
 
-        # Create base tree
+        # Create base estimators
         self.estimators = []
         [self.estimators.append(self.base_model(**self.basemodel_params)) for _ in range(self.n_estimators)]
 
-        # Fit the trees
+        # Fit the estimators
         if self.parallelize :
             fit_func = [partial(self.estimators[i].fit,X[samples_idx[i]][:,self.features_idx[i]],y[samples_idx[i]]) for i in range(self.n_estimators)]
 
@@ -41,7 +41,7 @@ class BaseBagging:
             for i in range(self.n_estimators) :
                 self.estimators[i].fit(X[samples_idx[i]][:,self.features_idx[i]],y[samples_idx[i]])
 
-    def predict_all_trees(self,X):
+    def predict_all_learners(self,X):
         if self.parallelize :
             pool = mp.Pool(mp.cpu_count())
             for i in range(self.n_estimators):
@@ -75,7 +75,7 @@ class BagginClassifier(BaseBagging,BaseClassifier):
         return super().fit(X,y)
         
     def predict(self,X):
-        res = super().predict_all_trees(X)
+        res = super().predict_all_learners(X)
 
         # Take the most common value
         res = np.array(res)
@@ -103,6 +103,6 @@ class BaggingRegressor(BaseBagging,BaseRegressor):
 
     
     def predict(self,X):
-        res = self.predict_all_trees(X)
+        res = self.predict_all_learners(X)
 
         return np.mean(res,axis=0)

@@ -49,6 +49,8 @@ class Base_Randomforest:
 
 class RandomForestClassifier(Base_Randomforest,BaseClassifier):
     ''' Random Forest Classfier
+    Ref : Ho, T.K. (1995) Random Decision Forest. Proceedings of the 3rd International Conference on Document Analysis and Recognition, Montreal, 14-16 August 1995, 278-282. 
+
     Parameters
     ----------
     basetree : object,
@@ -81,6 +83,8 @@ class RandomForestClassifier(Base_Randomforest,BaseClassifier):
 
 class RandomForestRegressor(Base_Randomforest,BaseRegressor):
     ''' Random Forest Classfier
+    Ref : Ho, T.K. (1995) Random Decision Forest. Proceedings of the 3rd International Conference on Document Analysis and Recognition, Montreal, 14-16 August 1995, 278-282. 
+    
     Parameters
     ----------
     basetree : object,
