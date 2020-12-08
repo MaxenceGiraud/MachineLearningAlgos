@@ -14,6 +14,8 @@ Some readme have written LaTeX, you can view them locally with some capable read
 ## How to
 Some examples on how to use the algorithms can be found in the file [example.py](./example.py)
 
+The machine learning algorithms are programmed in a similar fashion as sklearn.    
+The deep learning are conceived in a Keras-like manner.
 
 ## Algorithms
 
@@ -38,7 +40,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 ### [Ensemble methods](./mla/ensemble/)
 - [x] [Random Forest](./mla/ensemble/random_forest.py)
 - [x] [Bagging](./mla/ensemble/bagging.py)
-- [x] AdaBoost
+- [x] [AdaBoost](./mla/ensemble/adaboost.py)
 - [ ] Gradient Boosting
 - [x] [One vs rest classifier](./mla/ensemble/multiclass.py)
 - [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
@@ -76,6 +78,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 
 #### Wrapper
 - [x] [Autoencoder](./mla/dl/autoencoder.py)
+- [x] [MLP](./mla/dl/mlp.py)
 - [ ] VAE
 - [ ] GAN  
   
@@ -115,6 +118,7 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 ### Reinforcement Learning 
 - [ ] Value iteration
 - [ ] Q-learning
+- [ ] Deep Q-learning
   
 ### Data processing/Analysis
 - [ ] PCA
