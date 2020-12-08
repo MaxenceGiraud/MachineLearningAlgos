@@ -10,7 +10,7 @@ class MLP(NeuralNetwork):
         self.layers = [InputLayer(input_shape)]
         self.loss = loss
         for n in layers :
-            new_layer = Dense(n,activation=activation)
+            new_layer = Dense(n,activation=activation())
             new_layer.plug(self.layers[-1])
             self.layers.append(new_layer)
         self.loss.plug(self.layers[-1])

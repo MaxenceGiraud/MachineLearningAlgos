@@ -42,6 +42,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Bagging](./mla/ensemble/bagging.py)
 - [x] [AdaBoost](./mla/ensemble/adaboost.py)
 - [ ] Gradient Boosting
+- [ ] XGBoost
 - [x] [One vs rest classifier](./mla/ensemble/multiclass.py)
 - [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
   
@@ -115,8 +116,8 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [x] FTL
 - [x] Thompson sampling
 
-### Reinforcement Learning 
-- [ ] Value iteration
+### [Reinforcement Learning ](./mla/rl/)
+- [x] [Value iteration](./mla/rl/value_iteration.py)
 - [ ] Q-learning
 - [ ] Deep Q-learning
   
