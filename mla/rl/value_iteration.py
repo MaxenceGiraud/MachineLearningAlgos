@@ -18,8 +18,7 @@ def bellman_operator(Q, env, gamma=0.99):
     A = env.action_space.n 
     TQ = np.zeros((S, A))
 
-    #TQ = env.R * gamma *  env.P @ Q.max(axis=1)
-    for s in range(S):
+      for s in range(S):
         for a in range(A):
             TQ[s,a] = env.R[s,a] + gamma * env.P[s,a] @ Q.max(axis=1)
 
@@ -33,7 +32,7 @@ def ValueIteration(env, gamma=0.99, epsilon=1e-6):
     Parameters
     -----------
     env : gym-like env,
-        environment
+        environment with know reward and transition probabilities, and finite state and action space
     gamma : float,
         Discount factor ensuring the convergence of the iterations
     epsilon : float,

@@ -118,7 +118,7 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 
 ### [Reinforcement Learning ](./mla/rl/)
 - [x] [Value iteration](./mla/rl/value_iteration.py)
-- [ ] Q-learning
+- [x] [Q-learning](./mla/rl/qlearning.py)
 - [ ] Deep Q-learning
   
 ### Data processing/Analysis
