@@ -1,7 +1,7 @@
 import numpy as np
 
-def bellman_operator(Q, env, gamma=0.99):
-    """
+def BellmanOperator(Q, env, gamma=0.99):
+    """ Apply the bellman operator to Q
     Parameters
     ----------
     Q : array of shape (S,A),
@@ -11,8 +11,8 @@ def bellman_operator(Q, env, gamma=0.99):
 
     Yields
     -------
-    TQ : array of shape same as Q,
-        Action-Value function/matrix that is the fixed point of the Bellman operator T 
+    TQ : array of shape (S,A),
+        Results of the Bellman operator applied to the Action-Value function/matrix Q
     """
     S = env.observation_space.n
     A = env.action_space.n 
@@ -41,7 +41,7 @@ def ValueIteration(env, gamma=0.99, epsilon=1e-6):
     Yields
     ------
     Q : array of shape (S,A), 
-        Optomal action Value function/matrix, shape (S,A) with S the state space dimension and A the action space dimension.
+        Optimal action Value function/matrix that is the fixed point of the Bellman operator T , shape (S,A) with S the state space dimension and A the action space dimension.
     '''
 
     S = env.observation_space.n
@@ -49,7 +49,7 @@ def ValueIteration(env, gamma=0.99, epsilon=1e-6):
     Q = np.zeros((S, A))
 
     while True : 
-        TQ = bellman_operator(Q,env,gamma)
+        TQ = BellmanOperator(Q,env,gamma)
         if np.abs(TQ - Q).max() <= epsilon :
             break
         Q = TQ

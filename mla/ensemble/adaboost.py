@@ -20,19 +20,24 @@ class BaseAdaBoost:
         
         # Create base estimators
         self.estimators = []
-        [self.estimators.append(self.base_model(**self.basemodel_params)) for _ in range(self.n_estimators)]
+        self.estimators_tmp = []
+        [self.estimators_tmp.append(self.base_model(**self.basemodel_params)) for _ in range(self.n_estimators)]
 
         # Fit the estimators
         for i in range(self.n_estimators):
-            self.estimators[i].fit(weights*X,y)
-            y_diff = np.abs(self.estimators[i].predict(X).reshape(y.shape)-y)/y
+            self.estimators_tmp[i].fit(weights*X,y)
+            self.estimators.append(self.estimators_tmp[i])
+            y_diff = np.abs(self.predict(X).reshape(y.shape)-y)/y
 
             # Update weights
             weights *= np.exp(y_diff.reshape(-1,1))
            
 
     def predict_learners(self,X):
-        return [self.estimators[i].predict(X) for i in range(self.n_estimators)]
+        return [self.estimators[i].predict(X) for i in range(len(self.estimators))]
+
+    def predict(self,*args,**kwargs):
+        raise NotImplementedError
 
 class AdaBoostClassifier(BaseAdaBoost,BaseClassifier):
     ''' AdaBoost Classifer 

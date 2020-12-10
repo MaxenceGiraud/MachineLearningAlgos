@@ -7,7 +7,7 @@ Personal reimplementation of some ML algorithm for learning purposes
 ## Requirements 
 * [NumPy](https://numpy.org/) 
 * [Matplotlib](https://matplotlib.org/) (for plots only)
-* [Gym](https://gym.openai.com/) (RL environment)
+* [Gym](https://gym.openai.com/) (RL environment, not directly used in the algorithms)
 
 Some readme have written LaTeX, you can view them locally with some capable reader (e.g. VSCode) or using extensions (e.g. [here](https://addons.mozilla.org/en-US/firefox/addon/latexmathifygithub/) for Firefox).
 
@@ -15,7 +15,7 @@ Some readme have written LaTeX, you can view them locally with some capable read
 Some examples on how to use the algorithms can be found in the file [example.py](./example.py)
 
 The machine learning algorithms are programmed in a similar fashion as sklearn.    
-The deep learning are conceived in a Keras-like manner.
+The deep learning framework is conceived in a Keras-like manner.
 
 ## Algorithms
 
@@ -122,7 +122,7 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] Deep Q-learning
   
 ### Data processing/Analysis
-- [ ] PCA
+- [x] PCA
 - [ ] FDA
 - [ ] ICA
 - [ ] Elastic map

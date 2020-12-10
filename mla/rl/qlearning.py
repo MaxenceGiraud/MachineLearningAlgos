@@ -1,6 +1,6 @@
 import numpy as np
 
-def q_learning(env,lr=1,eps = 0.5, gamma=0.99, T=5000):
+def QLearning(env,lr=1,eps = 0.5, gamma=0.99, T=5000):
     """Q Learning Algorithm,
     Parameters 
     ----------
