@@ -62,6 +62,9 @@ class DBSCAN:
 
         return y_hat
     
+    def predict(self,*args,**kwargs):
+        raise Exception("DBSCAN doesn't have a predict method")
+
     def score(self,X,y):
         y_hat  = self.predict(X)
         acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)

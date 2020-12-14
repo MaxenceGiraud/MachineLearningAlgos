@@ -66,9 +66,9 @@ Q-Learning with __$\varepsilon$-greedy exploration__ proceeds as follows:
 
 Here, $\alpha_t(s,a)$ is a learning rate that can depend, for instance, on the number of times the algorithm has visited the state-action pair $(s, a)$. 
 
-## Deep Q-Learning
+## Deep Q-Learning (DQN)
 
-Deep Q-Learning used a neural network to approximate $Q$ functions. On the contrary of Q-Learning, with DQN (Deep Q Network) we can have continuous state and action spaces.
+Deep Q-Learning used a neural network to approximate $Q$ functions. On the contrary of Q-Learning, with DQN we can have continuous state and action spaces.
 
 The parameters of the neural network are denoted by $\theta$. 
 *   As input, the network takes a state $s$,
@@ -112,3 +112,39 @@ where $\eta$ is the optimization learning rate.
 * Every $N$ transitions ($t\mod N$ = 0), update target parameters: $\theta^- \gets \theta$.
 
 * $t \gets t+1$. Stop if $t = T$, otherwise go to step 2.
+
+## Advantage Actor Critic (A2C)
+
+A2C keeps two neural networks:
+*   One network with paramemeters $\theta$ to represent the policy $\pi_\theta$.
+*   One network with parameters $\omega$ to represent a value function $V_\omega$, that approximates $V^{\pi_\theta}$
+
+
+At each iteration, A2C collects $M$ transitions $(s_i, a_i, r_i, s_i')_{i=1}^M$ by following the policy $\pi_\theta$. If a terminal state is reached, we simply go back to the initial state and continue to play $\pi_\theta$ until we gather the $M$ transitions.
+
+Consider the following quantities, defined based on the collected transitions:
+
+$$
+\widehat{V}(s_i) = \widehat{Q}(s_i, a_i) = \sum_{t=i}^{\tau_i \wedge M} \gamma^{t-i} r_t + \gamma^{M-i+1} V_\omega(s_M')\mathbb{I}\{\tau_i>M\}
+$$
+
+where and $\tau_i = \min\{t\geq i: s_i' \text{ is a terminal state}\}$, and 
+
+$$
+\mathbf{A}_\omega(s_i, a_i) = \widehat{Q}(s_i, a_i) -  V_\omega(s_i)  
+$$
+
+
+A2C then takes a gradient step to minimize the policy "loss" (keeping $\omega$ fixed):
+
+$$
+L_\pi(\theta) =
+-\frac{1}{M} \sum_{i=1}^M \mathbf{A}_\omega(s_i, a_i) \log \pi_\theta(a_i|s_i)
+- \frac{\alpha}{M}\sum_{i=1}^M \sum_a  \pi(a|s_i) \log \frac{1}{\pi(a|s_i)}
+$$
+
+and a gradient step to minimize the value loss (keeping $\theta$ fixed):
+
+$$
+L_v(\omega) = \frac{1}{M} \sum_{i=1}^M \left( \widehat{V}(s_i) - V_\omega(s_i)   \right)^2
+$$

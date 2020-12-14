@@ -11,11 +11,57 @@ Personal reimplementation of some ML algorithm for learning purposes
 
 Some readme have written LaTeX, you can view them locally with some capable reader (e.g. VSCode) or using extensions (e.g. [here](https://addons.mozilla.org/en-US/firefox/addon/latexmathifygithub/) for Firefox).
 
-## How to
-Some examples on how to use the algorithms can be found in the file [example.py](./example.py)
+## Installation
 
-The machine learning algorithms are programmed in a similar fashion as sklearn.    
-The deep learning framework is conceived in a Keras-like manner.
+To install, simply clone the project :
+```bash
+git clone https://github.com/MaxenceGiraud/MachineLearningAlgos
+cd MachineLearningAlgos/
+```
+
+## Usage
+
+* The machine learning algorithms are programmed in a similar fashion as sklearn.    
+* The deep learning framework is conceived in a Keras-like manner.
+* The Reinforcement Learning take as input gym-like environments.
+
+```python
+import mla
+X,y =  load_your_data()
+
+clf = QDA()
+clf.fit(X,y)
+clf.score(X,y)
+
+##### Unsupevized learning
+clust = mla.DBSCAN(eps=5)
+clust.fit_predict(X)
+
+##### Deep Learning
+from mla import dl
+
+nn = dl.NeuralNetwork(X.shape[1:],loss=dl.MSE())
+nn.add(dl.Dense(10,activation=dl.activation.Relu()))
+nn.add(dl.Dense(4,activation=dl.activation.Relu()))
+nn.add(dl.Dense(1))
+
+nn.fit(X,y)
+
+##### Multi agent bandits
+from mla import mab 
+
+arms = [mab.arms.Bernoulli(0.8),mab.arms.Exponential(2),mab.arms.Gaussian(2.4),mab.arms.Gaussian(1.5)]
+bandit = mab.MAB(arms)
+
+T = 100 # Number of trials
+ucb = mab.UCB(bandit.nbArms)
+ts = mab.ThompsonSampling(bandit.nbArms)
+etc = mab.ETC(bandit.nbArms,T)
+
+mab.bandit_env.RunExpes([ucb,ts,etc],bandit,N_exp=10,timeHorizon=T) # Compare the different algorithms
+```
+
+Other examples on how to use the algorithms can be found in the file [example.py](./example.py)
 
 ## Algorithms
 
@@ -88,8 +134,9 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] Mini batch batch Gradient descent
 - [x] <img src="https://render.githubusercontent.com/render/math?math=\epsilon">-<img src="https://render.githubusercontent.com/render/math?math=\delta"> private SGD
 - [x] Adam
-- [ ] Nadam (Nesterov Adama)
+- [ ] Nadam (Nesterov Adam)
 - [x] Adagrad
+- [ ] L-BFGS
 
 #### [Loss](./mla/dl/layers/loss.py)
 - [x] MSE
@@ -122,7 +169,7 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] Deep Q-learning
   
 ### Data processing/Analysis
-- [x] PCA
+- [x] PCA (for Bayesian PCA/ mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
 - [ ] FDA
 - [ ] ICA
 - [ ] Elastic map

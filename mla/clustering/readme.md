@@ -1,4 +1,4 @@
-# Clustering algorithms 
+# Clustering algorithms / Unsupervized Learning
 
 ## K-means
 

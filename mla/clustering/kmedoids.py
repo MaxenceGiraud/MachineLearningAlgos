@@ -16,7 +16,7 @@ class Kmedoids:
         self.max_iter = max_iter
         self.centroids = False
 
-    def fit_predict(self,X):
+    def fit(self,X,return_means=True):
         ## Init
         centroids = [X[np.random.randint(0,X.shape[0])]]
         for i in range(self.k-1):
@@ -40,7 +40,12 @@ class Kmedoids:
             i+=1
         
         self.centroids = centroids
-        return self.centroids
+        if return_means :
+            return self.centroids
+    
+    def fit_predict(self,X):
+        self.fit(X,return_means=False)
+        return self.predict(X)
     
     def predict(self,X):
         dist_centroids = cdist(self.centroids, X) # compute all dists between the means and every point

@@ -59,8 +59,6 @@ class BernoulliNaiveBayes(BaseClassifier):
     
     def predict(self,X):
         
-        #assert (self.cond_prob != None), "Model has not been trained"
-
         if self.encoding == 'object' :
             y_hat = []
             for x in X :

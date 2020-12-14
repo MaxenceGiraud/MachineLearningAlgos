@@ -28,8 +28,8 @@ class FuzzyCmeans:
         dist = (1/dist)** (1/(self.p-1))
         w =  dist / dist.sum(axis=1).reshape(-1,1)
         return w
-
-    def fit_predict(self,X):
+    
+    def fit(self,X):
         self.clusters  = np.random.random((self.n_cluster,X.shape[1]))
 
         w = np.random.dirichlet(np.ones(self.n_cluster),size=X.shape[0]) 
@@ -47,7 +47,10 @@ class FuzzyCmeans:
             w = self._compute_weights(X)
             
             i+=1
-        print(i)
+
+    def fit_predict(self,X):
+        self.fit(X)
+        return self.predict(X)
         
     def predict(self,X):
         w = self._compute_weights(X)
