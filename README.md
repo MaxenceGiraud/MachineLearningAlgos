@@ -113,15 +113,19 @@ Some explainations of the algorithms can be found in the readme of their folders
 #### [Layers](./mla/dl/layers/)
 - [x] [Dense](./mla/dl/layers/dense.py)
 - [ ] Convolution (1d,2d,3d)
-- [ ] Deconvolution
 - [ ] Recurrent
 - [ ] LSTM
 - [ ] GRU
-- [ ] Transformer Block
-- [ ] Pooling
+- [ ] Max/Mean/Min Pooling
+- [ ] Deconvolution/ Upconv / Transposed Conv. layer
 - [x] Flatten
 - [x] Reshape
 - [x] Dropout
+
+### Blocks
+- [ ] Transformer
+- [ ] Inception
+- [ ] Residual (ResNet)
 
 #### Wrapper
 - [x] [Autoencoder](./mla/dl/autoencoder.py)
@@ -132,7 +136,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 #### [Optimization Algorithm](./mla/dl/optimizer/)
 - [x] Stochastic gradient descent
 - [x] Mini batch batch Gradient descent
-- [x] <img src="https://render.githubusercontent.com/render/math?math=\epsilon">-<img src="https://render.githubusercontent.com/render/math?math=\delta"> private SGD
+- [x] Epsilon-Delta private SGD
 - [x] Adam
 - [ ] Nadam (Nesterov Adam)
 - [x] Adagrad
