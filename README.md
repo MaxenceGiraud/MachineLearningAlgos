@@ -6,6 +6,7 @@ Personal reimplementation of some ML algorithm for learning purposes
 
 ## Requirements 
 * [NumPy](https://numpy.org/) 
+* [SciPy](https://scipy.org/)
 * [Matplotlib](https://matplotlib.org/) (for plots only)
 * [Gym](https://gym.openai.com/) (RL environment, not directly used in the algorithms)
 
@@ -47,7 +48,7 @@ nn.add(dl.Dense(1))
 
 nn.fit(X,y)
 
-##### Multi agent bandits
+##### Multi-armed bandits
 from mla import mab 
 
 arms = [mab.arms.Bernoulli(0.8),mab.arms.Exponential(2),mab.arms.Gaussian(2.4),mab.arms.Gaussian(1.5)]
@@ -171,6 +172,7 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [x] [Value iteration](./mla/rl/value_iteration.py)
 - [x] [Q-learning](./mla/rl/qlearning.py)
 - [ ] Deep Q-learning
+- [ ] Advantage Actor Critic
   
 ### Data processing/Analysis
 - [x] PCA (for Bayesian PCA/ mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
