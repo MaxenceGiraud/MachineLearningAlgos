@@ -70,13 +70,13 @@ Some explainations of the algorithms can be found in the readme of their folders
 
 ### [Machine Leaning](./mla/ml)
 - [x] [KNN](./mla/ml/knn.py) (classifier+regressor)
-- [x] [Logistic Regression/ Perceptron](./mla/ml/perceptron.py)
+- [x] [Logistic Regression/ Perceptron](./mla/ml/logistic_regression.py)
 - [x] [Least squares](./mla/ml/leastsquares.py) linear regression/classification
 - [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
 - [x] [Ridge](./mla/ml/leastsquares_regularised.py) 
 - [ ] [LASSO](./mla/ml/leastsquares_regularised.py) (using Least Angle Regression)
 - [ ] Elastic net solver ?? (solver for LS, Ridge, LASSO)
-- [ ] [SVM](./mla/ml/svm.py)
+- [ ] SVM
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [ ] Gaussian process
 - [ ] MARS (Multivariate adaptive regression spline)
@@ -117,7 +117,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Recurrent
 - [ ] LSTM
 - [ ] GRU
-- [ ] Max/Mean/Min Pooling
+- [ ] Max/Avg/Min Pooling (1d,2d,3d)
 - [ ] Deconvolution/ Upconv / Transposed Conv. layer
 - [x] Flatten
 - [x] Reshape
@@ -184,11 +184,22 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] Isomap Embedding
 - [ ] Spectral Embedding
 
+
+# TODO / Ongoing dev
+- [ ] Implement backprop of Convolution layer
+- [ ] Implement backprop of 1D Pooling Layers
+- [ ] Fix pruning of Decision Tree (currently creates overpruned trees)
+- [ ] Find out how OPTICS makes the clusters from reachability graph
+- [ ] Implement LASSO using Least angle regression
+- [ ] Add Deep Q learning and Advantage Actor Critic algos
+- [ ] Add Linear Bandits from last SDM lab
+- [ ] Add Explanations of all currently implemented algos
+
 ## References
 
 
 [1] M. BISHOP, Christopher. [Pattern Recognition and Machine Learning.](https://www.springer.com/gp/book/9780387310732) Springer, 2011.    
 [2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . [The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition.](https://web.stanford.edu/~hastie/ElemStatLearn/) Springer, 2016.   
 [3] P. MURPHY, Kevin. [Machine Learning: A Probabilistic Perspective.](https://www.cs.ubc.ca/~murphyk/MLbook/pml-toc-1may12.pdf) The MIT Press, 2012.   
-[4] [Scikit-learn](https://scikit-learn.org)   
+[4] [Scikit-learn](https://scikit-learn.org/stable): Machine Learning in Python, Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.   
 [5] Courses from [Master Data Science](https://sciences-technologies.univ-lille.fr/mathematiques/formation/master-mention-sciences-des-donnees/) held at the University of Lille, France

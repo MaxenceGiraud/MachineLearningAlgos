@@ -1,4 +1,4 @@
-import numpy as np
+Qimport numpy as np
 from ..base import BaseClassifier
 
 def str_to_function(arg):

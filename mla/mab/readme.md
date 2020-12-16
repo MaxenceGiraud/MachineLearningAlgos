@@ -1,7 +1,5 @@
 # Multi-armed bandits
 
-## Introduction
-
 In a Multi-armed Bandits problem, we have a bandit with multiple arms. At each iteration, we choose an arm to activate and we receive a reward. Our goal is then to maximize the global reward (sum of all rewards).    
 We can also try to maximize our confidence in which arm is the best (has maximal mean reward) in some cases (you can think for example as a clinic trial in which we prefer to be more confident about the treatment than to maximize the number of cured patients **in** the trial).
 

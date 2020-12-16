@@ -1,4 +1,7 @@
 # Reinforcement Learning
+
+The following explanations are greatly inspired by the notebooks made by [Omar Darwiche Domingues](https://omardrwch.github.io/) as part of the course [Sequential Decision Making](http://chercheurs.lille.inria.fr/ekaufman/SDM.html). The notebooks are available [here](https://github.com/rlberry-py/tutorials).
+
 ## Introduction - Markov Decision Processes and Value Functions
 
 In reinforcement learning, an agent interacts with an environment by taking actions and observing rewards. Its goal is to learn a *policy*, that is, a mapping from states to actions, that maximizes the amount of reward it gathers.
