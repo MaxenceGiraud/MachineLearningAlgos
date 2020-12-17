@@ -17,5 +17,9 @@ class Dropout(BaseLayer):
         self.zin = self.input_unit.forward(X)
         self.zout = np.copy(self.zin)
         if self.training :
-            self.zout= self.zout* np.random.binomial(n=1,p=1-self.proba,size=self.zout.shape) * 1/(1-self.proba)
+            self.mask = np.random.binomial(n=1,p=1-self.proba,size=self.zout.shape) * 1/(1-self.proba)
+            self.zout= self.zout*self.mask
         return self.zout
+
+    def backprop(self,delta):
+        return delta * self.mask
