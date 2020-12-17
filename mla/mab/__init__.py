@@ -4,5 +4,7 @@ from .klucb import klUCB
 from .thompson_sampling import ThompsonSampling
 from .ucb import UCB
 from .uniform_exploration import UniformExploration
+from .linear_thompson_sampling import LinTS
+from .linear_ucb import LinUCB
 from .bandit_env import *
 from .bandit_env import arms

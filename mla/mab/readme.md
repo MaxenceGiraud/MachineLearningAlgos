@@ -38,3 +38,13 @@ the first term is the exploitation term (incorporating the empirical means) and 
 ## Kullback-leiber UCB (kl-UCB)
 
 ## Thompson Sampling
+
+## Linear UCB
+
+LinUCB takes as an input a threshold function $\beta(t,\delta)$ and select the arm using: 
+$$A_{t+1}^{\text{LinUCB}} = \underset{a \in \{1,\dots,K\}}{\text{argmax}} \left[x_a^\top \hat{\theta}_t^{\lambda} + \beta(t,\delta) ||x_a||_{\left(B_t^{\lambda}\right)^{-1}}\right]$$
+
+## Linear Thompson Sampling
+Thompson Sampling, takes as an input a posterior inflation parameter $v$  : 
+$$A_{t+1}^{\text{LinTS}} = \underset{a \in \{1,\dots,K\}}{\text{argmax}} \ x_a^\top \tilde{\theta}_t$$
+where $\tilde{\theta}_t$ is a sample from $\mathcal{N}\left(\hat{\theta}_t^{\lambda}, v^2 \left(B_t^{\lambda}\right)^{-1}\right)$.

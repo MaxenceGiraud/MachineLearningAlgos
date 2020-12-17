@@ -136,7 +136,7 @@ Some explainations of the algorithms can be found in the readme of their folders
   
 #### [Optimization Algorithm](./mla/dl/optimizer/)
 - [x] Stochastic gradient descent
-- [x] Mini batch batch Gradient descent
+- [x] Mini batch Gradient descent
 - [x] Epsilon-Delta private SGD
 - [x] Adam
 - [ ] Nadam (Nesterov Adam)
