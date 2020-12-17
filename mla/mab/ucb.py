@@ -2,7 +2,14 @@ from .randmax import randmax
 import numpy as np
 
 class UCB:
-    """UCB1 with parameter alpha"""
+    """UCB1 with parameter alpha
+    
+    Parameters
+    ----------
+    nbArms :int,
+        Number of arms of bandit
+    alpha : float,
+    """
     def __init__(self, nbArms,alpha=2):
         self.nbArms = nbArms
         self.clear()

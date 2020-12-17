@@ -1,7 +1,13 @@
 import numpy as np
 
 class UniformExploration:
-    """a strategy that uniformly explores arms"""
+    """a strategy that uniformly explores arms
+    
+    Parameters
+    ----------
+    nbArms :int,
+        Number of arms of bandit
+    """
     def __init__(self,nbArms):
         self.nbArms = nbArms
         self.clear()

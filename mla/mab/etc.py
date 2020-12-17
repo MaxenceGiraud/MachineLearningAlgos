@@ -2,7 +2,15 @@ from .randmax import randmax
 import numpy as np
 
 class ETC:
-    """Explore-Then-Commit strategy for two arms"""
+    """Explore-Then-Commit strategy for two arms
+    
+    Parameters
+    ----------
+    nbArms :int,
+        Number of arms of bandit
+    Horizon : int,
+        Parameter that scale when the best arm is chosen before commiting    
+    """
     def __init__(self, nbArms,Horizon,c=1/2):
         self.nbArms = 2
         self.T = Horizon

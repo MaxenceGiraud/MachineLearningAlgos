@@ -2,9 +2,22 @@ import numpy as np
 from .randmax import randmax
 
 class LinUCB:
-    """Linear UCB strategy"""
+    """Linear UCB strategy
+
+    Parameters
+    ----------
+    X : array of shape (K,d),
+        Feature matrix witk = Number of arms and d the number of dimensons
+    sigma : float,
+        aa
+    reg : float,
+        regularization parameters
+    delta ; float,
+        aa
+    threshold : None or function,
+        If None default threshold is selected.
+    """
     def __init__(self, X,sigma=0.5,reg=1,delta=0.05,threshold = None):
-        # the algorithms is fed with the known matrix of features (K,d) and the regularization parameter
         self.features = X
         (self.nbArms,self.dimension) = np.shape(X)
         self.reg = reg
@@ -15,7 +28,6 @@ class LinUCB:
 
         if threshold == None :
             self.threshold = lambda t,delta : self.sigma*np.sqrt(10*np.log(1+t/(self.nbArms*self.reg)))
-            #self.threshold = lambda t,delta : self.sigma*np.sqrt(2*np.log(1/delta)+self.nbArms*np.log(1+t/(self.nbArms*self.reg))) + np.sqrt(self.reg) # Theoretical Threshold - Consider norm of theta star =1 and L= 1 as the data is normalized
         else :
             self.threshold = threshold
 

@@ -3,6 +3,15 @@ from .randmax import randmax
 
 class LinTS:
     """Linear Thompson Sampling strategy
+
+    Parameters
+    ----------
+    X : array of shape (K,d),
+        Feature matrix witk = Number of arms and d the number of dimensons
+    k : float,
+        aa
+    reg : float,
+        regularization parameters
     """
     def __init__(self,X,k=0.25,reg=1):
         # the algorithms is fed with the known matrix of features X of shape (K,d) and the regularization parameter 'reg'

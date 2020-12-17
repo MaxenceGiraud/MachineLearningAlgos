@@ -3,7 +3,15 @@ import numpy as np
 from .bandit_env.bandit_tools import klucbBern
 
 class klUCB:
-    """klUCB (Bernoulli divergence by default)"""
+    """kl-UCB
+    
+    Parameters
+    ----------
+    nbArms :int,
+        Number of arms of bandit
+    div : function,
+        kl divergence to use
+    """
     def __init__(self, nbArms,div=klucbBern):
         self.nbArms = nbArms
         self.clear()
