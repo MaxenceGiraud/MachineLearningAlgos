@@ -193,8 +193,8 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] Find out how OPTICS makes the clusters from reachability graph
 - [ ] Implement LASSO using Least angle regression
 - [ ] Add Deep Q learning and Advantage Actor Critic algos
-- [ ] Add Linear Bandits from last SDM lab
 - [ ] Add Explanations of all currently implemented algos
+- [ ] Finish implementation Gaussian Process
 
 ## References
 

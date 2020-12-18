@@ -43,11 +43,6 @@ class Node:
         prediction[right] = self.right.predict(X[right])
 
         return prediction
-
-    def init_pruned(self):
-        self.pruned = False
-        self.left.init_pruned()
-        self.right.init_pruned()
     
     def _count_preleaf(self):
         if isinstance(self.left,Leaf) : 
@@ -132,10 +127,6 @@ class Leaf(Node):
     @property
     def size(self):
         return 0
-
-    
-    def init_pruned(self):
-        pass
     
     def split_data(self,X):
         pass
@@ -207,9 +198,11 @@ class BaseDecisionTree:
         else :
             self.tree.display()
     
-    def fit(self,X,y):
+    def fit(self,X,y,prune = True):
         self.tree = self.build_node(X,y,0)  
-    
+        if prune : 
+            self.prune(X,y)
+
     def _create_leaf(self,y):
         raise Exception
 
@@ -217,8 +210,32 @@ class BaseDecisionTree:
         raise Exception
     
     def _create_pruned_tree(self,node,X,y,n):
-        if isinstance(node.left,Leaf) and isinstance(node.right,Leaf) :
-            return True,n
+        if isinstance(node.left,Leaf)  :
+            if isinstance(node.right,Leaf) :
+                return True,n
+            else : 
+                left,right = node.split_data(X)
+                temp_right,n = self._create_pruned_tree(node.right,X[right],y[right],n)
+                if temp_right == 'done' :
+                    return 'done',n
+                elif temp_right == True :
+                    n -= 1
+                    if n == 0 :
+                        node.right = self._create_leaf(y)
+                        return 'done',n
+
+        elif isinstance(node.right,Leaf) :
+            left,right = node.split_data(X)
+            temp_left,n = self._create_pruned_tree(node.left,X[left],y[left],n)
+            
+            if temp_left == 'done' :
+                return 'done',n
+            elif temp_left == True :
+                n -= 1
+                if n == 0 :
+                    node.left = self._create_leaf(y)
+                    return 'done',n
+
         elif not isinstance(node,Leaf): 
             left,right = node.split_data(X)
             temp_left,n = self._create_pruned_tree(node.left,X[left],y[left],n)
@@ -239,12 +256,11 @@ class BaseDecisionTree:
                 if n == 0 :
                     node.right = self._create_leaf(y)
                     return 'done',n
-            return False,n
+        return False,n
                 
     def get_pruned_trees(self,X,y):
         # Get all possible pruned trees  
         tree_list = []
-        self.tree.init_pruned()  # Init pruned values of nodes
         n_pruned_trees = self.tree._count_preleaf()
         for i in range(n_pruned_trees):
             new_tree = deepcopy(self.tree)
