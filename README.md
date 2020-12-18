@@ -190,7 +190,6 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 # TODO / Ongoing dev
 - [ ] Implement backprop of Convolution layer
 - [ ] Implement backprop of 1D Pooling Layers
-- [ ] Fix pruning of Decision Tree (currently creates overpruned trees)
 - [ ] Find out how OPTICS makes the clusters from reachability graph
 - [ ] Implement LASSO using Least angle regression
 - [ ] Add Deep Q learning and Advantage Actor Critic algos
