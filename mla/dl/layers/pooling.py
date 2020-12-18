@@ -7,6 +7,7 @@ class BasePooling1d:
         assert isinstance(padding,int) and padding >= 0, "Padding must an int >= 0"
         self.pool_size = pool_size
         self.padding = padding
+        assert stride > 0, "Stride must be at min 1"
         if stride > 1 :
             raise NotImplementedError("Stride Greater than 1 is not implemented")
         self.stride = stride
@@ -71,6 +72,8 @@ class BasePooling2d:
         assert isinstance(padding,int) and padding >= 0, "Padding must an int >= 0"
         self.pool_size = pool_size
         self.padding = padding
+
+        assert stride > 0, "Stride must be at min 1"
         if stride > 1 :
             raise NotImplementedError("Stride Greater than 1 is not implemented")
         self.stride = stride

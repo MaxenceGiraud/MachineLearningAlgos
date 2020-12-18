@@ -67,10 +67,6 @@ class BaseConvolutionLayer(BaseLayer):
         uk,ub = weights_diff
         self.kernel += uk
         self.b += ub
-        
-    def update(self,lr):
-        self.kernel -= lr * self.dk
-        self.b -= lr * self.db
 
 class Conv1D(BaseConvolutionLayer):
     def __init__(self,units,kernel_size,activation=Linear(),padding=True):
@@ -96,8 +92,9 @@ class Conv1D(BaseConvolutionLayer):
             raise NotImplementedError
     
     def backprop(self,delta):
+        #dk = delta.T @ self.zin 
+        db = np.sum(delta,axis=0)
         # TODO
-        pass
 
 class Conv2D(BaseConvolutionLayer):
     def __init__(self,units,kernel_size,activation=Linear(),padding=True):
@@ -123,5 +120,5 @@ class Conv2D(BaseConvolutionLayer):
             raise NotImplementedError
     
     def backprop(self,delta):
+        db = np.sum(delta,axis=0)
         # TODO
-        pass

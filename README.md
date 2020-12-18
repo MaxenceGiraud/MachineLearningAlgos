@@ -167,6 +167,8 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [x] ETC 
 - [x] FTL
 - [x] Thompson sampling
+- [x] Linear UCB
+- [x] Linear Thompson sampling
 
 ### [Reinforcement Learning ](./mla/rl/)
 - [x] [Value iteration](./mla/rl/value_iteration.py)

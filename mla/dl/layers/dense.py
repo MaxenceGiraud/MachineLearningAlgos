@@ -50,8 +50,3 @@ class Dense(BaseLayer):
         uw,ub = weights_diff
         self.w += uw
         self.b += ub 
-
-    def update(self,lr,noise_std=0):
-        ''' Update weights given a learning rate'''
-        self.w -= lr * self.dw.T
-        self.b -= lr * self.db

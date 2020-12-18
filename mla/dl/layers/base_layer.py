@@ -27,6 +27,3 @@ class BaseLayer:
     
     def update_weights(self,*args,**kwargs):
         pass
-
-    def update(self,*args,**kwargs):
-        pass
