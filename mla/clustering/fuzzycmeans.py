@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.spatial.distance import cdist
+from .base_unsupervized import BaseUnsupervized
 
-class FuzzyCmeans:
+class FuzzyCmeans(BaseUnsupervized):
     '''Fuzzy C-means clustering algorithm
     Parameters
     ----------
@@ -47,11 +48,7 @@ class FuzzyCmeans:
             w = self._compute_weights(X)
             
             i+=1
-
-    def fit_predict(self,X):
-        self.fit(X)
-        return self.predict(X)
-        
+       
     def predict(self,X):
         w = self._compute_weights(X)
         cluster = np.zeros(X.shape[0])

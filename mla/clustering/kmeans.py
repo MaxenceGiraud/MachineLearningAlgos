@@ -1,7 +1,8 @@
 import numpy as np
+from .base_unsupervized import BaseUnsupervized
 from scipy.spatial.distance import cdist
 
-class Kmeans:
+class Kmeans(BaseUnsupervized):
     '''K-Means clustering algorithm
     
     Parameters
@@ -45,12 +46,7 @@ class Kmeans:
             i+=1
         
         self.cluster_means = means
-        if return_means :
-            return self.cluster_means
-        
-    def fit_predict(self,X):
-        self.fit(X,return_means=False)
-        return self.predict(X)
+
     
     def predict(self,X):
         dist_means = cdist(self.cluster_means, X) # compute all dists between the means and every point

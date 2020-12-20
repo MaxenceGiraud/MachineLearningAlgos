@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.spatial.distance import cdist
+from .base_unsupervized import BaseUnsupervized
 
-class Kmedoids:
+class Kmedoids(BaseUnsupervized):
     '''K-Medoids clustering algorithm
     Parameters
     ----------
@@ -40,16 +41,7 @@ class Kmedoids:
             i+=1
         
         self.centroids = centroids
-        if return_means :
-            return self.centroids
-    
-    def fit_predict(self,X):
-        self.fit(X,return_means=False)
-        return self.predict(X)
     
     def predict(self,X):
         dist_centroids = cdist(self.centroids, X) # compute all dists between the means and every point
         return np.argmin(dist_centroids,axis=0)
-        
-
-

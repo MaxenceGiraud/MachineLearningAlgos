@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial.distance import cdist
 from itertools import compress  
-
+from .base_unsupervized import BaseUnsupervized
 
 class PriorityQueue:
     def __init__(self):
@@ -32,7 +32,7 @@ class PriorityQueue:
         self.queue[priority] = item
 
 
-class OPTICS:
+class OPTICS(BaseUnsupervized):
     ''' OPTICS clusering algorithm
     Ref : Ankerst, Mihael, Markus M. Breunig, Hans-Peter Kriegel, and Jörg Sander. “OPTICS: ordering points to identify the clustering structure.” ACM SIGMOD Record 28, no. 2 (1999): 49-60.
 

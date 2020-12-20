@@ -1,8 +1,9 @@
+from .base_unsupervized import BaseUnsupervized
 import numpy as np
 from scipy.spatial.distance import cdist
 from itertools import compress  
 
-class DBSCAN:
+class DBSCAN(BaseUnsupervized):
     ''' DBSCAN clustering algorithm 
     Ref : Ester, M., H. P. Kriegel, J. Sander, and X. Xu, “A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise”. In: Proceedings of the 2nd International Conference on Knowledge Discovery and Data Mining, Portland, OR, AAAI Press, pp. 226-231. 1996
 
@@ -62,8 +63,11 @@ class DBSCAN:
 
         return y_hat
     
+    def fit(self,*args,**kwargs):
+        return self.fit_predict(X)
+
     def predict(self,*args,**kwargs):
-        raise Exception("DBSCAN doesn't have a predict method")
+        return self.fit_predict(X)
 
     def score(self,X,y):
         y_hat  = self.predict(X)
