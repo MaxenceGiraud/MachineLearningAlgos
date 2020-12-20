@@ -1,11 +1,17 @@
 import numpy as np
+from abc import abstractmethod
 
 class BaseAny:
+    def __init__(self):
+        pass
+    
+    @abstractmethod
     def fit(self,X,y):
         raise NotImplementedError
-    
+
+    @abstractmethod
     def predict(self,X):
-        raise NotImplementedError("This method is not supposed to be used")
+        raise NotImplementedError
 
 class BaseRegressor(BaseAny):
 
