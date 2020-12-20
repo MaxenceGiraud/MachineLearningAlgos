@@ -184,7 +184,7 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] Elastic map
 - [ ] CCA
 
-#### Manifolf
+#### Manifold
 
 - [ ] Multi-dimensional Scaling
 - [ ] Isomap Embedding

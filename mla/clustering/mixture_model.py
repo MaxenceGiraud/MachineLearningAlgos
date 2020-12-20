@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
+from scipy.spatial.distance import cdist
 from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
 
@@ -16,15 +17,29 @@ class GaussianMixtureModel:
         maximum number of iterations of the algo
     eps : float,
         stopping criterion
+    init_means : string,
+        Method to initialize means, only kmeans++ and random are supported
     '''
-    def __init__(self,n_cluster=3,iter_max=100,eps=1e-3):
+    def __init__(self,n_cluster=3,iter_max=100,eps=1e-3,init_means="kmeans++"):
         self.n_cluster = n_cluster
         self.iter_max = iter_max
         self.eps = eps
 
+        self.init_means = init_means
+
 
     def _init_params(self,X):
-        self.mu = np.random.uniform(low=np.min(X,axis=0), high=np.max(X,axis=0), size=(self.n_cluster,X.shape[1]))  # init the means
+
+        # Init means using kmeans++
+        if self.init_means == 'kmeans++':
+            self.mu = [X[np.random.randint(0,X.shape[0])]]
+            for i in range(self.n_cluster-1):
+                prob_dist_squared = np.min(cdist(self.mu,X),axis=0)**2
+                prob_dist_squared = prob_dist_squared / sum(prob_dist_squared) # Normalize probability
+                self.mu = np.vstack([self.mu,X[np.random.choice(X.shape[0],1,p=prob_dist_squared)]]) 
+        else :
+            # Random init of means
+            self.mu = np.random.uniform(low=np.min(X,axis=0), high=np.max(X,axis=0), size=(self.n_cluster,X.shape[1]))  
 
         # Init Cov matrix
         self.sigma  =np.zeros((self.n_cluster,X.shape[1],X.shape[1]))
