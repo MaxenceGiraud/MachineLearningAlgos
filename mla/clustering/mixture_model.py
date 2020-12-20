@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
+from matplotlib.patches import Ellipse
+import matplotlib.transforms as transforms
 
 class GaussianMixtureModel:
     ''' Gaussian Mixture Model clustering algorithm
@@ -91,3 +93,67 @@ class GaussianMixtureModel:
         r = self._compute_resp(X)
         return np.argmax(r,axis=1)
 
+
+    def display(self,X):
+        assert X.shape[1] == 2 , 'To display X must have 2 features (Only 2D is supported)'
+        clusters = self.predict(X)
+
+        fig, ax = plt.subplots()
+
+        ax.scatter(X[:,0],X[:,1],c=clusters) # Data
+        ax.scatter(self.mu[:,0],self.mu[:,1],c='black') # Means
+
+        # Draw confidence ellipses
+        for i in range(self.n_cluster):
+            confidence_ellipse(self.mu[i],self.sigma[i],ax,n_std=1.0,edgecolor="firebrick")
+            confidence_ellipse(self.mu[i],self.sigma[i],ax,n_std=2.0,edgecolor="firebrick")
+            confidence_ellipse(self.mu[i],self.sigma[i],ax,n_std=3.0,edgecolor="firebrick")
+            confidence_ellipse(self.mu[i],self.sigma[i],ax,n_std=5.0,edgecolor="firebrick")
+            confidence_ellipse(self.mu[i],self.sigma[i],ax,n_std=7.0,edgecolor="firebrick")
+
+        plt.show()
+
+
+def confidence_ellipse(means,cov, ax, n_std=3.0, facecolor='none', **kwargs):
+    """
+    Create a plot of the covariance confidence ellipse of *x* and *y*.
+    Based on :  https://matplotlib.org/devdocs/gallery/statistics/confidence_ellipse.html
+
+    Parameters
+    ----------
+    cov : array-like, shape (d,d)
+        Covariance Matrix
+
+    ax : matplotlib.axes.Axes
+        The axes object to draw the ellipse into.
+
+    n_std : float
+        The number of standard deviations to determine the ellipse's radiuses.
+
+    **kwargs
+        Forwarded to `~matplotlib.patches.Ellipse`
+
+    Returns
+    -------
+    matplotlib.patches.Ellipse
+    """
+    mean_x,mean_y = means
+    pearson = cov[0, 1]/np.sqrt(cov[0, 0] * cov[1, 1])
+    # Using a special case to obtain the eigenvalues of this
+    # two-dimensionl dataset.
+    ell_radius_x = np.sqrt(1 + pearson)
+    ell_radius_y = np.sqrt(1 - pearson)
+    ellipse = Ellipse((0, 0), width=ell_radius_x * 2, height=ell_radius_y * 2,facecolor=facecolor, **kwargs)
+
+    # Calculating the stdandard deviation of x from
+    # the squareroot of the variance and multiplying
+    # with the given number of standard deviations.
+    scale_x = np.sqrt(cov[0, 0]) * n_std
+
+    # calculating the stdandard deviation of y ...
+    scale_y = np.sqrt(cov[1, 1]) * n_std
+
+    transf = transforms.Affine2D().rotate_deg(45).scale(scale_x, scale_y).translate(mean_x, mean_y)
+
+    ellipse.set_transform(transf + ax.transData)
+    return ax.add_patch(ellipse)
