@@ -82,3 +82,12 @@ class GaussianMixtureModel:
             nll = -np.sum(np.log(nll))
             print("Neg log likelihood =",nll)
             iter +=1
+            
+    def fit_predict(self,X):
+        self.fit(X)
+        return np.argmax(self.r,axis=1)
+
+    def predict(self,X):
+        r = self._compute_resp(X)
+        return np.argmax(r,axis=1)
+
