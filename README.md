@@ -99,7 +99,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [K-medoids](./mla/clustering/kmedoids.py)
 - [x] [DBSCAN](./mla/clustering/dbscan.py)
 - [x] [OPTICS](./mla/clustering/optics.py)
-- [ ] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
+- [x] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
 - [ ] Spectral Clustering
@@ -175,13 +175,17 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [x] [Q-learning](./mla/rl/qlearning.py)
 - [ ] Deep Q-learning
 - [ ] Advantage Actor Critic
-  
-### Data processing/Analysis
+
+### Decomposition / Dimensionality reduction
+
 - [x] PCA (for Bayesian PCA/ mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
 - [ ] FDA
 - [ ] ICA
 - [ ] Elastic map
 - [ ] CCA
+
+#### Manifolf
+
 - [ ] Multi-dimensional Scaling
 - [ ] Isomap Embedding
 - [ ] Spectral Embedding
