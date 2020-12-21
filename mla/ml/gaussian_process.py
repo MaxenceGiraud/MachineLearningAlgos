@@ -12,7 +12,7 @@ class GaussianProcessRegressor(BaseRegressor):
         self.K = None
 
     def _compute_kernel(self,x,xs):    
-        return np.array([self.kernel(x[i],xs[j]) for (i, j) in itertools.product(np.arange(x.shape[0]), np.arange(xs.shape[0]))]).reshape(x.shape[0],xs.shape[0])
+        return self.kernel.f(x.reshape(-1,self.d),xs.reshape(-1,self.d))
 
     def _compute_params(self,x,xs,y,K=None):
         if K is None : 
@@ -27,12 +27,13 @@ class GaussianProcessRegressor(BaseRegressor):
         return mu,cov
 
     def fit(self,X,y):
+        self.d = X.shape[1]
         self.K = self._compute_kernel(X,X)
         self.K_inv = np.linalg.inv(self.K + self.sigman**2 * np.eye(X.shape[0]))
 
         self.X = X
         self.y = y 
 
-    def predict(self,n_samples=1):
+    def predict(self,X,n_samples=1):
         self.mu,self.cov = self._compute_params(self.X,X,self.y,self.K)
         return np.random.multivariate_normal(self.mu,self.cov,size=n_samples)

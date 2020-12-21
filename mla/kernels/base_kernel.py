@@ -70,7 +70,7 @@ class KernelConcat(BaseKernel):
     def get_precomputed(self,x,y,**kwargs):
         if kwargs == {} :
             if 'distance' in self.to_precompute :
-                dist = x-y
+                dist = cdist(x,y)
                 self.precomputed['distance']= dist
 
         return kwargs

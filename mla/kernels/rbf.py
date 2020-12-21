@@ -11,7 +11,7 @@ class RBF(BaseKernel):
     
     def f(self,x,y,**kwargs):
         if 'distance' not in kwargs :
-            dist = x-y
+            dist = cdist(x,y)
         else : 
             dist = kwargs['distance']
-        return self.sigma**2 * np.exp(-0.5*np.sum((dist)**2)/self.l**2 ) 
+        return self.sigma**2 * np.exp(-0.5*dist**2/self.l**2 ) 
