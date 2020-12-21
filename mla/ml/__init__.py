@@ -5,3 +5,4 @@ from .logistic_regression import LogisticRegression
 from .decison_tree import DecisionTreeClassifier,DecisionTreeRegressor
 from .leastsquares import PolynomialRegression,PolynomialClassification,LinearClassification,LinearRegression
 from .leastsquares_regularised import RidgeClassifier,RidgeRegressor,LassoClassifier,LassoRegressor
+from.gaussian_process import GaussianProcessRegressor

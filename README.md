@@ -78,7 +78,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Elastic net solver ?? (solver for LS, Ridge, LASSO)
 - [ ] SVM
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
-- [ ] Gaussian process
+- [x] [Gaussian process Regressor](./mla/ml/gaussian_process.py)
 - [ ] MARS (Multivariate adaptive regression spline)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
@@ -198,7 +198,6 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [ ] Implement LASSO using Least angle regression
 - [ ] Add Deep Q learning and Advantage Actor Critic algos
 - [ ] Add Explanations of all currently implemented algos
-- [ ] Finish implementation Gaussian Process
 
 ## References
 
