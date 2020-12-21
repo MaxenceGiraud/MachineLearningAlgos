@@ -82,7 +82,8 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] MARS (Multivariate adaptive regression spline)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
-  
+- [ ] Kernel Ridge
+
 
 ### [Ensemble methods](./mla/ensemble/)
 - [x] [Random Forest](./mla/ensemble/random_forest.py)
@@ -105,7 +106,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Spectral Clustering
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
   
-### Other ML methods
+### Other ML/Ensemble methods
 - [ ] Isolation Forest (detection of outliers)  
 
 ### [Deep Leaning](./mla/dl/)
@@ -169,6 +170,8 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 - [x] Thompson sampling
 - [x] Linear UCB
 - [x] Linear Thompson sampling
+  
+For non stationary bandits, see my other repo [here](https://github.com/MaxenceGiraud/ucb-nonstationary).
 
 ### [Reinforcement Learning ](./mla/rl/)
 - [x] [Value iteration](./mla/rl/value_iteration.py)
@@ -178,17 +181,23 @@ Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.htm
 
 ### Decomposition / Dimensionality reduction
 
-- [x] PCA (for Bayesian PCA/ mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
+- [x] PCA (for Probabilistic,Bayesian PCA and Mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
+- [ ] Kernel PCA
 - [ ] FDA
 - [ ] ICA
 - [ ] Elastic map
 - [ ] CCA
+- [ ] Kernel CCA
 
 #### Manifold
 
 - [ ] Multi-dimensional Scaling
 - [ ] Isomap Embedding
 - [ ] Spectral Embedding
+
+### Kernels 
+
+- [x] [RBF](./mla/kernels/rbf.py)
 
 
 # TODO / Ongoing dev

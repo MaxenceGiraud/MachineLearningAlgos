@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from scipy.spatial.distance import cdist
 
 class BaseKernel:
     def __init__(self):
@@ -62,9 +63,26 @@ class KernelConcat(BaseKernel):
     def __init__(self,kernels,operation):
         self.kernels = kernels
         self.operation = operation
-    
-    def f(self,x,y):
-        return self.operation(self.kernels[0].f(x,y),self.kernels[1].f(x,y))
+
+        self.to_precompute =kernels[0].to_precompute.union(kernels[1].to_precompute)
+        self.precomputed = {}
+
+    def get_precomputed(self,x,y,**kwargs):
+        if kwargs == {} :
+            if 'distance' in self.to_precompute :
+                dist = x-y
+                self.precomputed['distance']= dist
+
+        return kwargs
+
+    def f(self,x,y,**kwargs):
+        # Precompute 
+        self.precomputed = self.get_precomputed(x,y,**kwargs)
+
+        out = self.operation(self.kernels[0].f(x,y,**self.precomputed),self.kernels[1].f(x,y,**self.precomputed))
+        self.precomputed = {} # clean precompute
+        return out
+
 
 class KernelConcatFloat(BaseKernel):
     def __init__(self,kernel,scale,operation):
@@ -72,6 +90,7 @@ class KernelConcatFloat(BaseKernel):
         self.kernel = kernel
         self.scale = scale
         self.operation = operation
+        self.to_precompute = kernel.to_precompute
     
-    def f(self,x,y):
-        return self.operation(self.kernel.f(x,y),self.scale)
+    def f(self,x,y,**kwargs):
+        return self.operation(self.kernel.f(x,y,**kwargs),self.scale)
