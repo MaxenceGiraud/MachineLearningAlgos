@@ -148,3 +148,38 @@ etc = mab.ETC(bandit.nbArms,T)
 ## Compare the different algorithms
 mab.bandit_env.RunExpes([ucb,ts,etc],bandit,N_exp=10,timeHorizon=T)
 # %%
+
+#%% ##### Gaussian Process Regressor  #################""
+import seaborn as sns 
+
+d = 1 #dimension
+n = 500 # n samples
+
+x = np.linspace(start=0, stop=1, num=n)
+def f(x):
+    f = np.sin((4*np.pi)*x) + np.sin((7*np.pi)*x)
+    return(f)
+sigma_n = 0.4
+y = f(x) + np.random.normal(loc=0, scale=sigma_n, size=n)
+
+gp = mla.GaussianProcessRegressor()
+gp.fit(x.reshape(-1,1),y)
+
+yh = gp.predict(x,n_samples=100)
+
+# Compare true function to learned one (with noise)
+for yi in yh :
+    sns.lineplot(x,yi,color='blue',alpha=0.2)
+sns.lineplot(x,f(x),color='red')
+plt.show()
+# %%
+
+###################### Unsupervized Learning ###############
+
+X,_ = make_blobs(600,2,centers=4)
+
+gmm = mla.GaussianMixtureModel(4)
+gmm.fit(X)
+gmm.display(X) # Only available for GMMS and 2D data
+
+#%%
