@@ -6,7 +6,7 @@ class BaseKernel:
         pass
 
     @abstractmethod
-    def f(self,x,y):
+    def __call__(self,x,y):
         pass
 
     def __add__(self,other):
@@ -75,11 +75,11 @@ class KernelConcat(BaseKernel):
 
         return kwargs
 
-    def f(self,x,y,**kwargs):
+    def __call__(self,x,y,**kwargs):
         # Precompute 
         self.precomputed = self.get_precomputed(x,y,**kwargs)
 
-        out = self.operation(self.kernels[0].f(x,y,**self.precomputed),self.kernels[1].f(x,y,**self.precomputed))
+        out = self.operation(self.kernels[0](x,y,**self.precomputed),self.kernels[1](x,y,**self.precomputed))
         self.precomputed = {} # clean precompute
         return out
 
@@ -92,5 +92,5 @@ class KernelConcatFloat(BaseKernel):
         self.operation = operation
         self.to_precompute = kernel.to_precompute
     
-    def f(self,x,y,**kwargs):
-        return self.operation(self.kernel.f(x,y,**kwargs),self.scale)
+    def __call__(self,x,y,**kwargs):
+        return self.operation(self.kernel(x,y,**kwargs),self.scale)

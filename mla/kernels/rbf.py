@@ -9,7 +9,7 @@ class RBF(BaseKernel):
 
         self.to_precompute = set(['distance'])
     
-    def f(self,x,y,**kwargs):
+    def __call__(self,x,y,**kwargs):
         if 'distance' not in kwargs :
             dist = cdist(x,y)
         else : 

@@ -12,7 +12,7 @@ class GaussianProcessRegressor(BaseRegressor):
         self.K = None
 
     def _compute_kernel(self,x,xs):    
-        return self.kernel.f(x.reshape(-1,self.d),xs.reshape(-1,self.d))
+        return self.kernel(x.reshape(-1,self.d),xs.reshape(-1,self.d))
 
     def _compute_params(self,x,xs,y,K=None):
         if K is None : 
@@ -36,4 +36,8 @@ class GaussianProcessRegressor(BaseRegressor):
 
     def predict(self,X,n_samples=1):
         self.mu,self.cov = self._compute_params(self.X,X,self.y,self.K)
-        return np.random.multivariate_normal(self.mu,self.cov,size=n_samples)
+        y_hat = np.random.multivariate_normal(self.mu,self.cov,size=n_samples)
+        if n_samples == 1 :
+            return y_hat[0]
+        else :
+            return y_hat
