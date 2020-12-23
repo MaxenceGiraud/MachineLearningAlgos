@@ -1,5 +1,6 @@
 import numpy as np
 from abc import abstractmethod
+from .metrics import mean_squared_error,accuracy_score
 
 class BaseAny:
     def __init__(self):
@@ -12,19 +13,17 @@ class BaseAny:
     @abstractmethod
     def predict(self,X):
         raise NotImplementedError
+    
+    def score(self,X,y,metric):
+        y_hat = self.predict(X)
+        return metric(y,y_hat)      
 
 class BaseRegressor(BaseAny):
 
-    def score(self,X,y):
-        '''Compute MSE for the prediction  of the model with X/y'''
-        y_hat = self.predict(X)
-        mse = np.sum((y - y_hat)**2) / len(y)
-        return mse
+    def score(self,X,y,metric=mean_squared_error):
+        return super().score(X,y,metric)
 
 class BaseClassifier(BaseAny):
 
-    def score(self,X,y):
-        ''' Compute Accuracy of classifier'''
-        y_hat  = self.predict(X)
-        acc  = np.count_nonzero(np.array(y_hat)==np.array(y)) /len(y)
-        return acc
+    def score(self,X,y,metric=accuracy_score):
+        return super().score(X,y,metric)
