@@ -52,7 +52,6 @@ def confidence_ellipse(means,cov, ax, n_std=3.0, facecolor='none', **kwargs):
 
 class GaussianMixtureModel(BaseUnsupervized):
     ''' Gaussian Mixture Model clustering algorithm
-    Ref :
 
     Parameters
     ----------

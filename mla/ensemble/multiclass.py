@@ -32,10 +32,13 @@ class OneVsRestClassifier(BaseMulticlass):
         self.binaryclassifiers = []
         
         for label in self.labels:
+            # Split dataset in 2 groups : one with label label and rest
             idx_rest = np.where(y!=label,True,False)
             y_rest  = np.copy(y)
             y_rest[idx_rest] = -1
             y_rest[np.invert(idx_rest)] = 1
+
+            # Create and fit binary classifiers
             binaryclf = self.base_classifier(**self.args) 
             binaryclf.fit(X,y_rest)
             self.binaryclassifiers.append(binaryclf)
@@ -77,6 +80,7 @@ class OneVsOneClassifier(BaseMulticlass):
                     y_tmp[idx_i] = -1
                     y_tmp[idx_j] = 1
 
+                    # Create and fit binary classifiers
                     binaryclf = self.base_classifier(**self.args) 
                     binaryclf.fit(X[idx_ij],y_tmp[idx_ij])
                     self.binaryclassifiers.append(binaryclf)

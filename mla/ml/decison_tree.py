@@ -321,12 +321,14 @@ class DecisionTreeClassifier(BaseDecisionTree,BaseClassifier):
         for j in range(X.shape[1]):
             # iterate on unique value of features
             for i in np.unique(X[:,j],return_index=True)[1]:
+                # Split data
                 if j in self.categorial_features :
                     groups = np.where(X[:,j]==X[i,j])[0], np.where(X[:,j]!=X[i,j])[0]
                 else :
                     groups = np.where(X[:,j]<X[i,j])[0], np.where(X[:,j]>=X[i,j])[0]
                 gini = gini_index([[y[groups[0]]][0],[y[groups[1]]][0]],labels)
-                if gini < best_score:
+                
+                if gini < best_score: # If better keep
                     best_score = gini
                     best_idx = i,j
                     best_groups = groups
@@ -341,8 +343,8 @@ class DecisionTreeClassifier(BaseDecisionTree,BaseClassifier):
         for new_tree in tree_list:
             tmp_decision_tree = deepcopy(self)
             tmp_decision_tree.tree = new_tree
-            if tmp_decision_tree.score(X,y) >= (score - self.pruning_eps) :
-                self.tree = new_tree # Pruning is successful
+            if tmp_decision_tree.score(X,y) >= (score - self.pruning_eps) : # Pruning is successful
+                self.tree = new_tree 
                 self._bottom_up_pruning(X,y,[]) # Try pruning some more based on the new tree  
                 break 
 
@@ -375,6 +377,7 @@ class DecisionTreeRegressor(BaseDecisionTree,BaseRegressor):
         for j in range(X.shape[1]):
             # iterate on unique value of features
             for i in np.unique(X[:,j],return_index=True)[1]:
+                # Split data
                 if j in self.categorial_features :
                     groups = np.where(X[:,j]==X[i,j])[0], np.where(X[:,j]!=X[i,j])[0]
                 else :
@@ -382,7 +385,7 @@ class DecisionTreeRegressor(BaseDecisionTree,BaseRegressor):
                 
                 n_samples = np.sum([len(group) for group in groups])
                 score = np.sum([np.square(group-np.mean(group)).sum() * len(group)/n_samples for group in groups])   
-                if score < best_score:
+                if score < best_score: # If better keep
                     best_score = score
                     best_idx = i,j
                     best_groups = groups
@@ -398,7 +401,7 @@ class DecisionTreeRegressor(BaseDecisionTree,BaseRegressor):
         for new_tree in tree_list:
             tmp_decision_tree = deepcopy(self)
             tmp_decision_tree.tree = new_tree
-            if tmp_decision_tree.score(X,y) <= (score +self.pruning_eps) :
+            if tmp_decision_tree.score(X,y) <= (score +self.pruning_eps) : # Successful pruning
                 self.tree = new_tree 
                 self._bottom_up_pruning(X,y) # Try pruning some more based on the new tree  
                 break 

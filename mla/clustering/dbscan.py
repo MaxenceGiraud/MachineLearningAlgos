@@ -22,43 +22,43 @@ class DBSCAN(BaseUnsupervized):
         self.metric = metric
 
     def fit_predict(self,X):
-        #self.labels = set(y) - {-1}
-        # y= -1 not labeled
         
-        dist_all = cdist(X,X,metric=self.metric)
-        neighbors = np.where(dist_all < self.eps,1,0) 
-        n_neighbors = np.sum(neighbors,axis=0)
+        dist_all = cdist(X,X,metric=self.metric) # Dist between all points and all points
+        neighbors = np.where(dist_all < self.eps,1,0) # Neighborhood of points
+        n_neighbors = np.sum(neighbors,axis=0) 
         
         # Classify points as noise/core/border point
-        is_noise = np.where(n_neighbors == 0,1,0)
-        is_core = np.where(n_neighbors >= self.min_pts,1,0) 
+        #is_noise = np.where(n_neighbors == 0,1,0)
+        is_core = np.where(n_neighbors >= self.min_pts,1,0)  # Core points
         
         # Boolean to indexes
         set_neighbors_idx =  [list(compress(range(len(bool_arr )), bool_arr )) for bool_arr in neighbors]
 
-        visited = np.zeros(X.shape[0])
-        clusters = []
+        visited = np.zeros(X.shape[0]) # Points we have already seen 
+        clusters = [] # list of clusters
   
         def add_neighbhor(point):
+            ''' Recursively add point's neibhors'''
             current_cluster.append(point)
             visited[point] = 1
             for p in set_neighbors_idx[point] :
                 if not visited[p] :
                     add_neighbhor(p)
 
+        # Iter all points
         for i in range(X.shape[0]) : 
             if not visited[i]:
                 visited[i] = 1
-                if is_core[i] :
+                if is_core[i] : # Core points
                     current_cluster = [i]
-                    for n in set_neighbors_idx[i] :
+                    for n in set_neighbors_idx[i] : # Add all neihgbhors
                         add_neighbhor(n)
 
                     clusters.append(current_cluster)
                             
-        y_hat = -np.ones(X.shape[0])
+        y_hat = -np.ones(X.shape[0]) # Noise points
                        
-        for i in range(len(clusters)):
+        for i in range(len(clusters)): # Clusters 
             y_hat[clusters[i]] = i
 
         return y_hat

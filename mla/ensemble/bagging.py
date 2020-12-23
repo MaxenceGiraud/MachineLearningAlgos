@@ -42,6 +42,7 @@ class BaseBagging:
                 self.estimators[i].fit(X[samples_idx[i]][:,self.features_idx[i]],y[samples_idx[i]])
 
     def predict_all_learners(self,X):
+        '''Make predictions with all learners) '''
         if self.parallelize :
             pool = mp.Pool(mp.cpu_count())
             for i in range(self.n_estimators):

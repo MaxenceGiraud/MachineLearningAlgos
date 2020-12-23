@@ -22,8 +22,8 @@ class GaussianProcessRegressor(BaseRegressor):
         Ks = self._compute_kernel(x,xs)
         Kss = self._compute_kernel(xs,xs)
 
-        cov = Kss - Ks.T @ self.K_inv @ Ks
-        mu = Ks.T @ self.K_inv @ y
+        cov = Kss - Ks.T @ self.K_inv @ Ks # Covariance matrix of Gaussian
+        mu = Ks.T @ self.K_inv @ y # Mean of Gaussian
         return mu,cov
 
     def fit(self,X,y):

@@ -27,7 +27,7 @@ class BaseAdaBoost:
         for i in range(self.n_estimators):
             self.estimators_tmp[i].fit(weights*X,y)
             self.estimators.append(self.estimators_tmp[i])
-            y_diff = np.abs(self.predict(X).reshape(y.shape)-y)/y
+            y_diff = np.abs(self.predict(X).reshape(y.shape)-y)/y # Precitions - true targets
 
             # Update weights
             weights *= np.exp(y_diff.reshape(-1,1))

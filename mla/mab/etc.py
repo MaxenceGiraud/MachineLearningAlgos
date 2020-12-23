@@ -26,9 +26,9 @@ class ETC:
         self.Explore = True 
     
     def chooseArmToPlay(self):
-        if self.Explore :
+        if self.Explore : # Exploring
             return self.t % self.nbArms
-        else :
+        else : # Commit
             return self.Best
 
     def receiveReward(self, arm, reward):

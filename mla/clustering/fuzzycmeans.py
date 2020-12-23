@@ -31,10 +31,9 @@ class FuzzyCmeans(BaseUnsupervized):
         return w
     
     def fit(self,X):
-        self.clusters  = np.random.random((self.n_cluster,X.shape[1]))
 
-        w = np.random.dirichlet(np.ones(self.n_cluster),size=X.shape[0]) 
-        w_old = np.random.dirichlet(np.ones(self.n_cluster),size=X.shape[0]) 
+        w = np.random.dirichlet(np.ones(self.n_cluster),size=X.shape[0]) # Init the weight matrix
+        w_old = w - 10
         i=0
         while i< self.iter_max and np.abs(w_old - w).sum() > 1e-6 :
             w_old = w
@@ -53,6 +52,7 @@ class FuzzyCmeans(BaseUnsupervized):
         w = self._compute_weights(X)
         cluster = np.zeros(X.shape[0])
         for i in range(X.shape[0]):
+            # Assign points to a cluster given with probability given by the weight matrix
             cluster[i] = np.random.choice(self.n_cluster,p=w[i])
         
         return cluster

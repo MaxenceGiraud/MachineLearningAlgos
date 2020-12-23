@@ -71,21 +71,23 @@ class AutoEncoder(NeuralNetwork):
         
     def add(self,layer,encoding_layer=False):
         
-        layer_decoder = reverse_layer(layer,self.encoder[-1].output_shape)
+        #
 
         # Connect encoder
         layer.plug(self.encoder[-1])
         self.encoder.append(layer)
         self.encoded_layer.plug(self.encoder[-1])
 
+        # Connect decoder
         if not encoding_layer :
-            # Connect decoder
+            layer_decoder = reverse_layer(layer,self.encoder[-1].output_shape) # Create layer of the decoder
             layer_decoder.plug(self.encoded_layer)
             for i in range(len(self.decoder)-2,-1,-1):
                 self.decoder[i].plug(self.decoder[i+1])
 
             self.decoder.append(layer_decoder)
         else :
+            # No encoded layer so simply connect decoder 
             self.decoder[-1].plug(self.encoded_layer)
             for i in range(len(self.decoder)-2,-1,-1):
                 self.decoder[i].plug(self.decoder[i+1])

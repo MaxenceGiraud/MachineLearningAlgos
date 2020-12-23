@@ -58,10 +58,11 @@ class LogisticRegression(BaseClassifier):
             permut = np.random.permutation(X.shape[0])
             X = X[permut]
             y = y[permut]
-            
+
+            # Gradient descent            
             for i in range(len(y) // self.batch_size):
                 grad_old = grad
-                range_start,range_end = i*self.batch_size,(i+1)*self.batch_size
+                range_start,range_end = i*self.batch_size,(i+1)*self.batch_size # Mini batch
 
                 pred =  self.activation(X[range_start:range_end] @  self.theta)
                 err = pred - y[range_start:range_end]

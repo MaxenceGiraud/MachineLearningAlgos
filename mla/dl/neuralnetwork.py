@@ -83,7 +83,7 @@ class NeuralNetwork:
         for i in range(len(layers)) : 
             layer_type = layers[i].__class__.__name__
             color,mark = get_colorshape(layer_type)
-            if layer_type in ['Flatten','Reshape'] : # Layer not to display (e.g. flatten)
+            if layer_type in ['Flatten','Reshape'] : # Layer not to display (e.g. flatten,reshape)
                 ax.scatter(i,0,marker=mark,c=color,s=10000)
                 continue
             old_nu = nu

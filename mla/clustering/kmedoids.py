@@ -18,7 +18,7 @@ class Kmedoids(BaseUnsupervized):
         self.centroids = False
 
     def fit(self,X,return_means=True):
-        ## Init
+        ## Init (kmeans++)
         centroids = [X[np.random.randint(0,X.shape[0])]]
         for i in range(self.k-1):
             prob_dist_squared = np.min(cdist(centroids,X),axis=0)**2
