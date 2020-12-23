@@ -179,7 +179,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] Deep Q-learning
 - [ ] Advantage Actor Critic
 
-### Decomposition / Dimensionality reduction
+### [Decomposition / Dimensionality reduction](./mla/dimension_reduction/)
 
 - [x] PCA (for Probabilistic,Bayesian PCA and Mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
 - [ ] Kernel PCA
@@ -189,7 +189,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] CCA
 - [ ] Kernel CCA
 
-#### Manifold
+#### [Manifold](./mla/dimension_reduction/manifold/)
 
 - [ ] Multi-dimensional Scaling
 - [ ] Isomap Embedding

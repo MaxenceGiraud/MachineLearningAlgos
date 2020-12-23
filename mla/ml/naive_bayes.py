@@ -22,7 +22,7 @@ class BernoulliNaiveBayes(BaseClassifier):
     def fit(self,X,y):
         '''
         if encoding = object :
-            X : list of list of object
+            X : list of list of object (ex words)
             y  : list of corresponding labels
 
         elif encoding = categorical :

@@ -43,10 +43,11 @@ This has unfortunetly no closed form, two well know solutions exists to estimate
 * Least Angle Regression
 * Forward stepwise regressions
 
+#### Least Angle Regression
 *(upcoming)* 
 
 ## CART Decision Tree
-
+Binary trees can be used as a machine learning model.
 ## Naive Bayes
 
 ### Bernouilli
@@ -62,3 +63,22 @@ This has unfortunetly no closed form, two well know solutions exists to estimate
 
 ### Quadratic Discriminant analysis
 
+## Gaussian Process Regressor
+
+Squared Exponential Kernel / RBF : 
+$$
+\kappa_{y}\left(x_{p}, x_{q}\right)=\sigma_{f}^{2} \exp \left(-\frac{1}{2 \ell^{2}}\left(x_{p}-x_{q}\right)^{2}\right)+\sigma_{n}^{2} \delta_{p q}
+$$
+
+We consider we have noise observation scaled by $\sigma_{n}$  :
+$$
+\mathbf{K}_{y}  \triangleq  \mathbf{K}+\sigma_{n}^{2} \mathbf{I}_{N}
+$$
+And so the posterior predictive density is :
+$$
+\begin{aligned}
+p\left(\mathbf{f}_{*} \mid \mathbf{X}_{*}, \mathbf{X}, \mathbf{y}\right) &=\mathcal{N}\left(\mathbf{f}_{*} \mid \boldsymbol{\mu}_{*}, \boldsymbol{\Sigma}_{*}\right) \\
+\boldsymbol{\mu}_{*} &=\mathbf{K}_{*}^{T} \mathbf{K}_{y}^{-1} \mathbf{y} \\
+\boldsymbol{\Sigma}_{*} &=\mathbf{K}_{* *}-\mathbf{K}_{*}^{T} \mathbf{K}_{y}^{-1} \mathbf{K}_{*}
+\end{aligned}
+$$
