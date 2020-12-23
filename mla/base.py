@@ -13,17 +13,15 @@ class BaseAny:
     @abstractmethod
     def predict(self,X):
         raise NotImplementedError
-    
-    def score(self,X,y,metric):
-        y_hat = self.predict(X)
-        return metric(y,y_hat)      
 
 class BaseRegressor(BaseAny):
 
-    def score(self,X,y,metric=mean_squared_error):
-        return super().score(X,y,metric)
+    def score(self,X,y,metric=mean_squared_error,weights=1):
+        y_hat = self.predict(X)
+        return metric(y,y_hat,metric,weights=weights)
 
 class BaseClassifier(BaseAny):
 
     def score(self,X,y,metric=accuracy_score):
-        return super().score(X,y,metric)
+        y_hat = self.predict(X)
+        return metric(y,y_hat,metric)
