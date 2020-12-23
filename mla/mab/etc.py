@@ -12,7 +12,7 @@ class ETC:
         Parameter that scale when the best arm is chosen before commiting    
     """
     def __init__(self, nbArms,Horizon,c=1/2):
-        self.nbArms = 2
+        self.nbArms = nbArms
         self.T = Horizon
         self.clear()
         self.Explore = True # are we still exploring? 
@@ -38,6 +38,7 @@ class ETC:
 
         if self.Explore :
             arms_mean = self.cumRewards / self.nbDraws
+            sorted_means = np.sort(arms_mean)
             if np.abs(arms_mean[0]-arms_mean[1]) > np.sqrt( self.c * np.log(self.T/self.t) / self.t):
                 self.Best = randmax(arms_mean)
                 self.Explore = False
