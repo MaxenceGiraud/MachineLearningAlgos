@@ -1,6 +1,7 @@
 from abc import abstractmethod
+from ..base import BaseAny
 
-class BaseUnsupervized:
+class BaseUnsupervized(BaseAny):
     def __init__(self):
         pass
 

@@ -1,6 +1,7 @@
 import numpy as np
 from abc import abstractmethod
 from .metrics import mean_squared_error,accuracy_score
+import inspect
 
 class BaseAny:
     def __init__(self):
@@ -13,6 +14,14 @@ class BaseAny:
     @abstractmethod
     def predict(self,X):
         raise NotImplementedError
+    
+    def __repr__(self):
+        signa = inspect.signature(self.__init__)
+        param_str = ""
+        for param in signa.parameters.keys():
+            param_str += str(param) +"="+ str(getattr(self,param)) +","
+        param_str = param_str[:-1]
+        return str(self.__class__.__name__)+ "("+param_str+")"
 
 class BaseRegressor(BaseAny):
 
