@@ -1,7 +1,8 @@
 from .randmax import randmax
 import numpy as np
+from .base_mab import BaseMAB
 
-class UCB:
+class UCB(BaseMAB):
     """UCB1 with parameter alpha
     
     Parameters
@@ -32,6 +33,3 @@ class UCB:
         self.t  += 1 
         self.cumRewards[arm] = self.cumRewards[arm]+reward
         self.nbDraws[arm] = self.nbDraws[arm] +1
-    
-    def name(self):
-        return "UCB"

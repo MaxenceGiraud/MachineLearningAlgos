@@ -1,7 +1,8 @@
 import numpy as np
 from .randmax import randmax
+from .base_mab import BaseMAB
 
-class LinUCB:
+class LinUCB(BaseMAB):
     """Linear UCB strategy
 
     Parameters
@@ -58,6 +59,3 @@ class LinUCB:
         self.DesignInv -=  (1/(1+x.T@y )) * y@y.T
         # update of the least squares estimate 
         self.thetaLS = self.DesignInv @ self.Vector 
-    
-    def name(self):
-        return "Linear UCB"

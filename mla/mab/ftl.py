@@ -1,7 +1,8 @@
 from .randmax import randmax
 import numpy as np
+from .base_mab import BaseMAB
 
-class FTL:
+class FTL(BaseMAB):
     """follow the leader (a.k.a. greedy strategy)
     
     Parameters
@@ -26,6 +27,3 @@ class FTL:
     def receiveReward(self,arm,reward):
         self.cumRewards[arm] = self.cumRewards[arm]+reward
         self.nbDraws[arm] = self.nbDraws[arm] +1
-
-    def name(self):
-        return "FTL"

@@ -1,8 +1,9 @@
 from .randmax import randmax
 import numpy as np
 from .bandit_env.bandit_tools import klucbBern
+from .base_mab import BaseMAB
 
-class klUCB:
+class klUCB(BaseMAB):
     """kl-UCB
     
     Parameters
@@ -34,6 +35,3 @@ class klUCB:
         self.t  += 1 
         self.cumRewards[arm] = self.cumRewards[arm]+reward
         self.nbDraws[arm] = self.nbDraws[arm] +1
-    
-    def name(self):
-        return "klUCB"

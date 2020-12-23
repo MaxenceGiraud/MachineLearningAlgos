@@ -1,7 +1,8 @@
 from .randmax import randmax
 import numpy as np
+from .base_mab import BaseMAB
 
-class ETC:
+class ETC(BaseMAB):
     """Explore-Then-Commit strategy for two arms
     
     Parameters
@@ -42,6 +43,3 @@ class ETC:
             if np.abs(arms_mean[0]-arms_mean[1]) > np.sqrt( self.c * np.log(self.T/self.t) / self.t):
                 self.Best = randmax(arms_mean)
                 self.Explore = False
-    
-    def name(self):
-        return "ETC"

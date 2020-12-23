@@ -52,7 +52,7 @@ def RunExpes(algorithms,bandit,N_exp,timeHorizon,step=10,quantiles = "on",names=
     tsave = np.arange(1,timeHorizon,step)
     colors = ["b","r","g","k","m"]
     if (names==[]):
-        names = [algo.name() for algo in algorithms]
+        names = [str(algo) for algo in algorithms]
     for i in range(len(algorithms)):
         algo=algorithms[i]
         Regret = OneBanditOneLearnerMultipleRuns(bandit, algo, timeHorizon, N_exp, tsave)

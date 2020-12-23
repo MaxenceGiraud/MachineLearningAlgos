@@ -1,7 +1,8 @@
 from .randmax import randmax
 import numpy as np
+from .base_mab import BaseMAB
 
-class ThompsonSampling:
+class ThompsonSampling(BaseMAB):
     """Thompson Sampling with Beta(a,b) prior and Bernoulli likelihood
 
     Parameters
@@ -34,6 +35,3 @@ class ThompsonSampling:
         bin_reward = float(np.random.random()<reward)
         self.cumRewards[arm] = self.cumRewards[arm]+bin_reward
         self.nbDraws[arm] = self.nbDraws[arm] +1
-    
-    def name(self):
-        return 'Thompson Sampling'

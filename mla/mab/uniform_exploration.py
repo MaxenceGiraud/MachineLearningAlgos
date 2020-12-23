@@ -1,6 +1,7 @@
 import numpy as np
+from .base_mab import BaseMAB
 
-class UniformExploration:
+class UniformExploration(BaseMAB):
     """a strategy that uniformly explores arms
     
     Parameters
@@ -22,6 +23,3 @@ class UniformExploration:
     def receiveReward(self,arm,reward):
         self.cumRewards[arm] = self.cumRewards[arm]+reward
         self.nbDraws[arm] = self.nbDraws[arm] +1
-
-    def name(self):
-        return "Uniform"

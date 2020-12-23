@@ -1,7 +1,8 @@
 import numpy as np
 from .randmax import randmax
+from .base_mab import BaseMAB
 
-class LinTS:
+class LinTS(BaseMAB):
     """Linear Thompson Sampling strategy
 
     Parameters
@@ -51,6 +52,3 @@ class LinTS:
         # update of the least squares estimate 
         self.thetaLS = self.DesignInv @ self.Vector 
         self.thetatilda = np.random.multivariate_normal(self.thetaLS.flatten(),self.v**2 * self.DesignInv).reshape((self.dimension,1))
-    
-    def name(self):
-        return "Linear Thompson Sampling"
