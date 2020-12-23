@@ -24,7 +24,20 @@ This is one of the only algorithm that has a closed form solution :
 $$\hat \beta = (X^T X)^{-1}X^Ty$$
 
 ### Polynomial Case
-The polynomial case simply add the power of the precised power of each feature to the input data $X$.
+The polynomial case simply add the power of the precised power of each feature to the input data $X$ as follows with a degree equal to 2 :
+
+$$\begin{bmatrix}
+x_{1,1} &  ... & x_{1,d}\\
+\vdots &  & \vdots \\
+x_{n,1} & ... & x_{n,d}
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+x_{1,1} &  ... & x_{1,d} & x_{1,1}^2 & ... & x_{1,d}^2\\
+\vdots &  & \vdots & \vdots & & \vdots\\
+x_{n,1} & ... & x_{n,d} & x_{n,1}^2 & ... &  x_{n,d}^2
+\end{bmatrix}
+$$
 
 ### Ridge / $l_2$ regularized
 
@@ -47,7 +60,26 @@ This has unfortunetly no closed form, two well know solutions exists to estimate
 *(upcoming)* 
 
 ## CART Decision Tree
-Binary trees can be used as a machine learning model.
+Binary trees can be used as a machine learning model as both regressor and classifier. We will focus on CART decision trees (which have the benefit of being alble to process also categorial data) but other methods exists (ID3, C4.5 ...).
+
+Each node of the tree perform a split on the data using a single variable using a threshold $T$ ($X_d < T$ if variable is numeric or $X_d == T$ if it is categorical). At the bottom of the tree are Leaves which simply output an answer no matter the data given.
+
+### Tree Creation
+
+The tree is created given a dataset $D$, by recursively doing the following step :
+* Finding the best split to divide to divide the data based on some metric (gini index for classification and mean squared error for regression), by testing all values of the dataset as a threshold.
+* Create two new nodes (left and right) using the splitted data according the best split defined before. 
+* A Leaf is created if when creating a node either the maximum depth of the tree is attained or the minimum number of samples is bigger than the number of left datapoints. 
+  
+### Gini Index
+
+When creating a CART classification decision tree, the gini index is used. The gini index is a cost function to evaluate the split defined as the following : 
+
+$$
+G = 1 - \sum_{i \in N} p_{i}^2
+$$
+with $p_i$ denoting the probability of an element being classified for a distinct class.
+
 ## Naive Bayes
 
 ### Bernouilli
@@ -65,7 +97,7 @@ Binary trees can be used as a machine learning model.
 
 ## Gaussian Process Regressor
 
-Squared Exponential Kernel / RBF : 
+The GPR uses kernels, the default and most used is the Squared Exponential Kernel (also called RBF), defined as follows : 
 $$
 \kappa_{y}\left(x_{p}, x_{q}\right)=\sigma_{f}^{2} \exp \left(-\frac{1}{2 \ell^{2}}\left(x_{p}-x_{q}\right)^{2}\right)+\sigma_{n}^{2} \delta_{p q}
 $$
@@ -82,3 +114,4 @@ p\left(\mathbf{f}_{*} \mid \mathbf{X}_{*}, \mathbf{X}, \mathbf{y}\right) &=\math
 \boldsymbol{\Sigma}_{*} &=\mathbf{K}_{* *}-\mathbf{K}_{*}^{T} \mathbf{K}_{y}^{-1} \mathbf{K}_{*}
 \end{aligned}
 $$
+with $\mathbf{X}$ the training data, $\mathbf{y}$ the corresponding targets, $\mathbf{X}_*$ the data from which we want to infer $\mathbf{f}_{*}$.
