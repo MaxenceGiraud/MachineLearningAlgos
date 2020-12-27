@@ -199,6 +199,8 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 ### [Kernels](./mla/kernels/) 
 
 - [x] [RBF](./mla/kernels/rbf.py)
+- [x] [Rational Quadratic](./mla/kernels/rational_quadratic.py)
+- [x] [Exp Sin Squared](./mla/kernels/expsinesquared.py)]
 
 ### [Metrics](./mla/metrics/)
 #### Regression
