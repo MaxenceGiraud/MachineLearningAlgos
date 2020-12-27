@@ -27,6 +27,7 @@ class BaseKernel:
             raise TypeError
 
     def __add__(self,other):
+        print(other,type(other))
         return self._create_concat(other,operation=lambda a,b: a+b)
     
     def __radd__(self,other):
@@ -82,6 +83,7 @@ class KernelConcat(BaseKernel):
     def get_precomputed(self,x,y,**kwargs):
         if kwargs == {} :
             if 'distance' in self.to_precompute :
+                x,y = self._reshape(x,y)
                 dist = cdist(x,y)
                 self.precomputed['distance']= dist
 

@@ -183,3 +183,19 @@ gmm.fit(X)
 gmm.display(X) # Only available for GMMS and 2D data
 
 #%%
+
+################# Kernels ##############################
+
+k = mla.kernels.RBF()
+k2 = mla.kernels.RBF(l=0.2)
+k3 = mla.kernels.RQK()
+
+# Combine kernels with other kernels and other operations
+new_kernel= 2**(((k+k2).exp() / 2) * (abs(k3)** 4) )
+
+print(new_kernel(1,2))
+# Same as : 
+print(2**(((np.exp(k(1,2)+k2(1,2))) / 2) * abs(k3(1,2))** 4) )
+
+# And now you can use this new kernel in any kernel algorithm
+# %%
