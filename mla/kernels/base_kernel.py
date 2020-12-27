@@ -72,6 +72,9 @@ class BaseKernel:
     def log(self):
         return KernelConcatFun(self,lambda a : np.log(a))
 
+    def apply_func(self,fn):
+        return KernelConcatFun(self,lambda a : fn(a))
+
 class KernelConcat(BaseKernel):
     def __init__(self,kernels,operation):
         self.kernels = kernels

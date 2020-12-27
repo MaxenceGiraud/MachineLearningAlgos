@@ -197,5 +197,9 @@ print(new_kernel(1,2))
 # Same as : 
 print(2**(((np.exp(k(1,2)+k2(1,2))) / 2) * abs(k3(1,2))** 4) )
 
+# you can also apply custom functions :
+new_kernel2 = k.apply_func(np.tanh)
+
+
 # And now you can use this new kernel in any kernel algorithm
 # %%
