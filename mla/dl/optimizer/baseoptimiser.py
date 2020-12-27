@@ -22,7 +22,10 @@ class BaseOptimizer:
             if isinstance(layer,Dropout):
                 layer.training = False
 
-    def minimize(self,nn,X,y):
+    def minimize(self,nn,X,y,weights=1):
+        # No weights 
+        if weights == 1 or weights is None :
+            weights = np.ones(X.shape[0])
         # add column of 1 for the bias/intercept
         self.init_layers(nn)
         g = 1
@@ -38,12 +41,12 @@ class BaseOptimizer:
             for i in range(int(batch_iter)):
                 range_start, range_end = i*self.batch_size, (i+1)*self.batch_size
 
-                loss += nn.forward(X[range_start:range_end],y[range_start:range_end]) # forward pass
-                g += nn.backprop(y[range_start:range_end]) # backprop
+                loss += nn.forward(X=X[range_start:range_end],y=y[range_start:range_end],weights=weights[range_start:range_end]) # forward pass
+                g += nn.backprop(y=y[range_start:range_end],weights=weights[range_start:range_end]) # backprop
                 self.update(nn,t=nb_iter,X=X)  # Update weights
             # last mini batch
-            nn.forward(X[int(batch_iter)*self.batch_size:],y[int(batch_iter)*self.batch_size:]) # forward pass
-            nn.backprop(y[int(batch_iter)*self.batch_size:]) # backprop
+            nn.forward(X=X[int(batch_iter)*self.batch_size:],y=y[int(batch_iter)*self.batch_size:],weights=weights[int(batch_iter)*self.batch_size:]) # forward pass
+            nn.backprop(y=y[int(batch_iter)*self.batch_size:],weights=weights[int(batch_iter)*self.batch_size:]) # backprop
             self.update(nn,t=nb_iter,X=X)  # Update weights
 
             print('-----\n Iter ',nb_iter)

@@ -1,11 +1,11 @@
 import numpy as np
 from .base_layer import BaseLayer
+from abc import abstractmethod
 
 class Loss(BaseLayer):
-    def __init__(self,weights=1):
+    def __init__(self):
         self.input_unit = None
         self.output_unit = None
-        self.weights = weights
 
         self.loss = 0
         self.loss_d = 0
@@ -20,38 +20,40 @@ class Loss(BaseLayer):
 
         self.zin = 0
     
-    def forward(self,X,y):
+    def forward(self,X,y,weights=1):
         self.zin = self.input_unit.forward(X)
-        self.loss = self.loss_function(self.zin,y)
+        self.loss = self.loss_function(self.zin,y,weights=weights)
         return self.loss
 
-    def backprop(self,y):
-        self.loss_d = self.deriv(self.zin,y.reshape(self.zin.shape))
+    def backprop(self,y,weights=1):
+        self.loss_d = self.deriv(self.zin,y.reshape(self.zin.shape),weights=weights)
         return self.loss_d
 
-    def loss_function(self,y_pred,y_true):
+    @abstractmethod
+    def loss_function(self,y_pred,y_true,weights,*args):
         raise NotImplementedError("Function not supposed to call, class is only a base")
-    
-    def deriv(self,y_pred,y_true):
+
+    @abstractmethod
+    def deriv(self,y_pred,y_true,weights,*args):
         raise NotImplementedError("Function not supposed to call, class is only a base")
 
 class MSE(Loss):
-    def loss_function(self,y_pred,y_true):
-        return np.mean(self.weights*(y_pred- y_true)**2)
+    def loss_function(self,y_pred,y_true,weights=1):
+        return np.mean(weights*(y_pred- y_true)**2)
     
-    def deriv(self,y_pred,y_true):
-        return 2*(y_pred - y_true) *self.weights
+    def deriv(self,y_pred,y_true,weights=1):
+        return 2*(y_pred - y_true) *weights
 
 class MAE(Loss):
-    def loss_function(self,y_pred,y_true):
-        return np.mean(np.abs(y_pred-y_true)*self.weights)
+    def loss_function(self,y_pred,y_true,weights=1):
+        return np.mean(np.abs(y_pred-y_true)*weights)
 
-    def deriv(self,y_pred,y_true):
-        return np.sign((y_pred-y_true)*self.weights)
+    def deriv(self,y_pred,y_true,weights=1):
+        return np.sign((y_pred-y_true)*weights)
 
 class BinaryCrossEntropy(Loss):
-    def loss_function(self,y_pred,y_true):
-        return np.mean((-y_true * np.log(y_pred) - (1 - y_true) * np.log(1 - y_pred))*self.weights)
+    def loss_function(self,y_pred,y_true,weights=1):
+        return np.mean((-y_true * np.log(y_pred) - (1 - y_true) * np.log(1 - y_pred))*weights)
     
-    def deriv(self,y_pred,y_true):
-        return (y_pred - y_true) * self.weights
+    def deriv(self,y_pred,y_true,weights=1):
+        return (y_pred - y_true) * weights

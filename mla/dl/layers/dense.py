@@ -39,7 +39,7 @@ class Dense(BaseLayer):
     def backprop(self,delta):
         self.delta = delta @ self.w.T * self.activation.deriv(self.zin)
         self.dw =  delta.T @ self.zin 
-        self.db = np.sum(delta,axis=0)
+        self.db = np.sum(delta,axis=0) # same as delta.T @ np.ones(...)
         return self.delta
     
     def get_gradients(self):

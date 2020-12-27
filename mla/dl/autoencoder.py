@@ -95,11 +95,11 @@ class AutoEncoder(NeuralNetwork):
         self.loss.plug(self.output_layer)
 
     
-    def forward(self,X,*args,**kwargs):
-        return self.loss.forward(X,X)
+    def forward(self,X,weights=1,*args,**kwargs):
+        return self.loss.forward(X,X,weights=weights)
     
-    def backprop(self,y):
-        delta = self.loss.backprop(y)
+    def backprop(self,y,weights=1):
+        delta = self.loss.backprop(y,weights=weights)
         delta_loss = np.copy(delta)
 
         for i in range(len(self.decoder)):

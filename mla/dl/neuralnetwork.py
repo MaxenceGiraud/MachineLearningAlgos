@@ -45,11 +45,11 @@ class NeuralNetwork:
         self.layers.append(layer)
         self.loss.plug(self.output_layer)
 
-    def forward(self,X,y):
-        return self.loss.forward(X,y)
+    def forward(self,X,y,weights=1):
+        return self.loss.forward(X,y,weights=weights)
 
-    def backprop(self,y):
-        delta = self.loss.backprop(y)
+    def backprop(self,y,weights=1):
+        delta = self.loss.backprop(y,weights=weights)
         delta_loss = np.copy(delta)
         for i in range(len(self.layers)-1,0,-1):
             delta = self.layers[i].backprop(delta)
@@ -63,8 +63,8 @@ class NeuralNetwork:
         for layer in self.layers[1:]:
             layer.update(lr,noise_std=noise_std)
 
-    def fit(self,X,y,optimizer=GradientDescent()):
-        optimizer.minimize(self,X,y)
+    def fit(self,X,y,optimizer=GradientDescent(),weights = 1):
+        optimizer.minimize(self,X,y,weights = weights)
     
     def predict(self,X):
         return self.output_layer.forward(X)
