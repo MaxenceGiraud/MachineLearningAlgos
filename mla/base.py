@@ -31,10 +31,10 @@ class BaseRegressor(BaseML):
 
     def score(self,X,y,metric=mean_squared_error,weights=1):
         y_hat = self.predict(X)
-        return metric(y,y_hat,metric,weights=weights)
+        return metric(y,y_hat,weights=weights)
 
 class BaseClassifier(BaseML):
 
     def score(self,X,y,metric=accuracy_score):
         y_hat = self.predict(X)
-        return metric(y,y_hat,metric)
+        return metric(y,y_hat)

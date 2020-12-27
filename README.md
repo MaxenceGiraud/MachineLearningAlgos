@@ -93,6 +93,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] XGBoost
 - [x] [One vs rest classifier](./mla/ensemble/multiclass.py)
 - [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
+- [x] [Voting Classifier/Regressor](./mla/ensemble/voting.py)
   
 
 ### [Clustering / Unsupervized Learning](./mla/clustering/)
@@ -195,14 +196,26 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] Isomap Embedding
 - [ ] Spectral Embedding
 
-### Kernels 
+### [Kernels](./mla/kernels/) 
 
 - [x] [RBF](./mla/kernels/rbf.py)
+
+### [Metrics](./mla/metrics/)
+#### Regression
+- [x] MSE
+- [x] RMSE
+- [x] MAE
+- [x] Median Absolute error
+- [x] R2 score
+  
+#### Classifcation
+- [x] Accuracy score
+- [x] Zero one loss
 
 
 # TODO / Ongoing dev
 - [ ] Implement backprop of Convolution layer
-- [ ] Implement backprop of 1D Pooling Layers
+- [ ] Implement backprop of Pooling Layers
 - [ ] Find out how OPTICS makes the clusters from reachability graph
 - [ ] Implement LASSO using Least angle regression
 - [ ] Add Deep Q learning and Advantage Actor Critic algos
