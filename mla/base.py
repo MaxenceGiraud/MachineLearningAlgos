@@ -11,7 +11,12 @@ class BaseAny:
         signa = inspect.signature(self.__init__)
         param_str = ""
         for param in signa.parameters.keys():
-            param_str += str(param) +"="+ str(getattr(self,param)) +","
+            param_str += " " + str(param)
+            if isinstance(getattr(self,param),str):
+                param_str +=  "='"+ getattr(self,param) +"',"
+            else : 
+                param_str += "="+ str(getattr(self,param)) +","
+
         param_str = param_str[:-1]
         return str(self.__class__.__name__)+ "("+param_str+")"
     
