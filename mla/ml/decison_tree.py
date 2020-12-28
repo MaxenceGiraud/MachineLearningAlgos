@@ -259,13 +259,14 @@ class BaseDecisionTree:
         return False,n
                 
     def get_pruned_trees(self,X,y):
-        # Get all possible pruned trees  
         tree_list = []
-        n_pruned_trees = self.tree._count_preleaf()
-        for i in range(n_pruned_trees):
-            new_tree = deepcopy(self.tree)
-            self._create_pruned_tree(new_tree,X,y,n=i+1)
-            tree_list.append(new_tree)
+        if self.tree.depth > 2 : 
+            # Get all possible pruned trees  
+            n_pruned_trees = self.tree._count_preleaf()
+            for i in range(n_pruned_trees):
+                new_tree = deepcopy(self.tree)
+                self._create_pruned_tree(new_tree,X,y,n=i+1)
+                tree_list.append(new_tree)
         return tree_list
 
     def _bottom_up_pruning(self,X,y):
