@@ -89,6 +89,11 @@ class KernelConcat(BaseKernel):
                 x,y = self._reshape(x,y)
                 dist = cdist(x,y)
                 self.precomputed['distance']= dist
+            if 'scalar_product' in self.to_precompute :
+                x,y = self._reshape(x,y)
+                prod = x @ y.T
+                self.precomputed['scalar_product']= prod
+                
 
         return kwargs
 
