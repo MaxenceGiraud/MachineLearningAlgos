@@ -201,6 +201,8 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [RBF](./mla/kernels/rbf.py)
 - [x] [Rational Quadratic](./mla/kernels/rational_quadratic.py)
 - [x] [Exp Sin Squared](./mla/kernels/expsinesquared.py)
+- [x] [Polynomial](./mla/kernels/polynomial.py)
+- [x] [Laplacian](./mla/kernels/laplacian.py)
 
 ### [Metrics](./mla/metrics/)
 #### Regression
@@ -222,6 +224,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] Implement LASSO using Least angle regression
 - [ ] Add Deep Q learning and Advantage Actor Critic algos
 - [ ] Add Explanations of all currently implemented algos
+- [ ] Implement optimization of SVM's dual problem (already formulated)
 
 ## References
 
