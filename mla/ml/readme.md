@@ -26,12 +26,12 @@ $$\hat \beta = (X^T X)^{-1}X^Ty$$
 ### Polynomial Case
 The polynomial case simply add the power of the precised power of each feature to the input data $X$ as follows with a degree equal to 2 :
 
-$$\begin{bmatrix}
+$$ X = \begin{bmatrix}
 x_{1,1} &  ... & x_{1,d}\\
 \vdots &  & \vdots \\
 x_{n,1} & ... & x_{n,d}
 \end{bmatrix}
-\rightarrow
+\rightarrow X_{poly} =
 \begin{bmatrix}
 x_{1,1} &  ... & x_{1,d} & x_{1,1}^2 & ... & x_{1,d}^2\\
 \vdots &  & \vdots & \vdots & & \vdots\\
@@ -97,7 +97,7 @@ with $p_i$ denoting the probability of an element being classified for a distinc
 
 ## Gaussian Process Regressor
 
-The GPR uses kernels, the default and most used is the Squared Exponential Kernel (also called RBF), defined as follows : 
+The GPR uses kernels, the default and most used is the Squared Exponential Kernel (also called RBF), is defined as follows : 
 $$
 \kappa_{y}\left(x_{p}, x_{q}\right)=\sigma_{f}^{2} \exp \left(-\frac{1}{2 \ell^{2}}\left(x_{p}-x_{q}\right)^{2}\right)+\sigma_{n}^{2} \delta_{p q}
 $$
@@ -115,3 +115,37 @@ p\left(\mathbf{f}_{*} \mid \mathbf{X}_{*}, \mathbf{X}, \mathbf{y}\right) &=\math
 \end{aligned}
 $$
 with $\mathbf{X}$ the training data, $\mathbf{y}$ the corresponding targets, $\mathbf{X}_*$ the data from which we want to infer $\mathbf{f}_{*}$.
+
+## Support Vector Machines (SVM) 
+
+### SVC
+The SVC solves the following primal problem
+$$\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i$$
+
+Subject to 
+$y_i (w^T \phi (x_i) + b) \geq 1 - \zeta_i$ and 
+$\zeta_i \geq 0, i=1, ...$
+
+Dual problem :
+$$\min_{\alpha} \frac{1}{2} \alpha^T Q \alpha - e^T \alpha$$
+Subject to $y^T \alpha = 0$ and  $0 \leq \alpha_i \leq C, i=1, ..., n$
+
+Decision function :
+$$\sum_{i\in SV} y_i \alpha_i K(x_i, x) + b,$$
+
+
+### SVR
+
+$$\min_ {w, b, \zeta, \zeta^*} \frac{1}{2} w^T w + C \sum_{i=1}^{n} (\zeta_i + \zeta_i^*)$$
+
+Subject to : 
+$$y_i - w^T \phi (x_i) - b \leq \varepsilon + \zeta_i,\\ w^T \phi (x_i) + b - y_i \leq \varepsilon + \zeta_i^* \\ \zeta_i, \zeta_i^* \geq 0, i=1, ..., n$$    
+
+Dual problem : 
+$$\min_{\alpha, \alpha^*} \frac{1}{2} (\alpha - \alpha^*)^T Q (\alpha - \alpha^*) - y^T (\alpha - \alpha^*) + \sum_i (\alpha_i + \alpha_i^*)$$
+
+Subject to 
+$$\sum_i (\alpha_i - \alpha_i^*) = 0,\\ \text{and  } 0 \leq \alpha_i, \alpha_i^* \leq C, i=1, ..., n$$
+
+And the decision is make using  :
+$$\sum_{i \in SV}(\alpha_i - \alpha_i^*) K(x_i, x) + b$$
