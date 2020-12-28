@@ -17,7 +17,6 @@ class Chi2(BaseKernel):
             chi = cdist(x,y,metric=chi_dist)
         else : 
             chi = kwargs['chi']
-
         
         return np.exp(-self.gamma * chi) 
 

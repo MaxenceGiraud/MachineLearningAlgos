@@ -10,7 +10,7 @@ class Laplacian(BaseKernel):
     
     def __call__(self,x,y,**kwargs):
         x,y = self._reshape(x,y)
-        if 'distance' not in kwargs :
+        if 'distance_manhattan' not in kwargs :
             dist = cdist(x,y,metric='cityblock')
         else : 
             dist = kwargs['distance_manhattan']
