@@ -1,7 +1,9 @@
 # MachineLearningAlgos
 Personal reimplementation of some ML algorithm for learning purposes
 
+## Table of Contents
 - [MachineLearningAlgos](#machinelearningalgos)
+  - [Table of Contents](#table-of-contents)
   - [Author](#author)
   - [Requirements](#requirements)
   - [Installation](#installation)

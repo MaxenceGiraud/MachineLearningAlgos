@@ -1,5 +1,19 @@
 # Multi-armed bandits
 
+## Table of Contents 
+- [Multi-armed bandits](#multi-armed-bandits)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Uniform exploration](#uniform-exploration)
+  - [Follow the Leader (FTL)](#follow-the-leader-ftl)
+  - [Explore then Commit (ETC)](#explore-then-commit-etc)
+  - [Upper Confidence Bound (UCB)](#upper-confidence-bound-ucb)
+  - [Kullback-leiber UCB (kl-UCB)](#kullback-leiber-ucb-kl-ucb)
+  - [Thompson Sampling](#thompson-sampling)
+  - [Linear UCB](#linear-ucb)
+  - [Linear Thompson Sampling](#linear-thompson-sampling)
+
+## Introduction
 In a Multi-armed Bandits problem, we have a bandit with multiple arms. At each iteration, we choose an arm to activate and we receive a reward. Our goal is then to maximize the global reward (sum of all rewards).    
 We can also try to maximize our confidence in which arm is the best (has maximal mean reward) in some cases (you can think for example as a clinic trial in which we prefer to be more confident about the treatment than to maximize the number of cured patients **in** the trial).
 
