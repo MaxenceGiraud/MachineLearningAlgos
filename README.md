@@ -1,6 +1,35 @@
 # MachineLearningAlgos
 Personal reimplementation of some ML algorithm for learning purposes
 
+- [MachineLearningAlgos](#machinelearningalgos)
+  - [Author](#author)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Algorithms](#algorithms)
+    - [Machine Leaning](#machine-leaning)
+    - [Ensemble methods](#ensemble-methods)
+    - [Clustering / Unsupervized Learning](#clustering--unsupervized-learning)
+    - [Other ML/Ensemble methods](#other-mlensemble-methods)
+    - [Deep Leaning](#deep-leaning)
+      - [Layers](#layers)
+      - [Blocks](#blocks)
+      - [Wrapper](#wrapper)
+      - [Optimizers](#optimizers)
+      - [Loss](#loss)
+      - [Activation functions](#activation-functions)
+    - [Multi-armed bandit](#multi-armed-bandit)
+    - [Reinforcement Learning ](#reinforcement-learning-)
+    - [Decomposition / Dimensionality reduction](#decomposition--dimensionality-reduction)
+      - [Manifold](#manifold)
+    - [Kernels](#kernels)
+    - [Metrics](#metrics)
+      - [Regression](#regression)
+      - [Classifcation](#classifcation)
+  - [TODO / Ongoing dev](#todo--ongoing-dev)
+  - [References](#references)
+
+
 ## Author
 [Maxence Giraud](https://github.com/MaxenceGiraud/)
 
@@ -125,7 +154,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] Reshape
 - [x] Dropout
 
-### Blocks
+#### Blocks
 - [ ] Transformer
 - [ ] Inception
 - [ ] Residual (ResNet)
@@ -136,7 +165,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] VAE
 - [ ] GAN  
   
-#### [Optimization Algorithm](./mla/dl/optimizer/)
+#### [Optimizers](./mla/dl/optimizer/)
 - [x] Stochastic gradient descent
 - [x] Mini batch Gradient descent
 - [x] Epsilon-Delta private SGD
@@ -203,6 +232,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [Exp Sin Squared](./mla/kernels/expsinesquared.py)
 - [x] [Polynomial](./mla/kernels/polynomial.py)
 - [x] [Laplacian](./mla/kernels/laplacian.py)
+- [x] [Chi Squared](./mla/kernels/chi2.py)
 
 ### [Metrics](./mla/metrics/)
 #### Regression
@@ -217,7 +247,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] Zero one loss
 
 
-# TODO / Ongoing dev
+## TODO / Ongoing dev
 - [ ] Implement backprop of Convolution layer
 - [ ] Implement backprop of Pooling Layers
 - [ ] Find out how OPTICS makes the clusters from reachability graph
