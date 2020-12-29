@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from scipy.spatial.distance import cdist
 import numpy as np
-from .chi2 import chi_dist
+from .utils import chi_metric
 
 class BaseKernel:
     def __init__(self):
@@ -100,7 +100,7 @@ class KernelConcat(BaseKernel):
                 self.precomputed['distance_manhattan']= dist 
             if 'chi' in self.to_precompute :
                 x,y = self._reshape(x,y)
-                dist = cdist(x,y,metric=chi_dist)
+                dist = cdist(x,y,metric=chi_metric)
                 self.precomputed['chi']= dist
         return kwargs
 

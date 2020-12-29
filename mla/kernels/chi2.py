@@ -1,9 +1,7 @@
 import numpy as np
 from .base_kernel import BaseKernel
 from scipy.spatial.distance import cdist
-
-def chi_dist(x,y):
-    return np.sum((x-y)**2/(x+y))
+from .utils import chi_metric
 
 class Chi2(BaseKernel):
     def __init__(self,gamma = 1):
@@ -19,4 +17,3 @@ class Chi2(BaseKernel):
             chi = kwargs['chi']
         
         return np.exp(-self.gamma * chi) 
-
