@@ -1,9 +1,8 @@
 import numpy as np
 from .base_kernel import BaseKernel
 
-class Polynomial(BaseKernel):
+class Sigmoid(BaseKernel):
     def __init__(self,degree=2,gamma=0.1,r=1):
-        self.degree = degree
         self.gamma = gamma
         self.r = r
 
@@ -16,4 +15,4 @@ class Polynomial(BaseKernel):
         else : 
             prod = kwargs['scalar_product']
         
-        return (self.gamma * prod + self.r)**self.degree
+        return np.tanh(self.gamma * prod + self.r)

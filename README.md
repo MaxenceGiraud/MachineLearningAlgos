@@ -235,6 +235,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [Polynomial](./mla/kernels/polynomial.py)
 - [x] [Laplacian](./mla/kernels/laplacian.py)
 - [x] [Chi Squared](./mla/kernels/chi2.py)
+- [x] [Sigmoid](./mla/kernels/sigmoid.py)
 
 ### [Metrics](./mla/metrics/)
 #### Regression
