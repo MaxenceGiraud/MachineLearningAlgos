@@ -12,7 +12,7 @@ Personal reimplementation of some ML algorithm for learning purposes
     - [Machine Leaning](#machine-leaning)
     - [Ensemble methods](#ensemble-methods)
     - [Clustering / Unsupervized Learning](#clustering--unsupervized-learning)
-    - [Other ML/Ensemble methods](#other-mlensemble-methods)
+    - [Outliers Detection](#outliers-detection)
     - [Deep Leaning](#deep-leaning)
       - [Layers](#layers)
       - [Blocks](#blocks)
@@ -113,7 +113,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] MARS (Multivariate adaptive regression spline)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
-- [ ] Kernel Ridge
+- [x] Kernel Ridge
 
 
 ### [Ensemble methods](./mla/ensemble/)
@@ -137,9 +137,12 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Generative topographic map
 - [ ] Spectral Clustering
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
+- [ ] Self Organizing Maps (SOM)
   
-### Other ML/Ensemble methods
-- [ ] Isolation Forest (detection of outliers)  
+### Outliers Detection
+- [ ] Isolation Forest
+- [ ] Outliers detection from known (or estimated) distribution.
+- [ ] One class SVM / outlier SVM
 
 ### [Deep Leaning](./mla/dl/)
 - [x] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
