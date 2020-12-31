@@ -217,7 +217,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 ### [Decomposition / Dimensionality reduction](./mla/dimension_reduction/)
 
 - [x] PCA (for Probabilistic,Bayesian PCA and Mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
-- [ ] Kernel PCA
+- [x] Kernel PCA
 - [ ] FDA
 - [ ] ICA
 - [ ] Elastic map
