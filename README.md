@@ -241,6 +241,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [Chi Squared](./mla/kernels/chi2.py)
 - [x] [Sigmoid](./mla/kernels/sigmoid.py)
 - [x] [Linear](./mla/kernels/linear.py)
+- [x] [Cosine Similarity](./mla/kernels/cosine_similarity.py)
 
 ### [Metrics](./mla/metrics/)
 #### [Regression](./mla/metrics/regression/)

@@ -1,12 +1,8 @@
 import numpy as np
 from .base_kernel import BaseKernel
 
-class Polynomial(BaseKernel):
-    def __init__(self,degree=2,gamma=0.1,r=1):
-        self.degree = degree
-        self.gamma = gamma
-        self.r = r
-
+class CosineSimilarity(BaseKernel):
+    def __init__(self):
         self.to_precompute = set(['inner_product'])
     
     def __call__(self,x,y,**kwargs):
@@ -16,4 +12,4 @@ class Polynomial(BaseKernel):
         else : 
             prod = kwargs['inner_product']
         
-        return (self.gamma * prod + self.r)**self.degree
+        return prod / (np.linalg.norm(x,axis=1).reshape(-1,1) * np.linalg.norm(y,axis=1).reshape(1,-1))

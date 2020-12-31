@@ -6,13 +6,13 @@ class Sigmoid(BaseKernel):
         self.gamma = gamma
         self.r = r
 
-        self.to_precompute = set(['scalar_product'])
+        self.to_precompute = set(['inner_product'])
     
     def __call__(self,x,y,**kwargs):
         x,y = self._reshape(x,y)
-        if 'scalar_product' not in kwargs :
+        if 'inner_product' not in kwargs :
             prod = x @ y.T
         else : 
-            prod = kwargs['scalar_product']
+            prod = kwargs['inner_product']
         
         return np.tanh(self.gamma * prod + self.r)
