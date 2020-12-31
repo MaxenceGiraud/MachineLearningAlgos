@@ -1,4 +1,4 @@
-from .knn import KNN,KNN_Regressor
+from .knn import KNNClassifier,KNNRegressor
 from .discriminantanalysis import LDA,QDA
 from .naive_bayes import BernoulliNaiveBayes,GaussianNaiveBayes,MultinomialNaiveBayes
 from .logistic_regression import LogisticRegression
@@ -7,3 +7,4 @@ from .leastsquares import PolynomialRegression,PolynomialClassification,LinearCl
 from .leastsquares_regularised import RidgeClassifier,RidgeRegressor,LassoClassifier,LassoRegressor
 from .gaussian_process import GaussianProcessRegressor
 from .kernel_ridge import KernelRidgeClassifier,KernelRidgeRegressor
+from .kernel_knn import KernelKNNClassifier,KernelKNNRegressor

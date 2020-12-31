@@ -114,6 +114,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
 - [x] Kernel Ridge
+- [x] Kernel KNN
 
 
 ### [Ensemble methods](./mla/ensemble/)

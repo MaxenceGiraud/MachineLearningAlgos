@@ -3,7 +3,7 @@ from scipy.spatial.distance import cdist
 from ..base import BaseClassifier,BaseRegressor
 
 
-class KNN(BaseClassifier):
+class KNNClassifier(BaseClassifier):
     '''K Nearest Neighbhor Classifier
     Parameters
     ----------
@@ -20,8 +20,12 @@ class KNN(BaseClassifier):
         self.X = X
         self.y = Y
 
-    def predict(self,X_test):
-        all_dist = cdist(X_test, self.X,metric=self.metric) ## Computing all distances between points in test and training set
+    def predict(self,X_test,dist=None):
+        if dist is None :
+            all_dist = cdist(X_test, self.X,metric=self.metric) ## Computing all distances between points in test and training set
+        else :
+             all_dist = dist
+             
         nearest_neighbors = np.argsort(all_dist,axis=1)[:,:self.k] ## Sorting and keeping index of K(+1) nearest neighbours for each test point
 
         target_nearest = np.array(self.y[nearest_neighbors],dtype=int).T ## Corresponding the nearest point to their classification
@@ -34,7 +38,7 @@ class KNN(BaseClassifier):
         y_hat = np.argmax(out,axis=1)
         return y_hat    
 
-class KNN_Regressor(BaseRegressor):
+class KNNRegressor(BaseRegressor):
     '''KNN Regressor with uniform weight
     Parameters
     ----------
@@ -53,8 +57,12 @@ class KNN_Regressor(BaseRegressor):
         self.X = X
         self.y = Y
 
-    def predict(self,X_test):
-        all_dist = cdist(X_test, self.X,metric=self.metric) ## Computing all distances between points in test and training set
+    def predict(self,X_test,dist=None):
+        if dist is None :
+            all_dist = cdist(X_test, self.X,metric=self.metric) ## Computing all distances between points in test and training set
+        else :
+             all_dist = dist
+
         nearest_neighbors = np.argsort(all_dist,axis=1)[:,:self.k] ## Sorting and keeping index of K nearest neighbours for each test point
 
        
