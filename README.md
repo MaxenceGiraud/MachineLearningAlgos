@@ -106,15 +106,15 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
 - [x] [Ridge](./mla/ml/leastsquares_regularised.py) 
 - [ ] [LASSO](./mla/ml/leastsquares_regularised.py) (using Least Angle Regression)
-- [ ] Elastic net solver ?? (solver for LS, Ridge, LASSO)
-- [ ] SVM
+- [ ] Elastic net solver ?? (solver for Least Squares+l1+l2)
+- [ ] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [x] [Gaussian process Regressor](./mla/ml/gaussian_process.py)
 - [ ] MARS (Multivariate adaptive regression spline)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
-- [x] Kernel Ridge
-- [x] Kernel KNN
+- [x] [Kernel Ridge](./mla/ml/kernel_ridge.py)
+- [x] [Kernel KNN](./mla/ml/kernel_knn.py)
 
 
 ### [Ensemble methods](./mla/ensemble/)
@@ -150,15 +150,15 @@ Some explainations of the algorithms can be found in the readme of their folders
 
 #### [Layers](./mla/dl/layers/)
 - [x] [Dense](./mla/dl/layers/dense.py)
-- [ ] Convolution (1d,2d,3d)
+- [ ] [Convolution](./mla/dl/layers/convolution.py) (1d,2d)
 - [ ] Recurrent
 - [ ] LSTM
 - [ ] GRU
-- [ ] Max/Avg/Min Pooling (1d,2d,3d)
+- [ ] Max/Avg/Min [Pooling](./mla/dl/layers/pooling.py) (1d,2d)
 - [ ] Deconvolution/ Upconv / Transposed Conv. layer
-- [x] Flatten
-- [x] Reshape
-- [x] Dropout
+- [x] [Flatten](./mla/dl/layers/flatten.py)
+- [x] [Reshape](./mla/dl/layers/reshape.py)
+- [x] [Dropout](./mla/dl/layers/dropout.py)
 
 #### Blocks
 - [ ] Transformer
@@ -172,12 +172,12 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] GAN  
   
 #### [Optimizers](./mla/dl/optimizer/)
-- [x] Stochastic gradient descent
-- [x] Mini batch Gradient descent
-- [x] Epsilon-Delta private SGD
-- [x] Adam
+- [x] [Stochastic gradient descent](./mla/dl/optimizer/gradientdescent.py)
+- [x] [Mini batch Gradient descent](./mla/dl/optimizer/gradientdescent.py)
+- [x] [Epsilon-Delta private SGD](./mla/dl/optimizer/private_sgd.py)
+- [x] [Adam](./mla/dl/optimizer/adam.py)
 - [ ] Nadam (Nesterov Adam)
-- [x] Adagrad
+- [x] [Adagrad](./mla/dl/optimizer/adagrad.py)
 - [ ] L-BFGS
 
 #### [Loss](./mla/dl/layers/loss.py)
@@ -199,13 +199,13 @@ Some explainations of the algorithms can be found in the readme of their folders
 ### [Multi-armed bandit](./mla/mab/)
 Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.html) for the bandit environment. 
 
-- [x] UCB
-- [x] kl UCB
-- [x] ETC 
-- [x] FTL
-- [x] Thompson sampling
-- [x] Linear UCB
-- [x] Linear Thompson sampling
+- [x] [UCB](./mla/mab/ucb.py)
+- [x] [kl UCB](./mla/mab/klucb.py)
+- [x] [Explore Then Commit](./mla/mab/etc.py)
+- [x] [Follow the Leader (FTL)](./mla/mab/ftl.py)
+- [x] [Thompson sampling](./mla/mab/thompson_sampling.py)
+- [x] [Linear UCB](./mla/mab/linear_ucb.py)
+- [x] [Linear Thompson sampling](./mla/mab/linear_thompson_sampling.py)
   
 For non stationary bandits, see my other repo [here](https://github.com/MaxenceGiraud/ucb-nonstationary).
 
@@ -217,8 +217,8 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 
 ### [Decomposition / Dimensionality reduction](./mla/dimension_reduction/)
 
-- [x] PCA (for Probabilistic,Bayesian PCA and Mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
-- [x] Kernel PCA
+- [x] [PCA](./mla/dimension_reduction/pca.py) (for Probabilistic,Bayesian PCA and Mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
+- [x] [Kernel PCA](./mla/dimension_reduction/kernel_pca.py) 
 - [ ] FDA
 - [ ] ICA
 - [ ] Elastic map
@@ -243,14 +243,14 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [Linear](./mla/kernels/linear.py)
 
 ### [Metrics](./mla/metrics/)
-#### Regression
+#### [Regression](./mla/metrics/regression/)
 - [x] MSE
 - [x] RMSE
 - [x] MAE
 - [x] Median Absolute error
 - [x] R2 score
   
-#### Classifcation
+#### [Classifcation](./mla/metrics/classification/)
 - [x] Accuracy score
 - [x] Zero one loss
 
@@ -261,8 +261,9 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] Find out how OPTICS makes the clusters from reachability graph
 - [ ] Implement LASSO using Least angle regression
 - [ ] Add Deep Q learning and Advantage Actor Critic algos
-- [ ] Add Explanations of all currently implemented algos
+- [ ] Complete Explanations of all currently implemented algos
 - [ ] Implement optimization of SVM's dual problem (already formulated)
+- [ ] Once completed import work bayesian PCA
 
 ## References
 
