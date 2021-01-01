@@ -1,5 +1,5 @@
 import numpy as np
-from ..activation.activation import Linear
+from ..activation import Linear
 from .base_layer import BaseLayer
 
 class Dense(BaseLayer):

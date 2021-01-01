@@ -1,6 +1,6 @@
 import numpy as np
 from .base_layer import BaseLayer
-from ..activation.activation import Linear
+from ..activation import Linear
 from functools import partial 
 from scipy.signal import convolve,convolve2d
 #scipy.ndimage.convolve with axis ??? 
