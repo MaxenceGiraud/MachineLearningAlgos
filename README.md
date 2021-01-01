@@ -12,8 +12,9 @@ Personal reimplementation of some ML algorithm for learning purposes
     - [Machine Leaning](#machine-leaning)
     - [Ensemble methods](#ensemble-methods)
     - [Clustering / Unsupervized Learning](#clustering--unsupervized-learning)
+    - [Semi Supzevized Learning](#semi-supzevized-learning)
     - [Outliers Detection](#outliers-detection)
-    - [Deep Leaning](#deep-leaning)
+    - [Deep Leaning / Neural Networks](#deep-leaning--neural-networks)
       - [Layers](#layers)
       - [Blocks](#blocks)
       - [Wrapper](#wrapper)
@@ -137,16 +138,23 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
 - [ ] Spectral Clustering
+- [ ] Hierarchical Clustering
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
 - [ ] Self Organizing Maps (SOM)
+- [ ] Dirichlet Process Mixture Model
+
+###  Semi Supzevized Learning
+- [ ] Label Propagation
   
 ### Outliers Detection
 - [ ] Isolation Forest
 - [ ] Outliers detection from known (or estimated) distribution.
 - [ ] One class SVM / outlier SVM
 
-### [Deep Leaning](./mla/dl/)
+### [Deep Leaning / Neural Networks](./mla/dl/)
 - [x] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
+- [ ] Restricted Boltzman Machine 
+- [ ] Deep Belief Network
 
 #### [Layers](./mla/dl/layers/)
 - [x] [Dense](./mla/dl/layers/dense.py)
@@ -224,6 +232,8 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] Elastic map
 - [ ] CCA
 - [ ] Kernel CCA
+- [ ] Latent Dirichlet Allocation
+- [ ] PLSCanonical
 
 #### [Manifold](./mla/dimension_reduction/manifold/)
 
@@ -242,6 +252,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [Sigmoid](./mla/kernels/sigmoid.py)
 - [x] [Linear](./mla/kernels/linear.py)
 - [x] [Cosine Similarity](./mla/kernels/cosine_similarity.py)
+- [x] [Matérn](./mla/kernels/matern.py)
 
 ### [Metrics](./mla/metrics/)
 #### [Regression](./mla/metrics/regression/)
@@ -257,14 +268,16 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 
 
 ## TODO / Ongoing dev
-- [ ] Implement backprop of Convolution layer
-- [ ] Implement backprop of Pooling Layers
-- [ ] Find out how OPTICS makes the clusters from reachability graph
-- [ ] Implement LASSO using Least angle regression
-- [ ] Add Deep Q learning and Advantage Actor Critic algos
-- [ ] Complete Explanations of all currently implemented algos
-- [ ] Implement optimization of SVM's dual problem (already formulated)
-- [ ] Once completed import work bayesian PCA
+* Implement backprop of Convolution layer
+* Implement backprop of Pooling Layers
+* Find out how OPTICS makes the clusters from reachability graph
+* Implement LASSO using Least angle regression
+* Add Deep Q learning and Advantage Actor Critic algos
+* Complete Explanations of all currently implemented algos
+* Implement optimization of SVM's dual problem (already formulated)
+* Once completed import the work of bayesian PCA
+* Implement Gaussian Process Classifier
+* Look into Evolutionary algorithm (e.g. NEAT algo), genetic algorithms and Genetic Programming
 
 ## References
 
