@@ -1,6 +1,6 @@
 import numpy as np
 from .neuralnetwork import NeuralNetwork
-from .layers.loss import MAE
+from .loss import MAE
 from .layers.inputlayer import InputLayer
 from .layers.dense import Dense
 from .layers.flatten import Flatten

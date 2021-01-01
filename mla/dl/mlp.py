@@ -1,6 +1,6 @@
 import numpy as np
 from .neuralnetwork import NeuralNetwork
-from .layers.loss import MSE
+from .loss import MSE
 from .layers.inputlayer import InputLayer
 from .layers.dense import Dense
 from .activation import Relu,Linear

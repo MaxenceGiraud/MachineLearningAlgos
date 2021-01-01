@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from .optimizer.gradientdescent import GradientDescent
 from .layers.inputlayer import InputLayer
-from .layers.loss import Loss,MSE,MAE
+from .loss import MSE,MAE
 from .layers.dense import Dense
 
 def get_colorshape(arg):
