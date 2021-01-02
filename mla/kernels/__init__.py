@@ -5,3 +5,4 @@ from .laplacian import Laplacian
 from .polynomial import Polynomial
 from .linear import Linear
 from .matern import Matern
+from .chi2 import Chi2

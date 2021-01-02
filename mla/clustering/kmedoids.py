@@ -20,7 +20,7 @@ class Kmedoids(BaseUnsupervized):
     def _compute_dist(self,x,y):
         return cdist(x,y)
 
-    def fit(self,X,return_means=True):
+    def fit(self,X):
         dist_matrix = self._compute_dist(X,X) 
 
         ## Init (kmeans++)

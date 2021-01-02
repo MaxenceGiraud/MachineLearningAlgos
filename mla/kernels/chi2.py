@@ -12,7 +12,7 @@ class Chi2(BaseKernel):
     def __call__(self,x,y,**kwargs):
         x,y = self._reshape(x,y)
         if 'chi' not in kwargs :
-            chi = cdist(x,y,metric=chi_dist)
+            chi = cdist(x,y,metric=chi_metric)
         else : 
             chi = kwargs['chi']
         
