@@ -192,7 +192,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] MSE
 - [x] MAE
 - [x] Binary Cross Entropy
-- [ ] Neg log likelihood  
+- [x] Neg log likelihood  
 - [x] Add possibility of weighted loss
   
 #### [Activation functions](./mla/dl/activation/activation.py)

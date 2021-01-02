@@ -19,11 +19,11 @@ class Loss(BaseLayer):
     
     def forward(self,X,y,weights=1):
         self.zin = self.input_unit.forward(X)
-        self.loss = self.loss_function(self.zin,y,weights=weights)
+        self.loss = self.loss_function(self.zin,y,weights=weights.reshape(y.shape))
         return self.loss
 
     def backprop(self,y,weights=1):
-        self.loss_d = self.deriv(self.zin,y.reshape(self.zin.shape),weights=weights)
+        self.loss_d = self.deriv(self.zin,y,weights=weights)
         return self.loss_d
 
     @abstractmethod

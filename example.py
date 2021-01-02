@@ -86,7 +86,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 #%%
 
-nn = dl.NeuralNetwork(X.shape[1:],loss=dl.BinaryCrossEntropy())
+nn = dl.NeuralNetwork(X.shape[1:],loss=dl.loss.BinaryCrossEntropy())
 nn.add(dl.Dense(10,activation=mla.dl.activation.Sigmoid()))
 nn.add(dl.Dense(4,activation=mla.dl.activation.Sigmoid()))
 nn.add(dl.Dense(3,activation=mla.dl.activation.Sigmoid()))
@@ -94,7 +94,7 @@ nn.add(dl.Dense(1,activation=mla.dl.activation.Sigmoid()))
 
 #%%
 
-nn.fit(X_train,y_train,dl.Adam())
+nn.fit(X_train,y_train,dl.optimizer.Adam())
 
 print('\n ------------------------ \naccuracy = ',1 - np.count_nonzero(y_test-np.where(nn.predict(X_test)>0.5,1,0).flatten())/y_test.size)
 #%%
@@ -111,14 +111,14 @@ X = (X - X.min(axis=0))/X.max(axis=0)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 #%%
 
-nn = dl.NeuralNetwork(X.shape[1:],loss=dl.MAE())
+nn = dl.NeuralNetwork(X.shape[1:],loss=dl.loss.MAE())
 nn.add(dl.Dense(10,activation=mla.dl.activation.Relu()))
 nn.add(dl.Dense(4,activation=mla.dl.activation.Relu()))
 nn.add(dl.Dense(1))
 
 #%%
 
-nn.fit(X,y,dl.Adam(learning_rate=0.1,n_iter=200))
+nn.fit(X,y,dl.optimizer.Adam(learning_rate=0.1,n_iter=30))
 
 #%% ######### Autoencoder ############################
 ## Warning : Big dataset
