@@ -42,7 +42,7 @@ class OPTICS(BaseUnsupervized):
         Maximum distance to consider a point in the neighborhood of another
     min_pts : int,
         Minimum number of points in the neighborhood of a point to be considered a core
-    metrics : string,
+    metrics : string or function,
         Metrics used to compute the distance between points
     '''
     def __init__(self,max_eps=30,min_pts=8,metric='minkowski'):

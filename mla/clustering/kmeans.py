@@ -52,6 +52,3 @@ class Kmeans(BaseUnsupervized):
     def predict(self,X):
         dist_means = cdist(self.cluster_means, X) # compute all dists between the means and every point
         return np.argmin(dist_means,axis=0)
-        
-
-
