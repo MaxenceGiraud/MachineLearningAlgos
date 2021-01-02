@@ -17,7 +17,7 @@ Personal reimplementation of some ML algorithm for learning purposes
     - [Deep Leaning / Neural Networks](#deep-leaning--neural-networks)
       - [Layers](#layers)
       - [Blocks](#blocks)
-      - [Wrapper](#wrapper)
+      - [Wrappers](#wrappers)
       - [Optimizers](#optimizers)
       - [Loss](#loss)
       - [Activation functions](#activation-functions)
@@ -173,7 +173,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Inception
 - [ ] Residual (ResNet)
 
-#### Wrapper
+#### Wrappers
 - [x] [Autoencoder](./mla/dl/autoencoder.py)
 - [x] [MLP](./mla/dl/mlp.py)
 - [ ] VAE
@@ -184,25 +184,27 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Mini batch Gradient descent](./mla/dl/optimizer/gradientdescent.py)
 - [x] [Epsilon-Delta private SGD](./mla/dl/optimizer/private_sgd.py)
 - [x] [Adam](./mla/dl/optimizer/adam.py)
-- [ ] Nadam (Nesterov Adam)
+- [x] [Nadam](./mla/dl/optimizer/nadam.py) (Nesterov Adam)
 - [x] [Adagrad](./mla/dl/optimizer/adagrad.py)
 - [ ] L-BFGS
 
-#### [Loss](./mla/dl/layers/loss.py)
-- [x] MSE
-- [x] MAE
-- [x] Binary Cross Entropy
-- [x] Neg log likelihood  
-- [x] Add possibility of weighted loss
+#### [Loss](./mla/dl/layers/loss/)
+
+All the following loss support weights (if given to fit method, it is done automatically)
+
+- [x] [MSE](./mla/dl/loss/mse.py)
+- [x] [MAE](./mla/dl/loss/mae.py)
+- [x] [Binary Cross Entropy](./mla/dl/loss/binary_cross_entropy.py)
+- [x] [Neg log likelihood](./mla/dl/loss/nll.py)  
   
-#### [Activation functions](./mla/dl/activation/activation.py)
-- [x] Linear
-- [x] Relu
-- [x] Tanh
-- [x] Sigmoid
-- [x] Leaky Relu
-- [x] Softplus
-- [x] Softmax
+#### [Activation functions](./mla/dl/activation/)
+- [x] [Linear](./mla/dl/activation/linear.py)
+- [x] [Relu](./mla/dl/activation/relu.py)
+- [x] [Tanh](./mla/dl/activation/tanh.py)
+- [x] [Sigmoid](./mla/dl/activation/sigmoid.py)
+- [x] [Leaky Relu](./mla/dl/activation/leaky_relu.py)
+- [x] [Softplus](./mla/dl/activation/softplus.py)
+- [x] [Softmax](./mla/dl/activation/softmax.py)
 
 ### [Multi-armed bandit](./mla/mab/)
 Credits to [Emilie Kaufmann](http://chercheurs.lille.inria.fr/ekaufman/index.html) for the bandit environment. 
@@ -272,7 +274,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 * Implement backprop of Pooling Layers
 * Find out how OPTICS makes the clusters from reachability graph
 * Implement LASSO using Least angle regression
-* Add Deep Q learning and Advantage Actor Critic algos
+* Rework and add Deep Q learning and Advantage Actor Critic algos 
 * Complete Explanations of all currently implemented algos
 * Implement optimization of SVM's dual problem (already formulated)
 * Once completed import the work of bayesian PCA
