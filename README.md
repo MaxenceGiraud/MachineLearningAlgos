@@ -223,7 +223,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 ### [Reinforcement Learning ](./mla/rl/)
 - [x] [Value iteration](./mla/rl/value_iteration.py)
 - [x] [Q-learning](./mla/rl/qlearning.py)
-- [ ] Deep Q-learning
+- [x] [Deep Q-learning](./mla/rl/deep_qlearning.py)
 - [ ] Advantage Actor Critic
 
 ### [Decomposition / Dimensionality reduction](./mla/dimension_reduction/)
@@ -281,6 +281,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 * Once completed import the work of bayesian PCA
 * Implement Gaussian Process Classifier
 * Look into Evolutionary algorithm (e.g. NEAT algo), genetic algorithms and Genetic Programming
+* Create Unittests
 
 ## References
 
