@@ -18,11 +18,15 @@ class Loss(BaseLayer):
         intputlayer.output_unit = self
     
     def forward(self,X,y,weights=1):
+        if weights == 1 or weights is None :
+            weights = np.ones(y.shape)
         self.zin = self.input_unit.forward(X)
         self.loss = self.loss_function(self.zin,y,weights=weights.reshape(y.shape))
         return self.loss
 
     def backprop(self,y,weights=1):
+        if weights == 1 or weights is None :
+            weights = np.ones(self.zin.shape)
         self.loss_d = self.deriv(self.zin,y,weights=weights)
         return self.loss_d
 
