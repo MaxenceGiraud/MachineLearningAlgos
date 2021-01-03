@@ -21,11 +21,11 @@ class Node:
     
     @property
     def width(self):
-        raise NotImplemented
+        raise NotImplementedError
     
     @property
     def size(self):
-        '''return number of leaves in the tree '''
+        '''return number of leaves and nodes in the tree '''
         return self.left.size + self.right.size + 1
 
     def split_data(self,X):
@@ -108,7 +108,7 @@ class Node:
                 plt.plot(line[:,0],line[:,1])
         plt.axis('off')
         plt.tight_layout()
-        plt.show()
+        plt.show(block=False)
         
    
 class Leaf(Node):
@@ -126,7 +126,7 @@ class Leaf(Node):
     
     @property
     def size(self):
-        return 0
+        return 1
     
     def split_data(self,X):
         pass
@@ -193,7 +193,7 @@ class BaseDecisionTree:
         return self.tree.depth
     
     def display(self):
-        if self.tree == None :
+        if self.tree is None :
             raise Exception('The tree is not created')
         else :
             self.tree.display()

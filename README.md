@@ -96,6 +96,11 @@ mab.bandit_env.RunExpes([ucb,ts,etc],bandit,N_exp=10,timeHorizon=T) # Compare th
 
 Other examples on how to use the algorithms can be found in the file [example.py](./example.py)
 
+To run unittest : 
+```bash
+python -m unittest tests/*/*_test.py
+```
+
 ## Algorithms
 
 Some explainations of the algorithms can be found in the readme of their folders, for more thorough reviews check the references.
