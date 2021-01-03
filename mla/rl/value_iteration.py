@@ -18,7 +18,7 @@ def BellmanOperator(Q, env, gamma=0.99):
     A = env.action_space.n 
     TQ = np.zeros((S, A))
 
-      for s in range(S):
+    for s in range(S):
         for a in range(A):
             TQ[s,a] = env.R[s,a] + gamma * env.P[s,a] @ Q.max(axis=1)
 

@@ -4,8 +4,8 @@ import numpy as np
 from ..base import BaseClassifier,BaseRegressor
 from ..ml.decison_tree import DecisionTreeClassifier,DecisionTreeRegressor
 
-base_learner_reg = partial(DecisionTreeRegressor,3)
-base_learner_clf = partial(DecisionTreeClassifier,3)
+base_learner_reg = partial(DecisionTreeRegressor,4)
+base_learner_clf = partial(DecisionTreeClassifier,4)
 
 class BaseAdaBoost:
     def __init__(self,base_model,basemodel_params,n_estimators):

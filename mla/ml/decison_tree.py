@@ -339,7 +339,8 @@ class DecisionTreeClassifier(BaseDecisionTree,BaseClassifier):
     def _create_leaf(self,y):
         return Leaf(decision = np.bincount(y).argmax())
     
-    def _bottom_up_pruning(self,X,y,tree_list):
+    def _bottom_up_pruning(self,X,y):
+        tree_list = self.get_pruned_trees(X,y)
         score = self.score(X,y)
         for new_tree in tree_list:
             tmp_decision_tree = deepcopy(self)

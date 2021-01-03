@@ -103,31 +103,29 @@ class DeepQLearning:
         # get batch
         transitions = self.replay_buffer.sample(self.batch_size)
 
-        # process batch of (state, action, reward, next_state)
+        # Process batch of (state, action, reward, next_state)
         states = [transitions[ii][0] for  ii in range(self.batch_size)]
         actions = [transitions[ii][1] for  ii in range(self.batch_size)] 
         rewards = [transitions[ii][2] for  ii in range(self.batch_size)] 
 
-        # Attention: next_state is None when the previous state is terminal.
-        # we handle this using a mask.
+        # Attention: next_state is None when the previous state is terminal. We handle this using a mask.
         next_states = [transitions[ii][3] for  ii in range(self.batch_size) if transitions[ii][3] is not None ] 
         mask = [transitions[ii][3] is not None for  ii in range(self.batch_size)]
 
         # Q(s_i, a_i)
         values = self.nn.predict(states) # TODO use actions
-        # values = torch.gather(values, dim=1, index=actions_torch)
+
 
         # max_a Q(s_{i+1}, a)
         values_next_states = np.zeros(self.batch_size)
         values_next_states[mask] = self.target_network.predict(next_states).max(axis=1)
-        # values_next_states = values_next_states.view(-1, 1) # ??? reshape ??
 
         # targets y_i
         targets = rewards + self.gamma*values_next_states
         
 
         # Loss function / forward pass
-        targets = np.array([targets,targets]).T# tmp solution
+        targets = np.repeat(targets.reshape(-1,1),values.shape[1],axis=1)
         loss = self.nn.forward(np.array(states), targets)
         
         # Optimize the model  / Backprop
