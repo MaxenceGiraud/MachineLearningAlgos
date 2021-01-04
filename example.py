@@ -3,8 +3,9 @@
 import mla
 from mla import dl,mab,ensemble
 import numpy as np
+import matplotlib.pyplot as plt
 
-from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups,load_iris,fetch_openml
+from sklearn.datasets import load_boston,make_classification,fetch_20newsgroups,load_iris,fetch_openml,make_blobs
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 #%%
@@ -170,7 +171,9 @@ yh = gp.predict(x,n_samples=100)
 # Compare true function to learned one (with noise)
 for yi in yh :
     sns.lineplot(x,yi,color='blue',alpha=0.2)
-sns.lineplot(x,f(x),color='red')
+sns.lineplot(x,f(x),color='red',label='True Function')
+sns.lineplot(x,y,color='green',label='Training Data',alpha=0.4)
+plt.legend()
 plt.show()
 # %%
 
