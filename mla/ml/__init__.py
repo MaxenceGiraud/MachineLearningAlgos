@@ -8,3 +8,4 @@ from .leastsquares_regularised import RidgeClassifier,RidgeRegressor,LassoClassi
 from .gaussian_process import GaussianProcessRegressor
 from .kernel_ridge import KernelRidgeClassifier,KernelRidgeRegressor
 from .kernel_knn import KernelKNNClassifier,KernelKNNRegressor
+from .svm import SVC

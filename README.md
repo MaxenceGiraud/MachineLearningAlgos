@@ -113,7 +113,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Ridge](./mla/ml/leastsquares_regularised.py) 
 - [ ] [LASSO](./mla/ml/leastsquares_regularised.py) (using Least Angle Regression)
 - [ ] Elastic net solver ?? (solver for Least Squares+l1+l2)
-- [ ] [SVM](./mla/ml/svm.py)
+- [x] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [x] [Gaussian process Regressor](./mla/ml/gaussian_process.py)
 - [ ] MARS (Multivariate adaptive regression spline)
@@ -151,8 +151,10 @@ Some explainations of the algorithms can be found in the readme of their folders
 
 ###  Semi Supzevized Learning
 - [ ] Label Propagation
+- [ ] Hierarchical Clustering
   
 ### Outliers Detection
+
 - [ ] Isolation Forest
 - [ ] Outliers detection from known (or estimated) distribution.
 - [ ] One class SVM / outlier SVM
