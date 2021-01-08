@@ -282,16 +282,16 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 * Implement backprop of Pooling Layers
 * Find out how OPTICS makes the clusters from reachability graph
 * Implement LASSO using Least angle regression
-* Rework and add Deep Q learning and Advantage Actor Critic algos 
+* Rework and add Advantage Actor Critic
 * Complete Explanations of all currently implemented algos
-* Implement optimization of SVM's dual problem (already formulated)
+* Implement SMO for SVR (already done for svc)
 * Once completed import the work of bayesian PCA
 * Implement Gaussian Process Classifier
 * Look into Evolutionary algorithm (e.g. NEAT algo), genetic algorithms and Genetic Programming
-* Create Unittests
 
 ## References
 
+*The references of the algorithms themselves are for the most part written in the docstring of the corresponding class*
 
 [1] M. BISHOP, Christopher. [Pattern Recognition and Machine Learning.](https://www.springer.com/gp/book/9780387310732) Springer, 2011.    
 [2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . [The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition.](https://web.stanford.edu/~hastie/ElemStatLearn/) Springer, 2016.   
