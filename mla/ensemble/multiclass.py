@@ -71,38 +71,30 @@ class OneVsOneClassifier(BaseMulticlass):
         self.binaryclassifiers = []
         
         for i in range(self.n_labels):
-            for j in range(self.n_labels):
-                if i < j  :
-                    idx_i = np.where(y==self.labels[i],True,False)
-                    idx_j = np.where(y==self.labels[j],True,False)
-                    idx_ij = idx_i+idx_j
-                    y_tmp  = np.copy(y)
-                    y_tmp[idx_i] = -1
-                    y_tmp[idx_j] = 1
+            for j in range(i):
+                idx_i = np.where(y==self.labels[i],True,False)
+                idx_j = np.where(y==self.labels[j],True,False)
+                idx_ij = idx_i+idx_j
+                y_tmp  = np.copy(y)
+                y_tmp[idx_i] = -1
+                y_tmp[idx_j] = 1
 
-                    # Create and fit binary classifiers
-                    binaryclf = self.base_classifier(**self.args) 
-                    binaryclf.fit(X[idx_ij],y_tmp[idx_ij])
-                    self.binaryclassifiers.append(binaryclf)
+                # Create and fit binary classifiers
+                binaryclf = self.base_classifier(**self.args) 
+                binaryclf.fit(X[idx_ij],y_tmp[idx_ij])
+                self.binaryclassifiers.append(binaryclf)
         
     def predict(self,X):
         preds = np.zeros((len(self.labels),X.shape[0]))
         k=0
         for i in range(self.n_labels):
-            for j in range(self.n_labels):
-                if i < j  :
-                    preds_binary = self.binaryclassifiers[k].predict(X)
-                    preds[i] -= preds_binary
-                    preds[j] += preds_binary 
-                    k+=1
+            for j in range(i):
+                preds_binary = self.binaryclassifiers[k].predict(X)
+                preds[i] -= preds_binary
+                preds[j] += preds_binary 
+                k+=1
         
         y_hat = randargmax(preds,axis=0)
         y_hat = self.labels[y_hat]
 
         return y_hat
-            
-
-
-
-
-    
