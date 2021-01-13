@@ -263,6 +263,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [Linear](./mla/kernels/linear.py)
 - [x] [Cosine Similarity](./mla/kernels/cosine_similarity.py)
 - [x] [Matérn](./mla/kernels/matern.py)
+- [x] (Normalized) [Intersection Kernel](./mla/kernels/intersection.py) (between categorical data)
 
 ### [Metrics](./mla/metrics/)
 #### [Regression](./mla/metrics/regression/)

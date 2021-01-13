@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from scipy.spatial.distance import cdist
 import numpy as np
-from .utils import chi_metric
+from .metrics import chi_metric,intersection_measure
 
 class BaseKernel:
     def __init__(self):

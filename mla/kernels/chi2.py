@@ -1,7 +1,7 @@
 import numpy as np
 from .base_kernel import BaseKernel
 from scipy.spatial.distance import cdist
-from .utils import chi_metric
+from .metrics import chi_metric
 
 class Chi2(BaseKernel):
     def __init__(self,gamma = 1):
