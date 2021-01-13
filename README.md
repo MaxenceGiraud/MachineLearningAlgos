@@ -252,6 +252,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] Spectral Embedding
 
 ### [Kernels](./mla/kernels/) 
+*A SplitKernel is also available that allows to combine kernels w.r.t. differents features of the data*
 
 - [x] [RBF](./mla/kernels/rbf.py)
 - [x] [Rational Quadratic](./mla/kernels/rational_quadratic.py)
@@ -286,7 +287,6 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 * Rework and add Advantage Actor Critic
 * Complete Explanations of all currently implemented algos
 * Implement SMO for SVR (already done for svc)
-* Once completed import the work of bayesian PCA
 * Implement Gaussian Process Classifier
 * Look into Evolutionary algorithm (e.g. NEAT algo), genetic algorithms and Genetic Programming
 

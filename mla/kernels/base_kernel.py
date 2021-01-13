@@ -87,31 +87,27 @@ class KernelConcat(BaseKernel):
     def get_precomputed(self,x,y,**kwargs):
         if kwargs == {} :
             if 'distance' in self.to_precompute :
-                x,y = self._reshape(x,y)
                 dist = cdist(x,y)
                 self.precomputed['distance']= dist
             if 'inner_product' in self.to_precompute :
-                x,y = self._reshape(x,y)
                 prod = x @ y.T
                 self.precomputed['inner_product']= prod
             if 'distance_manhattan' in self.to_precompute :
-                x,y = self._reshape(x,y)
                 dist = cdist(x,y,'cityblock')
                 self.precomputed['distance_manhattan']= dist 
             if 'chi' in self.to_precompute :
-                x,y = self._reshape(x,y)
                 dist = cdist(x,y,metric=chi_metric)
                 self.precomputed['chi']= dist
         return kwargs
 
     def __call__(self,x,y,**kwargs):
         # Precompute 
+        x,y = self._reshape(x,y)
         self.precomputed = self.get_precomputed(x,y,**kwargs)
 
         out = self.operation(self.kernels[0](x,y,**self.precomputed),self.kernels[1](x,y,**self.precomputed))
         self.precomputed = {} # clean precompute
         return out
-
 
 class KernelConcatFloat(BaseKernel):
     def __init__(self,kernel,scale,operation):

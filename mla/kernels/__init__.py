@@ -7,3 +7,4 @@ from .linear import Linear
 from .matern import Matern
 from .chi2 import Chi2
 from .intersection import IntersectionKernel
+from .split_kernel import SplitKernel
