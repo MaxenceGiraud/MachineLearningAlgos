@@ -142,7 +142,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
-- [ ] Spectral Clustering
+- [x] [Spectral Clustering](./mla/clustering/spectral_clustering.py)
 - [ ] Hierarchical Clustering
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
 - [ ] Self Organizing Maps (SOM)
@@ -235,7 +235,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 
 ### [Decomposition / Dimensionality reduction](./mla/dimension_reduction/)
 
-- [x] [PCA](./mla/dimension_reduction/pca.py) (for Probabilistic,Bayesian PCA and Mixture of PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
+- [x] [PCA](./mla/dimension_reduction/pca.py) (for Probabilistic/Bayesian PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
 - [x] [Kernel PCA](./mla/dimension_reduction/kernel_pca.py) 
 - [ ] FDA
 - [ ] ICA
