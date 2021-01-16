@@ -12,45 +12,45 @@ class SpectralClustering(BaseUnsupervized):
     k : int,
         Number of Clusters
     laplacian_method : str,
-        ...
+        unnormalized, symmetric (Default) or random_walk
     adjacent_method  : str,
-        KNN or Kernel
+        KNN, Kernel or precomputed (then X is considered to be the adjancy matrix)
     kernel : callable,
-        use to compute affinity matrix if adjacent_method== "kernel", compatible with kernels implemented in mla.kernels
-    precomputed : bool,
-        If true, X is considered to be the affinity matrix
+        use to compute affinity matrix if adjacent_method== "kernel" or compute distances if kernel == "KNN", compatible with kernels.implemented in mla.kernels.
+        Default to classical Euclidean distance
+    predict_method : class of clustergin algo,
+        Algo used to perform the clustering after the transformation of the data
     n_neighbors : int,
         Number of Neighbors to use if adjacent_method== 'KNN
     '''
-    def __init__(self,k,laplacian_method='symmetric',adjacent_method='KNN',kernel=cdist,predict_method=Kmeans,precomputed=False,n_neighbors = 10):
+    def __init__(self,k,laplacian_method='symmetric',adjacent_method='KNN',kernel=cdist,predict_method=Kmeans,n_neighbors = 10):
         self.k = k 
         self.laplacian_method = laplacian_method
         self.adjacent_method = adjacent_method # KNN or None
         self.kernel = kernel  
         self.predict_method = predict_method  
-        self.precomputed = precomputed
         self.n_neighbors = n_neighbors
 
     
-    def _compute_laplacian(self,W):
+    def _compute_laplacian(self,A):
         ''' Compute the Laplacian of the graph
 
         Parameters 
         ----------
-        D : array of size (n,n),
+        A : array of size (n,n),
             Adjacent matrix
         '''
-        D = np.diag(np.sum(W,axis=1))  # Degree Matrix
+        D = np.diag(np.sum(A,axis=1))  # Degree Matrix
 
         if self.laplacian_method == 'unnormalized':
-            L = D - W
+            L = D - A
 
         elif self.laplacian_method == 'random_walk':
-            L = np.eye(W.shape[0]) - np.linalg.pinv(D) @ W
+            L = np.eye(A.shape[0]) - np.linalg.pinv(D) @ A
 
         elif self.laplacian_method == 'symmetric':
             D_power = np.sqrt(np.linalg.pinv(D))
-            L = np.eye(W.shape[0]) - D_power @ W @ D_power
+            L = np.eye(A.shape[0]) - D_power @ A @ D_power
         
         else :
             raise ValueError
@@ -59,7 +59,7 @@ class SpectralClustering(BaseUnsupervized):
         return L
    
     def _compute_affinity_nearest_neighbors(self,X):
-        dist = cdist(X,X)
+        dist = self.kernel(X,X)
 
         nearest_neighbors = np.argsort(dist,axis=1)[:,:self.n_neighbors] ## Sorting and keeping index of K nearest neighbours for each test point
         A = np.zeros(dist.shape)
@@ -67,11 +67,11 @@ class SpectralClustering(BaseUnsupervized):
             A[i,nearest_neighbors[i]] = 1
 
         return A
-        
     
-    def fit_predict(self,X):
-        # Affinity/Similarity matrix
-        if self.precomputed :
+    def transform(self,X):
+
+        # Affinity/Similarity/Adjacent matrix
+        if self.adjacent_method == 'precomputed' :
             A = X
         elif self.adjacent_method == 'KNN' :
             A = self._compute_affinity_nearest_neighbors(X)
@@ -84,6 +84,12 @@ class SpectralClustering(BaseUnsupervized):
 
         eig_val,eig_vec = np.linalg.eig(Laplacian) 
         Xnew = eig_vec[:,np.argsort(eig_val)[:self.k]].real # Take eigenvec corresponding to k smallest eigenvalues
+
+        return Xnew
+    
+    def fit_predict(self,X):
+        
+        Xnew = self.transform(X)
 
         y_hat = self.predict_method(self.k).fit_predict(Xnew)
 
