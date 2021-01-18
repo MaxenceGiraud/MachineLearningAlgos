@@ -3,6 +3,7 @@ from .base_unsupervized import BaseUnsupervized
 from ..kernels import RBF
 from .kmeans import Kmeans
 from scipy.spatial.distance import cdist
+from scipy.sparse import csr_matrix
 
 class SpectralClustering(BaseUnsupervized):
     ''' Spectral Clustering Algorithm 
@@ -40,7 +41,7 @@ class SpectralClustering(BaseUnsupervized):
         A : array of size (n,n),
             Adjacent matrix
         '''
-        D = np.diag(np.sum(A,axis=1))  # Degree Matrix
+        D = np.diag(np.array(np.sum(A,axis=1)).flatten())  # Degree Matrix
 
         if self.laplacian_method == 'unnormalized':
             L = D - A
@@ -62,7 +63,7 @@ class SpectralClustering(BaseUnsupervized):
         dist = self.kernel(X,X)
 
         nearest_neighbors = np.argsort(dist,axis=1)[:,:self.n_neighbors] ## Sorting and keeping index of K nearest neighbours for each test point
-        A = np.zeros(dist.shape)
+        A = csr_matrix(dist.shape)
         for i in range(X.shape[0]):
             A[i,nearest_neighbors[i]] = 1
 
