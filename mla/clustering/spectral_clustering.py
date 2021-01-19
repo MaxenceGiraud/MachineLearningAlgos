@@ -15,22 +15,25 @@ class SpectralClustering(BaseUnsupervized):
     laplacian_method : str,
         unnormalized, symmetric (Default) or random_walk
     adjacent_method  : str,
-        KNN, Kernel or precomputed (then X is considered to be the adjancy matrix)
+        KNN, Kernel, precomputed (then X is considered to be the adjancy matrix) or epsilon
     kernel : callable,
         use to compute affinity matrix if adjacent_method== "kernel" or compute distances if kernel == "KNN", compatible with kernels.implemented in mla.kernels.
         Default to classical Euclidean distance
     predict_method : class of clustergin algo,
         Algo used to perform the clustering after the transformation of the data
     n_neighbors : int,
-        Number of Neighbors to use if adjacent_method== 'KNN
+        Number of Neighbors to use if adjacent_method== 'KNN'
+    epsilon :float,
+        Max distance to consider 2 points neighbors, considered on if  adjacent_method=='epsilon'
     '''
-    def __init__(self,k,laplacian_method='symmetric',adjacent_method='KNN',kernel=cdist,predict_method=Kmeans,n_neighbors = 10):
+    def __init__(self,k,laplacian_method='symmetric',adjacent_method='KNN',kernel=cdist,predict_method=Kmeans,n_neighbors = 10,epsilon=0.5):
         self.k = k 
         self.laplacian_method = laplacian_method
         self.adjacent_method = adjacent_method # KNN or None
         self.kernel = kernel  
         self.predict_method = predict_method  
         self.n_neighbors = n_neighbors
+        self.epsilon = epsilon
 
     
     def _compute_laplacian(self,A):
@@ -69,6 +72,12 @@ class SpectralClustering(BaseUnsupervized):
 
         return A
     
+    def _compute_affinity_epsilon_neighborhood(self,X):
+        dist = self.kernel(X,X)
+        A = np.where(dist<self.epsilon,1,0)
+
+        return A
+    
     def transform(self,X):
 
         # Affinity/Similarity/Adjacent matrix
@@ -78,6 +87,8 @@ class SpectralClustering(BaseUnsupervized):
             A = self._compute_affinity_nearest_neighbors(X)
         elif self.adjacent_method == 'kernel' :
             A= self.kernel(X,X) 
+        elif self.adjacent_method == 'epsilon':
+            A = self._compute_affinity_epsilon_neighborhood(X)
         else :
             raise ValueError
         
