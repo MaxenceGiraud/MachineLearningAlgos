@@ -112,7 +112,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
 - [x] [Ridge](./mla/ml/leastsquares_regularised.py) 
 - [ ] [LASSO](./mla/ml/leastsquares_regularised.py) (using Least Angle Regression)
-- [ ] Elastic net solver ?? (solver for Least Squares+l1+l2)
+- [ ] Elastic net (solver for Least Squares+l1+l2)
 - [x] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [x] [Gaussian process Regressor](./mla/ml/gaussian_process.py)
@@ -121,6 +121,9 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
 - [x] [Kernel Ridge](./mla/ml/kernel_ridge.py)
 - [x] [Kernel KNN](./mla/ml/kernel_knn.py)
+- [ ] RVM
+- [ ] Bridge regression
+- [ ] Bayesian LASSO
 
 
 ### [Ensemble methods](./mla/ensemble/)
