@@ -6,3 +6,4 @@ from .mixture_model import GaussianMixtureModel
 from .fuzzycmeans import FuzzyCmeans
 from .kernel_kmedoids import KernelKmedoids
 from .spectral_clustering import SpectralClustering
+from .hierarchical_clustering import HierarchicalClustering

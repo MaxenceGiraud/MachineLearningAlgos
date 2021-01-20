@@ -146,7 +146,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
 - [x] [Spectral Clustering](./mla/clustering/spectral_clustering.py)
-- [ ] Hierarchical Clustering
+- [x] Hierarchical Clustering
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
 - [ ] Self Organizing Maps (SOM)
 - [ ] Dirichlet Process Mixture Model
@@ -154,13 +154,11 @@ Some explainations of the algorithms can be found in the readme of their folders
 
 ###  Semi Supzevized Learning
 - [ ] Label Propagation
-- [ ] Hierarchical Clustering
   
 ### Outliers Detection
 
 - [ ] Isolation Forest
 - [ ] Outliers detection from known (or estimated) distribution.
-- [ ] One class SVM / outlier SVM
 
 ### [Deep Leaning / Neural Networks](./mla/dl/)
 - [x] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
