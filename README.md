@@ -1,8 +1,10 @@
 # MachineLearningAlgos
 Personal reimplementation of some ML algorithm for learning purposes
 
-## Table of Contents
-- [MachineLearningAlgos](#machinelearningalgos)
+<details>
+  <summary>Table of Contents</summary>
+  
+  - [MachineLearningAlgos](#machinelearningalgos)
   - [Table of Contents](#table-of-contents)
   - [Author](#author)
   - [Requirements](#requirements)
@@ -32,9 +34,13 @@ Personal reimplementation of some ML algorithm for learning purposes
   - [TODO / Ongoing dev](#todo--ongoing-dev)
   - [References](#references)
 
+</details>
+
 
 ## Author
-[Maxence Giraud](https://github.com/MaxenceGiraud/)
+
+This repo is only made by myself ([Maxence Giraud](https://github.com/MaxenceGiraud/)), I do not seek additional contributors (although you can open an issue if you find a mistake or have a constructive comment) as it has only learning purposes and no other intentions.
+
 
 ## Requirements 
 * [NumPy](https://numpy.org/) 
@@ -42,11 +48,16 @@ Personal reimplementation of some ML algorithm for learning purposes
 * [Matplotlib](https://matplotlib.org/) (for plots only)
 * [Gym](https://gym.openai.com/) (RL environment, not directly used in the algorithms)
 
+The requirements can be installed through this simple command :
+```bash
+pip install -r requirements.txt
+```
+
 Some readme have written LaTeX, you can view them locally with some capable reader (e.g. VSCode) or using extensions (e.g. [here](https://addons.mozilla.org/en-US/firefox/addon/latexmathifygithub/) for Firefox).
 
 ## Installation
 
-To install, simply clone the project :
+To install, simply clone the project (don't forget the requirements first) :
 ```bash
 git clone https://github.com/MaxenceGiraud/MachineLearningAlgos
 cd MachineLearningAlgos/
@@ -146,7 +157,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] Variational Bayesian Gaussian Mixture
 - [ ] Generative topographic map
 - [x] [Spectral Clustering](./mla/clustering/spectral_clustering.py)
-- [x] Hierarchical Clustering
+- [x] [Hierarchical Clustering](./mla/clustering/hierarchical_clustering.py)
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
 - [ ] Self Organizing Maps (SOM)
 - [ ] Dirichlet Process Mixture Model
