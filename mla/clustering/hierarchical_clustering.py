@@ -39,11 +39,11 @@ class HierarchicalClustering(BaseUnsupervized):
         self.precomputed = precomputed
         self.distance_threshold = distance_threshold
     
-    def _single_linkage(self,dist,clusters,*args):
+    def _single_linkage(self,dist,clusters,**args):
         return divmod(dist.argmin(), dist.shape[1]) # Find 2 closest point
     
 
-    def _full_linkage(self,dist,clusters,fun=np.max,*args):
+    def _full_linkage(self,dist,clusters,fun=np.max):
         clusters_unique = np.unique(clusters)
         c_idx = [np.where(clusters == clusters[ci])[0] for ci in clusters_unique]
         # Find max distance between all clusters
@@ -60,18 +60,37 @@ class HierarchicalClustering(BaseUnsupervized):
 
         return c_idx[mini][0],c_idx[minj][0]
 
-    def _complete_linkage(self,dist,clusters,*args):
-        return self._full_linkage(dist,clusters,np.max,*args)
+    def _complete_linkage(self,dist,clusters,**args):
+        return self._full_linkage(dist,clusters,np.max)
 
-    def _avg_linkage(self,dist,clusters,*args):
-        return self._full_linkage(dist,clusters,np.mean,*args)
+    def _avg_linkage(self,dist,clusters,**args):
+        return self._full_linkage(dist,clusters,np.mean)
          
-    def _centroid_linkage(self,dist,clusters,*args):
-        raise NotImplementedError
+    def _centroid_linkage(self,dist,clusters,X,**args):
+        clusters_unique = np.unique(clusters)
+
+        # Find data points assigned to clusters
+        c_idx = [np.where(clusters == clusters[ci])[0] for ci in clusters_unique]
+
+        # Compute centroids
+        centroids = [np.mean(X[c],axis=0) for c in c_idx]
+
+        # Compute dist between centroids
+        dist_centroids = cdist(centroids,centroids,metric=self.metric)
+
+        i,j = np.diag_indices_from(dist_centroids)
+        dist_centroids[i,j] = np.inf # Set diag to inf 
+
+        # Find closest centroids
+        ic,jc = divmod(dist_centroids.argmin(),dist_centroids.shape[1])
+
+        return clusters_unique[ic],clusters_unique[jc]
     
     def fit_predict(self,X):
         if self.precomputed :
             dist = X
+        elif self.linkage == 'centroid':
+            dist = np.zeros((X.shape[0],X.shape[0]))
         else :
             dist = cdist(X,X,metric=self.metric)
 
@@ -81,7 +100,7 @@ class HierarchicalClustering(BaseUnsupervized):
         clusters = np.arange(X.shape[0])
         
         while np.unique(clusters).size > self.n_clusters :
-            i,j = self.linkage_step(dist,clusters)
+            i,j = self.linkage_step(dist,clusters,X=X)
 
             if dist[i,j] < self.distance_threshold and self.linkage=="single":
                 break
