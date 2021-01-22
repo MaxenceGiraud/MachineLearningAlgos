@@ -76,6 +76,9 @@ class BaseKernel:
     def apply_func(self,fn):
         return KernelConcatFun(self,lambda a : fn(a))
 
+    def normalize(self):
+        return KernelConcatFun(self,lambda a: (a-np.min(a))/np.max(a))
+
 class KernelConcat(BaseKernel):
     def __init__(self,kernels,operation):
         self.kernels = kernels
