@@ -8,8 +8,7 @@ class Laplacian(BaseKernel):
 
         self.to_precompute = set(['distance_manhattan'])
     
-    def __call__(self,x,y,**kwargs):
-        x,y = self._reshape(x,y)
+    def _compute_kernel(self,x,y,**kwargs):
         if 'distance_manhattan' not in kwargs :
             dist = cdist(x,y,metric='cityblock')
         else : 

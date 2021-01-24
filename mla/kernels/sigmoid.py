@@ -8,8 +8,7 @@ class Sigmoid(BaseKernel):
 
         self.to_precompute = set(['inner_product'])
     
-    def __call__(self,x,y,**kwargs):
-        x,y = self._reshape(x,y)
+    def _compute_kernel(self,x,y,**kwargs):
         if 'inner_product' not in kwargs :
             prod = x @ y.T
         else : 

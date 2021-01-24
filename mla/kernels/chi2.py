@@ -9,8 +9,7 @@ class Chi2(BaseKernel):
 
         self.to_precompute = set(['chi'])
     
-    def __call__(self,x,y,**kwargs):
-        x,y = self._reshape(x,y)
+    def _compute_kernel(self,x,y,**kwargs):
         if 'chi' not in kwargs :
             chi = cdist(x,y,metric=chi_metric)
         else : 

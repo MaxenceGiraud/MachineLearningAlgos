@@ -264,7 +264,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [ ] Spectral Embedding
 
 ### [Kernels](./mla/kernels/) 
-*A SplitKernel is also available that allows to combine kernels w.r.t. differents features of the data*
+*A KernelFusion is also available that allows to combine kernels w.r.t. differents features of the data*
 
 - [x] [RBF](./mla/kernels/rbf.py)
 - [x] [Rational Quadratic](./mla/kernels/rational_quadratic.py)

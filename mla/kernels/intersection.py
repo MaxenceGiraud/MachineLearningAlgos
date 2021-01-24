@@ -10,8 +10,6 @@ class IntersectionKernel(BaseKernel):
     def __init__(self):
         pass
     
-    def __call__(self,x,y,**kwargs):
-        x,y = self._reshape(x,y)
+    def _compute_kernel(self,x,y,**kwargs):
         inter =  cdist(x,y,metric=intersection_measure)  
-
         return inter

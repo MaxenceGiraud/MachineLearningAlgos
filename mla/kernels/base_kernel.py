@@ -7,9 +7,15 @@ class BaseKernel:
     def __init__(self):
         pass
 
+    def __call__(self,x,y,**kwargs):
+        if y is None :
+            y = x
+        x,y = self._reshape(x,y)
+        return self._compute_kernel(x,y,**kwargs)
+
     @abstractmethod
-    def __call__(self,x,y):
-        pass
+    def _compute_kernel(self,x,y,**kwargs):
+        raise NotImplementedError
 
     def _reshape(self,x,y):
         ''' Reshape inputs x,y to 2D array if necessary'''
@@ -26,6 +32,7 @@ class BaseKernel:
             return KernelConcatFloat(self,other,operation=operation)
         else :
             raise TypeError
+
 
     def __add__(self,other):
         print(other,type(other))
