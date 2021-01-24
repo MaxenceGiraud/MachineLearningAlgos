@@ -194,15 +194,18 @@ k2 = mla.kernels.RBF(l=0.2)
 k3 = mla.kernels.RQK()
 
 # Combine kernels with other kernels and other operations
-new_kernel= 2**(((k+k2).exp() / 2) * (abs(k3)** 4) )
+new_kernel= 2**((np.exp(k+k2) / 2) * (abs(k3)** 4) )
 
 print(new_kernel(1,2))
 # Same as : 
 print(2**(((np.exp(k(1,2)+k2(1,2))) / 2) * abs(k3(1,2))** 4) )
 
+# You can use most of trigonometrics/hyperbolic numpy function to call the kernel as well as exp and log
+np.cosh(k)
 # you can also apply custom functions :
-new_kernel2 = k.apply_func(np.tanh)
-
+def custom_f(a):
+    return a+2
+new_kernel2 = k.apply_func(custom_f)
 
 # And now you can use this new kernel in any kernel algorithm
 # %%

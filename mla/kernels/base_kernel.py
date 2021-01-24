@@ -79,6 +79,45 @@ class BaseKernel:
     
     def log(self):
         return KernelConcatFun(self,lambda a : np.log(a))
+    
+    def sqrt(self):
+        return KernelConcatFun(self,lambda a : np.sqrt(a))
+
+    def tan(self):
+        return KernelConcatFun(self,lambda a : np.tan(a))
+    
+    def tanh(self):
+        return KernelConcatFun(self,lambda a : np.tanh(a))
+    
+    def sin(self):
+        return KernelConcatFun(self,lambda a : np.sin(a))
+
+    def cos(self):
+        return KernelConcatFun(self,lambda a : np.cos(a))
+
+    def sinh(self):
+        return KernelConcatFun(self,lambda a : np.sinh(a))
+
+    def cosh(self):
+        return KernelConcatFun(self,lambda a : np.cosh(a))
+    
+    def arccos(self):
+        return KernelConcatFun(self,lambda a : np.arccos(a))
+    
+    def arcsin(self):
+        return KernelConcatFun(self,lambda a : np.arcsin(a))
+
+    def arctan(self):
+        return KernelConcatFun(self,lambda a : np.arctan(a))
+
+    def arccosh(self):
+        return KernelConcatFun(self,lambda a : np.arccosh(a))
+    
+    def arcsinh(self):
+        return KernelConcatFun(self,lambda a : np.arcsinh(a))
+    
+    def arctanh(self):
+        return KernelConcatFun(self,lambda a : np.arctanh(a))
 
     def apply_func(self,fn):
         return KernelConcatFun(self,lambda a : fn(a))
