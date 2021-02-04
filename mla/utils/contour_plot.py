@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def plot_contour(X,y,model,model_fun='predict_probs',ax=None,precision = 100,decision_boundary=0.5):
+def plot_contour(X,y,model,model_fun='auto',ax=None,precision = 100,decision_boundary=0.5):
     ax = ax if ax is not None else plt.gca()
 
     assert X.shape[1] == 2, "Data must be in 2D"
@@ -17,7 +17,16 @@ def plot_contour(X,y,model,model_fun='predict_probs',ax=None,precision = 100,dec
     xxx,yyy = np.meshgrid(xx,yy)
     X_grid = np.array([xxx.flatten(),yyy.flatten()]).T
 
-    predict = getattr(model,model_fun)
+    if model_fun == 'auto' :
+        if hasattr(model,'predict_probs'):
+            predict = getattr(model,'predict_probs')
+        elif hasattr(model,'predict'):
+            predict = getattr(model,'predict')
+        else :
+            raise EnvironmentError('Mode has not known prediction method, specify it manually witht the param model_fun')
+    else :
+        predict = getattr(model,model_fun)
+        
     y_grid = predict(X_grid).reshape(precision,precision)
 
     if decision_boundary is not None :

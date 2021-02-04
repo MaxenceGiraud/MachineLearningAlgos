@@ -2,7 +2,7 @@
 Personal reimplementation of some ML algorithm for learning purposes
 
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Table of Contents <em>(click to expand)</em></summary>
   
   - [MachineLearningAlgos](#machinelearningalgos)
   - [Table of Contents](#table-of-contents)
