@@ -6,12 +6,12 @@ class Dropout(BaseLayer):
         self.proba = proba
         self.training = False # Determine if model is in training mode or not
     
-    def plug(self,intputlayer):
-        self.input_shape = intputlayer.output_shape
+    def plug(self,inputlayer):
+        self.input_shape = inputlayer.output_shape
         self.output_shape = self.input_shape
 
-        self.input_unit = intputlayer
-        intputlayer.output_unit = self
+        self.input_unit = inputlayer
+        inputlayer.output_unit = self
 
     def forward(self,X):
         self.zin = self.input_unit.forward(X)

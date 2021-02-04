@@ -6,11 +6,11 @@ class BaseLayer:
     def nparams(self):
         return 0 
     
-    def plug(self,intputlayer):
-        self.input_shape = intputlayer.output_shape[0]
+    def plug(self,inputlayer):
+        self.input_shape = inputlayer.output_shape[0]
 
-        self.input_unit = intputlayer
-        intputlayer.output_unit = self
+        self.input_unit = inputlayer
+        inputlayer.output_unit = self
 
         self.zin = 0
     

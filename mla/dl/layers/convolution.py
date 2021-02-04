@@ -17,7 +17,7 @@ def convolution2d(M,kernel,stride,padding):
 
 class BaseConvolutionLayer(BaseLayer):
     def __init__(self,units,kernel_size,activation=Linear(),padding=0,stride=1):
-        # TODO encompass stride and padding
+        # TODO implement stride 
         self.units = units
         self.kernel_size = kernel_size
         self.activation = activation
@@ -27,11 +27,11 @@ class BaseConvolutionLayer(BaseLayer):
         if self.stride != 1 : 
             raise NotImplementedError("Stride different from 1 is not implemented")
 
-    def plug(self,intputlayer):
+    def plug(self,inputlayer):
         
-        self.input_shape = intputlayer.output_shape
-        self.input_unit = intputlayer
-        intputlayer.output_unit = self
+        self.input_shape = inputlayer.output_shape
+        self.input_unit = inputlayer
+        inputlayer.output_unit = self
 
         self.zin = 0
         self.zout = 0
@@ -89,10 +89,10 @@ class Conv1D(BaseConvolutionLayer,BasePadding1d):
     def convolve(X,k):
         return convolve(self._add_padding(X),k,mode='valid')
 
-    def plug(self,intputlayer):
-        assert len(intputlayer.output_shape) == 1, "Input of Conv1D layer must be a vector"
+    def plug(self,inputlayer):
+        assert len(inputlayer.output_shape) == 1, "Input of Conv1D layer must be a vector"
 input_shape
-        super().plug(intputlayer)
+        super().plug(inputlayer)
 
         if self.padding :
             self.output_shape = (self.units,*self.)
@@ -110,10 +110,10 @@ class Conv2D(BaseConvolutionLayer,BasePadding2d):
     def convolve(X,k):
         return convolve2d(self._add_padding(X),k,mode='valid')
 
-    def plug(self,intputlayer):
-        assert len(intputlayer.output_shape) == 2, "Input of Conv2D layer must be a 2D Matrix"
+    def plug(self,inputlayer):
+        assert len(inputlayer.output_shape) == 2, "Input of Conv2D layer must be a 2D Matrix"
 
-        super().plug(intputlayer)
+        super().plug(inputlayer)
 
         if self.padding :
             self.output_shape = (self.units,*self.input_shape)

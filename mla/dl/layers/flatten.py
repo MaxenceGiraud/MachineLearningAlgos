@@ -5,12 +5,12 @@ class Flatten(BaseLayer):
     def __init__(self):
         pass
 
-    def plug(self,intputlayer):
-        self.input_shape = intputlayer.output_shape
+    def plug(self,inputlayer):
+        self.input_shape = inputlayer.output_shape
         self.output_shape = [np.prod(self.input_shape)]
 
-        self.input_unit = intputlayer
-        intputlayer.output_unit = self
+        self.input_unit = inputlayer
+        inputlayer.output_unit = self
 
     def forward(self,X):
         return X.reshape((X.shape[0],-1))

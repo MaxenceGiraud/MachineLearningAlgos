@@ -22,13 +22,13 @@ class BasePooling1d(BasePadding1d):
             raise NotImplementedError("Stride Greater than 1 is not implemented")
         self.stride = stride
         
-    def plug(self,intputlayer):
-        assert len(intputlayer.output_shape) == 1, "1D Pooling take only vector as input" 
-        self.input_shape = intputlayer.output_shape[0]
+    def plug(self,inputlayer):
+        assert len(inputlayer.output_shape) == 1, "1D Pooling take only vector as input" 
+        self.input_shape = inputlayer.output_shape[0]
         self.output_shape = [1+ self.input_shape + self.padding  - self.pool_size]
         assert self.output_shape[0] > 0 , "Shapes of pooling and input don't match"
-        self.input_unit = intputlayer
-        intputlayer.output_unit = self
+        self.input_unit = inputlayer
+        inputlayer.output_unit = self
 
         self.zin = 0
     
@@ -96,13 +96,13 @@ class BasePooling2d(BasePadding2d):
         self.stride = stride
     
            
-    def plug(self,intputlayer):
-        assert len(intputlayer.output_shape) == 2, "Pooling 2d take only vector as input" 
-        self.input_shape = intputlayer.output_shape
+    def plug(self,inputlayer):
+        assert len(inputlayer.output_shape) == 2, "Pooling 2d take only vector as input" 
+        self.input_shape = inputlayer.output_shape
         self.output_shape = [1+ self.input_shape[0] + self.padding  - self.pool_size[0],1+ self.input_shape[1] + self.padding  - self.pool_size[1]]
         assert self.output_shape[0] > 0 and self.output_shape[1] > 0, "Shapes of pooling and input don't match"
-        self.input_unit = intputlayer
-        intputlayer.output_unit = self
+        self.input_unit = inputlayer
+        inputlayer.output_unit = self
 
         self.zin = 0
     

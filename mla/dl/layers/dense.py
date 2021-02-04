@@ -15,13 +15,13 @@ class Dense(BaseLayer):
     def nparams(self):
         return self.w.size + self.b.size
     
-    def plug(self,intputlayer):
-        assert len(intputlayer.output_shape) == 1, "Input of Dense layer must be a vector"
-        self.input_shape = intputlayer.output_shape[0]
+    def plug(self,inputlayer):
+        assert len(inputlayer.output_shape) == 1, "Input of Dense layer must be a vector"
+        self.input_shape = inputlayer.output_shape[0]
         self.output_shape = [self.units]
 
-        self.input_unit = intputlayer
-        intputlayer.output_unit = self
+        self.input_unit = inputlayer
+        inputlayer.output_unit = self
 
         # Weights
         self.w = np.random.randn(self.units*self.input_shape).reshape((self.input_shape,self.units))
