@@ -183,7 +183,6 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [ ] LSTM
 - [ ] GRU
 - [ ] Max/Avg/Min [Pooling](./mla/dl/layers/pooling.py) (1d,2d)
-- [ ] Deconvolution/ Upconv / Transposed Conv. layer
 - [x] [Flatten](./mla/dl/layers/flatten.py)
 - [x] [Reshape](./mla/dl/layers/reshape.py)
 - [x] [Dropout](./mla/dl/layers/dropout.py)

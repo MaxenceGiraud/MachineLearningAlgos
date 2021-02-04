@@ -1,5 +1,6 @@
 import numpy as np
 from .base_layer import BaseLayer
+from .pooling import BasePadding1d,BasePadding2d
 from ..activation import Linear
 from functools import partial 
 from scipy.signal import convolve,convolve2d
@@ -15,15 +16,13 @@ def convolution2d(M,kernel,stride,padding):
     raise NotImplementedError
 
 class BaseConvolutionLayer(BaseLayer):
-    def __init__(self,units,kernel_size,activation=Linear(),padding=False,stride=1):
+    def __init__(self,units,kernel_size,activation=Linear(),padding=0,stride=1):
         # TODO encompass stride and padding
         self.units = units
         self.kernel_size = kernel_size
         self.activation = activation
         self.padding = padding 
-        self.padding_size = 0
-        if  padding == True: 
-            raise NotImplementedError("Padding is not yet implemented")
+   
         self.stride = stride
         if self.stride != 1 : 
             raise NotImplementedError("Stride different from 1 is not implemented")
@@ -80,15 +79,15 @@ class BaseConvolutionLayer(BaseLayer):
 
         return delta
 
-class Conv1D(BaseConvolutionLayer):
-    def __init__(self,units,kernel_size,activation=Linear(),padding=False):
+class Conv1D(BaseConvolutionLayer,BasePadding1d):
+    def __init__(self,units,kernel_size,activation=Linear(),padding=0):
 
         assert isinstance(kernel_size,int) or len(kernel_size) ==1 , "Kernel size must be an int or array of size 1"
 
         super().__init__(units=units,kernel_size=kernel_size,x=activation,padding=padding)
     
     def convolve(X,k):
-        return convolve(X,k,mode='valid')
+        return convolve(self._add_padding(X),k,mode='valid')
 
     def plug(self,intputlayer):
         assert len(intputlayer.output_shape) == 1, "Input of Conv1D layer must be a vector"
@@ -101,15 +100,15 @@ input_shape
             self.output_shape  = self.input_shape + self.kernel_size -1 
             raise NotImplementedError
 
-class Conv2D(BaseConvolutionLayer):
-    def __init__(self,units,kernel_size,activation=Linear(),padding=False):
+class Conv2D(BaseConvolutionLayer,BasePadding2d):
+    def __init__(self,units,kernel_size,activation=Linear(),padding=0):
 
         assert len(kernel_size) == 2, "Kernel size must be a 2D Matrix"
 
         super().__init__(units=units,kernel_size=kernel_size,activation=activation,padding=padding)
     
     def convolve(X,k):
-        return convolve2d(X,k,mode='valid')
+        return convolve2d(self._add_padding(X),k,mode='valid')
 
     def plug(self,intputlayer):
         assert len(intputlayer.output_shape) == 2, "Input of Conv2D layer must be a 2D Matrix"

@@ -1,7 +1,17 @@
 import numpy as np
 from .base_layer import BaseLayer
 
-class BasePooling1d:
+
+class BasePadding1d:
+    def _add_padding(self,X):
+        '''Add padding to X'''
+        if self.padding == 0 :
+            return X
+        X = np.hstack((np.zeros(X.shape[0]*self.padding).reshape(-1,self.padding),X)) # Left padding
+        X = np.hstack((X,np.zeros(X.shape[0]).reshape(-1,self.padding)))# Right padding
+        return X
+
+class BasePooling1d(BasePadding1d):
     def __init__(self,pool_size=3,padding=0,stride=1):
         assert isinstance(pool_size,int), "Pool size must be an int"
         assert isinstance(padding,int) and padding >= 0, "Padding must an int >= 0"
@@ -11,14 +21,6 @@ class BasePooling1d:
         if stride > 1 :
             raise NotImplementedError("Stride Greater than 1 is not implemented")
         self.stride = stride
-    
-    def _add_padding(self,X):
-        '''Add padding to X'''
-        if self.padding == 0 :
-            return X
-        X = np.hstack((np.zeros(X.shape[0]*self.padding).reshape(-1,self.padding),X)) # Left padding
-        X = np.hstack((X,np.zeros(X.shape[0]).reshape(-1,self.padding)))# Right padding
-        return X
         
     def plug(self,intputlayer):
         assert len(intputlayer.output_shape) == 1, "1D Pooling take only vector as input" 
@@ -64,20 +66,9 @@ class AvgPooling1d(BasePooling1d,BaseLayer):
                
     def backprop(self,delta,*args,**kwargs):
         # TODO
-        return delta
+        return delta  
 
-class BasePooling2d:
-    def __init__(self,pool_size=(3,3),padding=0,stride=1):
-        assert len(pool_size)==2, "Pool size must be tuple of size 2"
-        assert isinstance(padding,int) and padding >= 0, "Padding must an int >= 0"
-        self.pool_size = pool_size
-        self.padding = padding
-
-        assert stride > 0, "Stride must be at min 1"
-        if stride > 1 :
-            raise NotImplementedError("Stride Greater than 1 is not implemented")
-        self.stride = stride
-    
+class BasePadding2d:
     def _add_padding(self,X):
         '''Add padding to X'''
         if self.padding == 0 :
@@ -91,7 +82,20 @@ class BasePooling2d:
             return x
 
         return np.array([pad_1datapoint(X[i]) for i in range(X.shape[0])])
-        
+
+class BasePooling2d(BasePadding2d):
+    def __init__(self,pool_size=(3,3),padding=0,stride=1):
+        assert len(pool_size)==2, "Pool size must be tuple of size 2"
+        assert isinstance(padding,int) and padding >= 0, "Padding must an int >= 0"
+        self.pool_size = pool_size
+        self.padding = padding
+
+        assert stride > 0, "Stride must be at min 1"
+        if stride > 1 :
+            raise NotImplementedError("Stride Greater than 1 is not implemented")
+        self.stride = stride
+    
+           
     def plug(self,intputlayer):
         assert len(intputlayer.output_shape) == 2, "Pooling 2d take only vector as input" 
         self.input_shape = intputlayer.output_shape
