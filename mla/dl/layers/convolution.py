@@ -84,18 +84,18 @@ class Conv1D(BaseConvolutionLayer,BasePadding1d):
 
         assert isinstance(kernel_size,int) or len(kernel_size) ==1 , "Kernel size must be an int or array of size 1"
 
-        super().__init__(units=units,kernel_size=kernel_size,x=activation,padding=padding)
+        super(self,BaseConvolutionLayer).__init__(units=units,kernel_size=kernel_size,x=activation,padding=padding)
     
-    def convolve(X,k):
+    def convolve(self,X,k):
         return convolve(self._add_padding(X),k,mode='valid')
 
     def plug(self,inputlayer):
         assert len(inputlayer.output_shape) == 1, "Input of Conv1D layer must be a vector"
-input_shape
-        super().plug(inputlayer)
+
+        super(self,BaseConvolutionLayer).plug(inputlayer)
 
         if self.padding :
-            self.output_shape = (self.units,*self.)
+            self.output_shape = (self.units,*self.input_shape)
         else : 
             self.output_shape  = self.input_shape + self.kernel_size -1 
             raise NotImplementedError
@@ -107,7 +107,7 @@ class Conv2D(BaseConvolutionLayer,BasePadding2d):
 
         super().__init__(units=units,kernel_size=kernel_size,activation=activation,padding=padding)
     
-    def convolve(X,k):
+    def convolve(self,X,k):
         return convolve2d(self._add_padding(X),k,mode='valid')
 
     def plug(self,inputlayer):
