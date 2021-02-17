@@ -7,7 +7,7 @@ class BaseKernel:
     def __init__(self):
         pass
 
-    def __call__(self,x,y,**kwargs):
+    def __call__(self,x,y=None,**kwargs):
         if y is None :
             y = x
         x,y = self._reshape(x,y)
@@ -149,9 +149,8 @@ class KernelConcat(BaseKernel):
                 self.precomputed['chi']= dist
         return kwargs
 
-    def __call__(self,x,y,**kwargs):
+    def _compute_kernel(self,x,y,**kwargs):
         # Precompute 
-        x,y = self._reshape(x,y)
         self.precomputed = self.get_precomputed(x,y,**kwargs)
 
         out = self.operation(self.kernels[0](x,y,**self.precomputed),self.kernels[1](x,y,**self.precomputed))
@@ -166,7 +165,7 @@ class KernelConcatFloat(BaseKernel):
         self.operation = operation
         self.to_precompute = kernel.to_precompute
     
-    def __call__(self,x,y,**kwargs):
+    def _compute_kernel(self,x,y,**kwargs):
         return self.operation(self.kernel(x,y,**kwargs),self.scale)
 
 class KernelConcatFun(BaseKernel):
@@ -175,5 +174,5 @@ class KernelConcatFun(BaseKernel):
         self.fn = fn
         self.to_precompute = kernel.to_precompute
     
-    def __call__(self,x,y,**kwargs):
+    def _compute_kernel(self,x,y,**kwargs):
         return self.fn(self.kernel(x,y,**kwargs))

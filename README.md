@@ -133,15 +133,13 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Kernel Ridge](./mla/ml/kernel_ridge.py)
 - [x] [Kernel KNN](./mla/ml/kernel_knn.py)
 - [ ] RVM
-- [ ] Bridge regression
-- [ ] Bayesian LASSO
 
 
 ### [Ensemble methods](./mla/ensemble/)
 - [x] [Random Forest](./mla/ensemble/random_forest.py)
 - [x] [Bagging](./mla/ensemble/bagging.py)
 - [x] [AdaBoost](./mla/ensemble/adaboost.py)
-- [ ] Gradient Boosting
+- [x] [Gradient Boosting](./mla/ensemble/gradient_boosting.py)
 - [ ] XGBoost
 - [x] [One vs rest classifier](./mla/ensemble/multiclass.py)
 - [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
