@@ -36,5 +36,5 @@ A second type can be added if working on a specific sub project (ex: **[__DL__]*
 ```
 * Reference and close an issue reported on Github
 ```git
-[Fix] Fix infinite loop in SMO SVD solver  #5
+[Fix] Fix infinite loop in SMO SVM solver  #5
 ```
