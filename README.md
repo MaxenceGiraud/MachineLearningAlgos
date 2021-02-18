@@ -163,7 +163,7 @@ Some explainations of the algorithms can be found in the readme of their folders
 
 ###  Semi Supzevized Learning
 - [x] Label Propagation
-- [ ] Label Spreading
+- [x] Label Spreading
   
 ### Outliers Detection
 

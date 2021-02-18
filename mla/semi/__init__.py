@@ -1,1 +1,2 @@
 from .label_propagration import LabelPropagation
+from .label_spreading import LabelSpreading
