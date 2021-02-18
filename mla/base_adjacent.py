@@ -3,9 +3,9 @@ from scipy.spatial.distance import cdist
 from scipy.sparse import csr_matrix
 
 class BaseAdjacent:
-    def __init__(self):
-        self.epsilon = 0.5
-        self.n_neighbors = 10
+    def __init__(self,n_neighbors,epsilon):
+        self.epsilon = epsilon
+        self.n_neighbors = n_neighbors
 
     def _compute_adjacent_nearest_neighbors(self,X):
         dist = cdist(X,X)

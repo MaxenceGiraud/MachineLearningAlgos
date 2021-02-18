@@ -162,7 +162,8 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Kernel K-medoids](./mla/clustering/kernel_kmedoids.py)
 
 ###  Semi Supzevized Learning
-- [ ] Label Propagation
+- [x] Label Propagation
+- [ ] Label Spreading
   
 ### Outliers Detection
 
