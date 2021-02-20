@@ -162,8 +162,8 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Kernel K-medoids](./mla/clustering/kernel_kmedoids.py)
 
 ###  Semi Supzevized Learning
-- [x] Label Propagation
-- [x] Label Spreading
+- [x] [Label Propagation](./mla/semi/label_propagration.py)
+- [x] [Label Spreading](./mla/semi/label_spreading.py)
   
 ### Outliers Detection
 
@@ -241,7 +241,7 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] [Value iteration](./mla/rl/value_iteration.py)
 - [x] [Q-learning](./mla/rl/qlearning.py)
 - [x] [Deep Q-learning](./mla/rl/deep_qlearning.py)
-- [ ] Advantage Actor Critic
+- [x] [Advantage Actor Critic](./mla/rl/advantage_actor_critic.py) (Need PyTorch)
 
 ### [Decomposition / Dimensionality reduction](./mla/dimension_reduction/)
 
