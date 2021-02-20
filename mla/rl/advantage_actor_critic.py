@@ -54,6 +54,8 @@ class ValueNetwork(nn.Module):
 def AdvantageActorCritic(env,actor_network,value_network,actor_network_optimizer,value_network_optimizer,max_iter=200):
     ''' Advantage Actor Critic Algorithm
 
+    Based on : https://github.com/rlberry-py/tutorials
+
     Parameters
     ----------
     env  : gym-like environment,,

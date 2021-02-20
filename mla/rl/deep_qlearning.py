@@ -2,7 +2,6 @@ import numpy as np
 from copy import deepcopy
 from ..dl.optimizer import Adam
 
-
 class ReplayBuffer:
     def __init__(self, capacity):
         self.capacity = capacity
@@ -27,6 +26,8 @@ class ReplayBuffer:
 class DeepQLearning:
     ''' Deep Q learning 
 
+    Based on  : https://github.com/rlberry-py/tutorials
+
     Parameters
     ----------
     n_episode : int,
@@ -46,7 +47,7 @@ class DeepQLearning:
     update_target_every : int,
         Number of steps the target network is updated
     '''
-    def __init__(self,n_episode=500,buffer_capacity=10000,batch_size = 256,gamma =0.99,epsilon = 0.99,eval_every=5,reward_threshold=200,update_target_every=20):
+    def __init__(self,n_episode=500,buffer_capacity=10000,batch_size = 256,gamma =0.99,epsilon = 0.99,eval_every=5,reward_threshold=100,update_target_every=20):
         self.n_episode = n_episode
         self.replay_buffer = ReplayBuffer(buffer_capacity)
         self.batch_size = batch_size
@@ -106,25 +107,31 @@ class DeepQLearning:
         # Process batch of (state, action, reward, next_state)
         states = [transitions[ii][0] for  ii in range(self.batch_size)]
         actions = [transitions[ii][1] for  ii in range(self.batch_size)] 
-        rewards = [transitions[ii][2] for  ii in range(self.batch_size)] 
+        rewards = [transitions[ii][2] for  ii in range(self.batch_size)]       
 
         # Attention: next_state is None when the previous state is terminal. We handle this using a mask.
         next_states = [transitions[ii][3] for  ii in range(self.batch_size) if transitions[ii][3] is not None ] 
         mask = [transitions[ii][3] is not None for  ii in range(self.batch_size)]
 
         # Q(s_i, a_i)
-        values = self.nn.predict(states) # TODO use actions
-
+        values = self.nn.predict(states) # TODO select values using actions
 
         # max_a Q(s_{i+1}, a)
         values_next_states = np.zeros(self.batch_size)
+        mask_feat = self.target_network.predict(next_states).argmax(axis=1)
         values_next_states[mask] = self.target_network.predict(next_states).max(axis=1)
 
+        
         # targets y_i
         targets = rewards + self.gamma*values_next_states
-        
+        # print(mask_train.shape)
+        targets2d = np.zeros(values.shape)
+        # for i in range(self.batch_size) : 
+        #     targets2[i,mask_train[i]] =targets[i]
+        #     targets2[i,1-mask_train[i]] = values[i,1-mask_train[i]]
 
         # Loss function / forward pass
+        # TODO only select one col (using actions)
         targets = np.repeat(targets.reshape(-1,1),values.shape[1],axis=1)
         loss = self.nn.forward(np.array(states), targets)
         
@@ -183,3 +190,6 @@ class DeepQLearning:
 
         if hasattr(self.nn,'clear_layer_training'):
             self.nn.clear_layer_training(self.nn)
+
+        rewards = self._eval_dqn(20)
+        print("mean reward after training = ", np.mean(rewards))
