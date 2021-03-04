@@ -37,9 +37,11 @@ Personal reimplementation of some ML algorithm for learning purposes
 </details>
 
 
-## Author
+## Contribution/ Author
 
 This repo is only made by myself ([Maxence Giraud](https://github.com/MaxenceGiraud/)), I do not seek additional contributors (although you can open an issue if you find a mistake or have a constructive comment) as it has only learning purposes and no other intentions.
+
+If you want to see the work to come and in progress, you can go to the [project tab](https://github.com/MaxenceGiraud/MachineLearningAlgos/projects/1).
 
 
 ## Requirements 
@@ -112,9 +114,10 @@ To run unittest :
 python -m unittest tests/*/*_test.py
 ```
 
-## Algorithms
+## Implemented Algorithms
 
-Some explainations of the algorithms can be found in the readme of their folders, for more thorough reviews check the references.
+Some explainations of the algorithms can be found in the readme of their folders, for more thorough reviews check the references.    
+Algorithms that I plan to implement are written in the projects tab.
 
 ### [Machine Leaning](./mla/ml)
 - [x] [KNN](./mla/ml/knn.py) (classifier+regressor)
@@ -122,17 +125,13 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Least squares](./mla/ml/leastsquares.py) linear regression/classification
 - [x] [Least squares](./mla/ml/leastsquares.py) polynomial Regression/classification
 - [x] [Ridge](./mla/ml/leastsquares_regularised.py) 
-- [ ] [LASSO](./mla/ml/leastsquares_regularised.py) (using Least Angle Regression)
-- [ ] Elastic net (solver for Least Squares+l1+l2)
 - [x] [SVM](./mla/ml/svm.py)
 - [x] [CART Decision Tree](./mla/ml/decison_tree.py)
 - [x] [Gaussian process Regressor](./mla/ml/gaussian_process.py)
-- [ ] MARS (Multivariate adaptive regression spline)
 - [x] [Naive Bayes](./mla/ml/naive_bayes.py) (Bernoulli, Gaussian and Multinomial)
 - [x] [LDA/QDA](./mla/ml/discriminantanalysis.py)
 - [x] [Kernel Ridge](./mla/ml/kernel_ridge.py)
 - [x] [Kernel KNN](./mla/ml/kernel_knn.py)
-- [ ] RVM
 
 
 ### [Ensemble methods](./mla/ensemble/)
@@ -140,10 +139,8 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Bagging](./mla/ensemble/bagging.py)
 - [x] [AdaBoost](./mla/ensemble/adaboost.py)
 - [x] [Gradient Boosting](./mla/ensemble/gradient_boosting.py)
-- [ ] XGBoost
 - [x] [One vs rest classifier](./mla/ensemble/multiclass.py)
 - [x] [One vs one classifier ](./mla/ensemble/multiclass.py)
-- [x] [Voting Classifier/Regressor](./mla/ensemble/voting.py)
   
 
 ### [Clustering / Unsupervized Learning](./mla/clustering/)
@@ -152,50 +149,30 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [DBSCAN](./mla/clustering/dbscan.py)
 - [x] [OPTICS](./mla/clustering/optics.py)
 - [x] [Gaussian Mixture](./mla/clustering/mixture_model.py) with EM algorithm
-- [ ] Variational Bayesian Gaussian Mixture
-- [ ] Generative topographic map
 - [x] [Spectral Clustering](./mla/clustering/spectral_clustering.py)
 - [x] [Hierarchical Clustering](./mla/clustering/hierarchical_clustering.py)
 - [x] [Fuzzy C-means](./mla/clustering/fuzzycmeans.py)
-- [ ] Self Organizing Maps (SOM)
-- [ ] Dirichlet Process Mixture Model
 - [x] [Kernel K-medoids](./mla/clustering/kernel_kmedoids.py)
 
 ###  Semi Supzevized Learning
 - [x] [Label Propagation](./mla/semi/label_propagration.py)
 - [x] [Label Spreading](./mla/semi/label_spreading.py)
-  
-### Outliers Detection
 
-- [ ] Isolation Forest
-- [ ] Outliers detection from known (or estimated) distribution.
 
 ### [Deep Leaning / Neural Networks](./mla/dl/)
 - [x] [Neural Network Base/sequential](./mla/dl/neuralnetwork.py)
-- [ ] Restricted Boltzman Machine 
-- [ ] Deep Belief Network
 
 #### [Layers](./mla/dl/layers/)
 - [x] [Dense](./mla/dl/layers/dense.py)
 - [ ] [Convolution](./mla/dl/layers/convolution.py) (1d,2d)
-- [ ] Recurrent
-- [ ] LSTM
-- [ ] GRU
 - [ ] Max/Avg/Min [Pooling](./mla/dl/layers/pooling.py) (1d,2d)
 - [x] [Flatten](./mla/dl/layers/flatten.py)
 - [x] [Reshape](./mla/dl/layers/reshape.py)
 - [x] [Dropout](./mla/dl/layers/dropout.py)
 
-#### Blocks
-- [ ] Transformer
-- [ ] Inception
-- [ ] Residual (ResNet)
-
 #### Wrappers
 - [x] [Autoencoder](./mla/dl/autoencoder.py)
 - [x] [MLP](./mla/dl/mlp.py)
-- [ ] VAE
-- [ ] GAN  
   
 #### [Optimizers](./mla/dl/optimizer/)
 - [x] [Stochastic gradient descent](./mla/dl/optimizer/gradientdescent.py)
@@ -204,7 +181,6 @@ Some explainations of the algorithms can be found in the readme of their folders
 - [x] [Adam](./mla/dl/optimizer/adam.py)
 - [x] [Nadam](./mla/dl/optimizer/nadam.py) (Nesterov Adam)
 - [x] [Adagrad](./mla/dl/optimizer/adagrad.py)
-- [ ] L-BFGS
 
 #### [Loss](./mla/dl/layers/loss/)
 
@@ -247,19 +223,6 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 
 - [x] [PCA](./mla/dimension_reduction/pca.py) (for Probabilistic/Bayesian PCA view other repo [here](https://github.com/MaxenceGiraud/BayesianPCA))
 - [x] [Kernel PCA](./mla/dimension_reduction/kernel_pca.py) 
-- [ ] FDA
-- [ ] ICA
-- [ ] Elastic map
-- [ ] CCA
-- [ ] Kernel CCA
-- [ ] Latent Dirichlet Allocation
-- [ ] PLSCanonical
-
-#### [Manifold](./mla/dimension_reduction/manifold/)
-
-- [ ] Multi-dimensional Scaling
-- [ ] Isomap Embedding
-- [ ] Spectral Embedding
 
 ### [Kernels](./mla/kernels/) 
 *A KernelFusion is also available that allows to combine kernels w.r.t. differents features of the data*
@@ -289,17 +252,6 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 - [x] Zero one loss
 
 
-## TODO / Ongoing dev
-* Implement backprop of Convolution layer
-* Implement backprop of Pooling Layers
-* Find out how OPTICS makes the clusters from reachability graph
-* Implement LASSO using Least angle regression
-* Rework and add Advantage Actor Critic
-* Complete Explanations of all currently implemented algos
-* Implement SMO for SVR (already done for svc)
-* Implement Gaussian Process Classifier
-* Look into Evolutionary algorithm (e.g. NEAT algo), genetic algorithms and Genetic Programming
-
 ## References
 
 *The references of the algorithms themselves are for the most part written in the docstring of the corresponding class*
@@ -308,4 +260,4 @@ For non stationary bandits, see my other repo [here](https://github.com/MaxenceG
 [2] TIBSHIRANI, Robert, HASTIE, Trevor y FRIEDMAN JEROME, . [The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition.](https://web.stanford.edu/~hastie/ElemStatLearn/) Springer, 2016.   
 [3] P. MURPHY, Kevin. [Machine Learning: A Probabilistic Perspective.](https://www.cs.ubc.ca/~murphyk/MLbook/pml-toc-1may12.pdf) The MIT Press, 2012.   
 [4] [Scikit-learn](https://scikit-learn.org/stable): Machine Learning in Python, Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.   
-[5] Courses from [Master Data Science](https://sciences-technologies.univ-lille.fr/mathematiques/formation/master-mention-sciences-des-donnees/) held at the University of Lille, France
+[5] Courses from [Master Data Science](https://sciences-technologies.univ-lille.fr/mathematiques/formation/master-mention-sciences-des-donnees/) held at the University of Lille, France  
