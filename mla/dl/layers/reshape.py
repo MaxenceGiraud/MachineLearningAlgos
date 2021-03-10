@@ -8,7 +8,7 @@ class Reshape(BaseLayer):
     def plug(self,inputlayer):
         self.input_shape = inputlayer.output_shape
         
-        if np.cumsum(self.input_shape) != np.cumsum(self.input_shape):
+        if np.prod(self.input_shape) != np.prod(self.input_shape):
             raise Exception("Input shape and output shape of Reshape Layer do not match")
 
         self.input_unit = inputlayer   
