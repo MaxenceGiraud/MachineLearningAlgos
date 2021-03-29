@@ -97,7 +97,7 @@ def AdvantageActorCritic(env,actor_network,value_network,actor_network_optimizer
 
             state = next_state
             if done:
-            state = env.reset()
+                state = env.reset()
 
         if not done:
             next_value = value_network.value(next_states[-1]).detach().numpy()[0]
