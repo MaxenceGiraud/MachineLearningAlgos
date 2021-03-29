@@ -56,11 +56,11 @@ class Node:
             return self.right._count_preleaf() + self.left._count_preleaf()
             
     
-    def _define_postition(self,position = (0,0)):
+    def _define_position(self,position = (0,0)):
         self.pos = position
         d = self.depth 
-        self.left._define_postition((self.pos[0]-2**d,self.pos[1]-1))
-        self.right._define_postition((self.pos[0]+2**d,self.pos[1]-1))
+        self.left._define_position((self.pos[0]-2**d,self.pos[1]-1))
+        self.right._define_position((self.pos[0]+2**d,self.pos[1]-1))
 
     def _get_tree_data(self):
         d = {}
@@ -80,8 +80,8 @@ class Node:
 
         return arr
 
-    def display(self,pos=[0]):
-        self._define_postition()
+    def display(self,pos=(0,0)):
+        self._define_position(pos)
         tree = self._get_tree_data()
 
         for n in tree :
@@ -134,7 +134,7 @@ class Leaf(Node):
     def predict(self,X):
         return np.ones(X.shape[0])*self.decision
     
-    def _define_postition(self,position):
+    def _define_position(self,position):
         self.pos = position
     
     def _get_tree_data(self):
