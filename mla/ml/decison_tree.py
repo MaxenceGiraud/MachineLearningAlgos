@@ -347,7 +347,7 @@ class DecisionTreeClassifier(BaseDecisionTree,BaseClassifier):
             tmp_decision_tree.tree = new_tree
             if tmp_decision_tree.score(X,y) >= (score - self.pruning_eps) : # Pruning is successful
                 self.tree = new_tree 
-                self._bottom_up_pruning(X,y,[]) # Try pruning some more based on the new tree  
+                self._bottom_up_pruning(X,y) # Try pruning some more based on the new tree  
                 break 
 
 
