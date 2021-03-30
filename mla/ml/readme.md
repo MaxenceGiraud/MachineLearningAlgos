@@ -1,35 +1,5 @@
 # Machine Learning Algorithms / Supervized Learning
 
-## Table of Contents
-
-- [Machine Learning Algorithms / Supervized Learning](#machine-learning-algorithms--supervized-learning)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [K-Nearest Neighbor (KNN)](#k-nearest-neighbor-knn)
-    - [Classification](#classification)
-    - [Regression](#regression)
-  - [Least Square linear Regression/Classification](#least-square-linear-regressionclassification)
-    - [Polynomial Case](#polynomial-case)
-    - [Ridge / $l_2$ regularized](#ridge--l_2-regularized)
-    - [LASSO / $l_1$ regularized](#lasso--l_1-regularized)
-      - [Least Angle Regression](#least-angle-regression)
-  - [CART Decision Tree](#cart-decision-tree)
-    - [Tree Creation](#tree-creation)
-    - [Gini Index](#gini-index)
-  - [Naive Bayes](#naive-bayes)
-    - [Bernouilli](#bernouilli)
-    - [Multinomial](#multinomial)
-    - [Gaussian](#gaussian)
-  - [Logistic Regression / Perceptron](#logistic-regression--perceptron)
-  - [Discriminant Analysis](#discriminant-analysis)
-    - [Linear Discriminant analysis](#linear-discriminant-analysis)
-    - [Quadratic Discriminant analysis](#quadratic-discriminant-analysis)
-  - [Gaussian Process Regressor](#gaussian-process-regressor)
-  - [Support Vector Machines (SVM)](#support-vector-machines-svm)
-    - [SVC](#svc)
-    - [SVR](#svr)
-
-
 ## Introduction
 In supervized learning we are given a data matrix $X$ and target vector $y$ and the goal is to create a function that maps datapoints from $X_i$ to its corresponding target $y_i$.
 

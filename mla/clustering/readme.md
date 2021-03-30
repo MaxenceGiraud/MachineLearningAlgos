@@ -2,18 +2,6 @@
 
 In an unsupervized learning setting, we are given a data matrix $X$ of shape $(n,d)$ and the goal is to split the data points into several clusters (the number may be an input of the algorithm or not).
 
-## Table of Contents
-
-- [Clustering algorithms / Unsupervized Learning](#clustering-algorithms--unsupervized-learning)
-  - [Table of Contents](#table-of-contents)
-  - [K-means](#k-means)
-  - [Kmeans++ init](#kmeans-init)
-  - [K-medoids](#k-medoids)
-  - [Gaussian Mixture Model](#gaussian-mixture-model)
-  - [DBSCAN](#dbscan)
-  - [OPTICS](#optics)
-  - [Fuzzy C-means](#fuzzy-c-means)
-
 ## K-means
 
 The centroids are initialized either at random or using a smarter technique (e.g. see k-means++ in the next section). 

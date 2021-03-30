@@ -1,42 +1,6 @@
 # MachineLearningAlgos
 Personal reimplementation of some ML algorithm for learning purposes
 
-<details>
-  <summary>Table of Contents <em>(click to expand)</em></summary>
-  
-  - [MachineLearningAlgos](#machinelearningalgos)
-  - [Table of Contents](#table-of-contents)
-  - [Author](#author)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Algorithms](#algorithms)
-    - [Machine Leaning](#machine-leaning)
-    - [Ensemble methods](#ensemble-methods)
-    - [Clustering / Unsupervized Learning](#clustering--unsupervized-learning)
-    - [Semi Supzevized Learning](#semi-supzevized-learning)
-    - [Outliers Detection](#outliers-detection)
-    - [Deep Leaning / Neural Networks](#deep-leaning--neural-networks)
-      - [Layers](#layers)
-      - [Blocks](#blocks)
-      - [Wrappers](#wrappers)
-      - [Optimizers](#optimizers)
-      - [Loss](#loss)
-      - [Activation functions](#activation-functions)
-    - [Multi-armed bandit](#multi-armed-bandit)
-    - [Reinforcement Learning ](#reinforcement-learning-)
-    - [Decomposition / Dimensionality reduction](#decomposition--dimensionality-reduction)
-      - [Manifold](#manifold)
-    - [Kernels](#kernels)
-    - [Metrics](#metrics)
-      - [Regression](#regression)
-      - [Classifcation](#classifcation)
-  - [TODO / Ongoing dev](#todo--ongoing-dev)
-  - [References](#references)
-
-</details>
-
-
 ## Contribution/ Author
 
 This repo is only made by myself ([Maxence Giraud](https://github.com/MaxenceGiraud/)), I do not seek additional contributors (although you can open an issue if you find a mistake or have a constructive comment) as it has only learning purposes and no other intentions.

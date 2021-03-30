@@ -1,16 +1,5 @@
 # Deep Learning
 
-## Table of Contents
-- [Deep Learning](#deep-learning)
-	- [Table of Contents](#table-of-contents)
-	- [Neural Network](#neural-network)
-		- [A Single Neuron / Perceptron](#a-single-neuron--perceptron)
-		- [Multi Layer Perceptron (MLP)](#multi-layer-perceptron-mlp)
-		- [Backpropagation](#backpropagation)
-	- [Auto-Encoder (AE)](#auto-encoder-ae)
-	- [Variational Auto Encoder (VAE)](#variational-auto-encoder-vae)
-	- [Generative Adversarial Network (GAN)](#generative-adversarial-network-gan)
-
 
 ## Neural Network
 
