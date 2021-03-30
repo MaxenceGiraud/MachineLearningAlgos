@@ -1,5 +1,6 @@
 import numpy as np
 from ..base import BaseClassifier,BaseRegressor
+from itertools import combinations_with_replacement
 
 
 class BaseLeastSquares:
@@ -10,9 +11,13 @@ class BaseLeastSquares:
     def X_to_poly(self,X):
         X_poly = X
         if self.degree >= 2 :
-            for d in range(2,self.degree+1):
-                Xd = X**d
-                X_poly = np.concatenate((X_poly,Xd),axis=1)
+            for deg in range(2,self.degree):
+                for com in combinations_with_replacement(range(X.shape[1]), deg):
+                    Xd = np.ones(X.shape[0])
+                    for c in com :
+                        Xd = Xd * X[:,c]
+                    X_poly = np.concatenate((X_poly,Xd.reshape(-1,1)),axis=1)
+           
         X_poly = np.concatenate((np.ones((X.shape[0],1)),X_poly),axis=1) # add column of 1 for the bias
         return X_poly
     
@@ -30,7 +35,7 @@ class PolynomialRegression(BaseLeastSquares,BaseRegressor):
     ----------
     degree : int >=1
              degrees of features to consider,ex for 2 features x1,x2 with degree =2,
-             the input features are going to be x1,x2,x1^2,x2^2
+             the input features are going to be x1,x2,x1x2,x1^2,x2^2
     '''
     pass
 

@@ -64,9 +64,9 @@ x_{n,1} & ... & x_{n,d}
 \end{bmatrix}
 \rightarrow X_{poly} =
 \begin{bmatrix}
-x_{1,1} &  ... & x_{1,d} & x_{1,1}^2 & ... & x_{1,d}^2\\
+x_{1,1} &  ... & x_{1,d} &x_{1,1} x_{1,2} & ... & x_{1,d-1} x_{1,d} & x_{1,1}^2 & ... & x_{1,d}^2\\
 \vdots &  & \vdots & \vdots & & \vdots\\
-x_{n,1} & ... & x_{n,d} & x_{n,1}^2 & ... &  x_{n,d}^2
+x_{n,1} & ... & x_{n,d} &x_{n,1} x_{n,2} & ... & x_{n,d-1} x_{n,d}& x_{n,1}^2 & ... &  x_{n,d}^2
 \end{bmatrix}
 $$
 
